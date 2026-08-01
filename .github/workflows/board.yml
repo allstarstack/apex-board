@@ -1,0 +1,29 @@
+name: Update board
+on:
+  schedule:
+    - cron: '40 22 * * 1-5'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build board
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+        run: python build_board.py
+      - name: Publish
+        run: |
+          if ! git diff --quiet index.html 2>/dev/null; then
+            git config user.name "board-bot"
+            git config user.email "bot@users.noreply.github.com"
+            git add index.html
+            git commit -m "board: $(date -u +'%F %H:%M')"
+            git push
+          fi

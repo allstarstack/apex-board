@@ -1,0 +1,27 @@
+{
+  "calendar": [
+    {"date": "2026-08-03", "label": "Monday", "title": "PLTR reports", "sub": "gate flips on estimate reset"},
+    {"date": "2026-08-05", "label": "Wednesday", "title": "CAI + NVO report", "sub": "your two live triggers"},
+    {"date": "2026-08-15", "label": "Aug 15", "title": "Screen audit", "sub": "first live grading"},
+    {"date": "2026-08-26", "label": "Aug 26", "title": "NVDA reports", "sub": "re-entry gate context"}
+  ],
+  "btc": {"trigger_low": 59000, "trigger_high": 60000, "falsifier": 40000},
+  "names": [
+    {"t": "MP",   "gate": 38,   "at_gate": true, "zone": "gate $38\u201345 \u00b7 deploy zone $36\u201338", "note": "Inside its gate zone. Next step is a Board re-underwrite (China export risk, insider selling) \u2014 not a buy."},
+    {"t": "ISRG", "gate": 305,  "note": "or US procedure re-acceleration"},
+    {"t": "COIN", "gate": 120,  "note": ""},
+    {"t": "HOOD", "gate": 70,   "note": ""},
+    {"t": "DLO",  "gate": 12,   "note": ""},
+    {"t": "PLTR", "gate": 90,   "note": ""},
+    {"t": "NU",   "gate": 10,   "note": ""},
+    {"t": "NVDA", "gate": 140,  "note": ""},
+    {"t": "ASML", "gate": 1100, "note": ""},
+    {"t": "GOOGL","gate": 235,  "note": ""},
+    {"t": "KNSL", "gate": 230,  "note": ""},
+    {"t": "GEV",  "gate": 625,  "note": ""},
+    {"t": "VICR", "gate": 130,  "note": ""},
+    {"t": "LEU",  "gate": 100,  "note": ""},
+    {"t": "BLLN", "gate": 60,   "note": ""},
+    {"t": "AEHR", "gate": 27,   "note": ""}
+  ]
+}
