@@ -30,14 +30,154 @@ text-transform:uppercase;color:var(--sub);margin:22px 0 8px}.sec.warn{color:var(
 p.body{font-size:13.5px;color:var(--sub)}.legend{font-size:12px;color:var(--mut);margin:0 0 8px}
 .foot{border-top:1px solid var(--line);margin-top:22px;padding-top:12px;font-size:12px;color:var(--mut)}
 .rule{font-size:12.5px;color:var(--sub);margin:-8px 0 16px}
+.chart{margin:6px 0 4px}
+svg{display:block;width:100%;height:auto}
+.curve{fill:none;stroke:var(--sub);stroke-width:2;stroke-linecap:round}
+.tick{stroke:var(--line);stroke-width:1}
+.stg{font-size:12px;fill:var(--mut)}
+.lead{stroke:var(--line);stroke-width:1}
+.dot{fill:var(--dot);opacity:0;animation:pop .5s ease .15s forwards}
+.lbl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none;opacity:1}}
+.cm-note{font-size:12.5px;font-style:italic;color:var(--sub);margin:2px 0 10px}
+.cm-card{padding:12px 0;border-top:1px solid var(--line)}
+.cm-card:first-of-type{border-top:none;padding-top:4px}
+.cm-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cm-name{font-size:15px;font-weight:600}
+.cm-win{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;text-align:right}
+.cm-stage{font-size:12px;color:var(--mut);margin-top:2px}
+.cm-action{font-size:13px;color:var(--sub);margin-top:6px}
+.cm-nm{font-size:13px;color:var(--ink);margin-top:5px}
+.cm-nm:first-of-type{margin-top:8px}
 </style></head><body>
-<div class="top"><h1>APEX board</h1><span class="stamp">updated Aug 02, 06:47 UTC</span></div>
+<div class="top"><h1>APEX board</h1><span class="stamp">updated Aug 02, 07:06 UTC</span></div>
 <p class="rule">A gate hit means open a Board Review in Claude &mdash; gates are hurdles, not green lights.</p>
 <div class="sec">This week</div><div class="week"><div class="wcard"><div class="d">Monday</div><div class="t">PLTR reports</div><div class="s">gate flips on estimate reset</div></div><div class="wcard"><div class="d">Wednesday</div><div class="t">CAI + NVO report</div><div class="s">live triggers + IESC checklist + MP reconcile</div></div><div class="wcard"><div class="d">Thursday</div><div class="t">MP reports</div><div class="s">reconcile the two re-underwrites FIRST</div></div><div class="wcard"><div class="d">Aug 15</div><div class="t">Screen audit</div><div class="s">first live grading</div></div><div class="wcard"><div class="d">Aug 26</div><div class="t">NVDA reports</div><div class="s">re-entry gate context</div></div><div class="wcard"><div class="d">Sep 16</div><div class="t">IREN FY print</div><div class="s">proof date (unsynced 7/30 - ratify at Board)</div></div></div>
 <div class="sec warn">At the gate &mdash; action owed</div><div class="atgate"><div class="h"><span>MP &middot; $41.37</span><span class="z">CONFLICT - Board reconcile before Aug 6 print</span></div><div class="n">Two unsynced re-underwrites: 7/30 said KILL, gate ~$20 or 2-of-4 proof flips; 8/1 said CANDIDATE, $36-38 only if Aug 6 print confirms magnets H2 + 10X on schedule, or $30-32 on price. Do not act on this row until the Board picks one. Interim alert level $32 = the price-alone re-look from the 8/1 re-underwrite; Board sets the real gate Aug 5.</div></div><div class="atgate"><div class="h"><span>LEGN &middot; $18.55</span><span class="z">gate $19.5</span></div><div class="n">or frontline approval, or anito-cel stumble</div></div>
 <div class="sec">Approaching</div><div class="legend">dot = last close &middot; wall = your gate &middot; full track = 30% away</div><div class="rows"><div class="row"><div class="rh"><span class="tk">ISRG</span><span class="ds">16% above its gate</span></div><div class="track"><span class="wall"></span><span class="rail"><span class="pt" style="left:53%"></span></span></div><div class="rl"><span>gate $305</span><span>or US procedure re-acceleration</span></div></div><div class="row"><div class="rh"><span class="tk">COIN</span><span class="ds">22% above its gate</span></div><div class="track"><span class="wall"></span><span class="rail"><span class="pt" style="left:73%"></span></span></div><div class="rl"><span>gate $120</span><span>$146.26 now</span></div></div><div class="row"><div class="rh"><span class="tk">HOOD</span><span class="ds">24% above its gate</span></div><div class="track"><span class="wall"></span><span class="rail"><span class="pt" style="left:79%"></span></span></div><div class="rl"><span>gate $70</span><span>$86.56 now</span></div></div><div class="row"><div class="rh"><span class="tk">DLO</span><span class="ds">26% above its gate</span></div><div class="track"><span class="wall"></span><span class="rail"><span class="pt" style="left:86%"></span></span></div><div class="rl"><span>gate $12</span><span>$15.08 now</span></div></div><div class="row"><div class="rh"><span class="tk">NTSK</span><span class="ds">26% above its gate</span></div><div class="track"><span class="wall"></span><span class="rail"><span class="pt" style="left:86%"></span></span></div><div class="rl"><span>gate $10</span><span>or reaccel-proof + sub-$11</span></div></div></div>
 <div class="sec">Far away &mdash; nothing to do</div><p class="body">13 gates sit 32&ndash;77% below last close: PENG, PLTR, TSEM, NU, NVDA, ASML, KRMN, GOOGL, KNSL, GEV, VICR, LEU, OUST. They only matter on a big drop or a proof trigger.</p>
 <div class="sec">Left behind &mdash; retire these gates?</div><p class="body">BLLN (+131%), AEHR (+196%) ran without you; their gates are effectively dead. Culling decision at Board.</p>
+<p class="body" style="margin-top:16px">BTC $63,418 — armed above the trigger zone, pending Board ratification. Quotes unavailable: 2454.TW.</p>
+<div class="sec" id="cyclemap">Cycle map</div>
+<p class="rule" id="cm-stamp">Board read &mdash;</p>
+<p class="cm-note" id="cm-note"></p>
+<div class="chart">
+<svg viewBox="0 0 640 320" role="img" aria-label="Theme positions on the stealth to despair cycle curve">
+  <path id="cm-curve" class="curve" d="M 12 236
+    C 120 234, 200 212, 268 172
+    C 330 134, 372 94, 428 76
+    C 468 63, 486 70, 508 114
+    C 532 158, 548 196, 578 210
+    C 600 218, 618 214, 632 204"/>
+  <line class="tick" x1="115" y1="268" x2="115" y2="276"/>
+  <line class="tick" x1="265" y1="268" x2="265" y2="276"/>
+  <line class="tick" x1="400" y1="268" x2="400" y2="276"/>
+  <line class="tick" x1="520" y1="268" x2="520" y2="276"/>
+  <text class="stg" x="57"  y="292" text-anchor="middle">stealth</text>
+  <text class="stg" x="190" y="292" text-anchor="middle">awareness</text>
+  <text class="stg" x="332" y="292" text-anchor="middle">mania</text>
+  <text class="stg" x="460" y="292" text-anchor="middle">blow-off</text>
+  <text class="stg" x="580" y="292" text-anchor="middle">despair</text>
+  <g id="cm-marks"></g>
+</svg>
+</div>
+<div id="cm-reads"></div>
+<div class="sec">No fresh read</div>
+<p class="body" id="cm-unplaced"></p>
+<script type="application/json" id="cycle-data">{
+  "read_date": "Jul 24, 2026",
+  "read_date_iso": "2026-07-24",
+  "note": "Order = where action lives today. The stage sets the entry window; the Board sets the entry.",
+  "themes": [
+    {"name": "Agentic AI", "x": 0.94, "stage": "despair → inflection", "window": "ENTRY WINDOW OPEN",
+     "action": "Max-pessimism window — probation size only, needs a stabilization proof. Despair prices mean the expectation gap is free; this is where fresh capital can act first.",
+     "names": [
+       {"t": "PLTR", "hook": "reports Aug 3 — gate $90 or estimate reset"},
+       {"t": "NOW",  "hook": "agentic proof 7/24 — fresh mark at Aug 5 Board"},
+       {"t": "TEAM", "hook": "FQ4 print — last PW 17.2%"},
+       {"t": "GOOGL","hook": "gate $235 or FCF inflection w/ Cloud margin >60%"}]},
+    {"name": "Robotics / physical AI", "x": 0.515, "stage": "narrative mania · proof phase opening", "window": "WATCH — NO PROOF YET",
+     "action": "Biggest curve IF it proves out, but mania pricing with zero admissible proof is the PTON/ZM trade. No entry until a proof event lands; then underwrite from that day's price, premium included.",
+     "names": [
+       {"t": "HDSI", "hook": "Aug humanoid-share disclosure — the first hard test"},
+       {"t": "AMBA", "hook": ">25% growth re-acceleration"},
+       {"t": "OUST", "hook": "gate $22 — ran 82% past it on narrative, no chase"},
+       {"t": "KRMN", "hook": "gate $32"}]},
+    {"name": "AI infra & memory", "x": 0.735, "stage": "blow-off → break", "window": "CLOSED — GATES ONLY",
+     "action": "Complex broke off the blow-off; kills sustained. Fresh capital waits at armed re-entry gates — a gate hit is a summons, not a buy.",
+     "names": [
+       {"t": "NVDA", "hook": "gate $140 — reports Aug 26"},
+       {"t": "ASML", "hook": "gate ~$1,100 · disclosure-regression flag live"},
+       {"t": "MU",   "hook": "kill sustained — no chase"},
+       {"t": "AEHR / VICR / PENG / TSEM", "hook": "gates $27 / $130 / $40 / $160"}]}
+  ],
+  "unplaced": ["Nuclear / SMRs", "Grid & power", "Defense", "Stablecoins", "Quantum", "Copper", "Sovereign AI"]
+}
+</script>
+<script>
+(function(){
+  var el0 = document.getElementById('cycle-data');
+  if (!el0) return;
+  var data;
+  try { data = JSON.parse(el0.textContent); } catch(e){ return; }
+  var stamp = document.getElementById('cm-stamp');
+  stamp.textContent = 'Board read ' + data.read_date;
+  if (data.read_date_iso) {
+    var days = Math.floor((Date.now() - new Date(data.read_date_iso + 'T00:00:00Z')) / 864e5);
+    if (days > 35) {
+      stamp.textContent += ' · ' + days + 'd old — refresh due';
+      stamp.style.color = 'var(--warnink)';
+    }
+  }
+  if (data.note) document.getElementById('cm-note').textContent = data.note;
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var path = document.getElementById('cm-curve');
+  var marks = document.getElementById('cm-marks');
+  var L = path.getTotalLength();
+  var pts = [];
+  for (var i = 0; i <= 600; i++) pts.push(path.getPointAtLength(L * i / 600));
+  function atX(x){
+    var best = pts[0];
+    for (var j = 1; j < pts.length; j++)
+      if (Math.abs(pts[j].x - x) < Math.abs(best.x - x)) best = pts[j];
+    return best;
+  }
+  function el(tag, attrs){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function winColor(w){
+    w = w || '';
+    if (w.indexOf('OPEN') > -1) return 'var(--warnink)';
+    if (w.indexOf('WATCH') > -1) return 'var(--sub)';
+    if (w.indexOf('CLOSED') > -1) return 'var(--mut)';
+    return 'var(--sub)';
+  }
+  var reads = document.getElementById('cm-reads');
+  (data.themes || []).forEach(function(t){
+    var p = atX(t.x * 640);
+    marks.appendChild(el('circle', {cx:p.x, cy:p.y, r:5, 'class':'dot'}));
+    var card = document.createElement('div'); card.className = 'cm-card';
+    var h = document.createElement('div'); h.className = 'cm-h';
+    var nm = document.createElement('span'); nm.className = 'cm-name'; nm.textContent = t.name;
+    var wl = document.createElement('span'); wl.className = 'cm-win'; wl.textContent = t.window || '';
+    wl.style.color = winColor(t.window);
+    h.appendChild(nm); h.appendChild(wl); card.appendChild(h);
+    var st = document.createElement('div'); st.className = 'cm-stage'; st.textContent = t.stage || ''; card.appendChild(st);
+    if (t.action){ var ac = document.createElement('div'); ac.className = 'cm-action'; ac.textContent = t.action; card.appendChild(ac); }
+    (t.names || []).forEach(function(n){
+      var row = document.createElement('div'); row.className = 'cm-nm';
+      row.textContent = n.t + ' — ' + n.hook;
+      card.appendChild(row);
+    });
+    reads.appendChild(card);
+  });
+  document.getElementById('cm-unplaced').textContent = (data.unplaced || []).join(' · ');
+})();
+</script>
 <div class="sec">Proof triggers &mdash; events, not prices</div><div class="rows"><div class="row"><span class="tk">TEAM</span> <span class="ds">FQ4 print (last PW 17.2%)</span></div><div class="row"><span class="tk">NOW</span> <span class="ds">fresh mark at next Board - graduated 7/24 on agentic proof</span></div><div class="row"><span class="tk">NVO</span> <span class="ds">Aug 5: Q2 holds raised guide + 2nd US GLP-1 stabilization qtr</span></div><div class="row"><span class="tk">HDSI</span> <span class="ds">Aug humanoid-share disclosure - first robotics proof test</span></div><div class="row"><span class="tk">AMBA</span> <span class="ds">&gt;25% growth re-acceleration</span></div><div class="row"><span class="tk">SNPS</span> <span class="ds">max-pessimism watch (8-10% PW)</span></div><div class="row"><span class="tk">HIMS</span> <span class="ds">FY26 guide &gt;=$2.8B + subs QoQ growth + aEBITDA &gt;=10%</span></div><div class="row"><span class="tk">NU</span> <span class="ds">2 qtrs risk-adj NIM &gt;=9.5% w/ allowance &lt;= portfolio growth, or Mexico NI inflection</span></div><div class="row"><span class="tk">ISRG</span> <span class="ds">US procedure re-acceleration</span></div><div class="row"><span class="tk">LEU</span> <span class="ds">NNSA sole-source or equity-partner close</span></div><div class="row"><span class="tk">BTC</span> <span class="ds">ratification pending: ETF inflows 2-3 wks + weekly close &gt;=$59-60k</span></div><div class="row"><span class="tk">IESC</span> <span class="ds">Aug 5 Board checklist (unsynced 8/1 - ratify at Board)</span></div><div class="row"><span class="tk">IREN</span> <span class="ds">Sep 16 FY print (unsynced 7/30 - ratify at Board)</span></div><div class="row"><span class="tk">KALSHI</span> <span class="ds">S-1 filing 2027+ re-entry gate, IPO scanner (unsynced 7/30 - ratify at Board)</span></div></div>
-<div class="foot"><a href="cycle-map.html" style="color:var(--sub)">Cycle map &rarr;</a><br><br>BTC $63,429 — armed above the trigger zone, pending Board ratification. Quotes unavailable: 2454.TW.<br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
+<div class="foot"><a href="#cyclemap" style="color:var(--sub)">Cycle map &rarr;</a><br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
 </body></html>
