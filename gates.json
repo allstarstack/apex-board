@@ -9,7 +9,7 @@
   ],
   "btc": {"trigger_low": 59000, "trigger_high": 60000, "falsifier": 40000},
   "names": [
-    {"t": "MP",   "gate": 38,   "at_gate": true, "zone": "CONFLICT - Board reconcile before Aug 6 print", "note": "Two unsynced re-underwrites: 7/30 said KILL, gate ~$20 or 2-of-4 proof flips; 8/1 said CANDIDATE, $36-38 only if Aug 6 print confirms magnets H2 + 10X on schedule, or $30-32 on price. Do not act on this row until the Board picks one."},
+    {"t": "MP",   "gate": 32,   "at_gate": true, "zone": "CONFLICT - Board reconcile before Aug 6 print", "note": "Two unsynced re-underwrites: 7/30 said KILL, gate ~$20 or 2-of-4 proof flips; 8/1 said CANDIDATE, $36-38 only if Aug 6 print confirms magnets H2 + 10X on schedule, or $30-32 on price. Do not act on this row until the Board picks one. Interim alert level $32 = the price-alone re-look from the 8/1 re-underwrite; Board sets the real gate Aug 5."},
     {"t": "ISRG", "gate": 305,  "note": "or US procedure re-acceleration"},
     {"t": "COIN", "gate": 120,  "note": ""},
     {"t": "HOOD", "gate": 70,   "note": ""},
