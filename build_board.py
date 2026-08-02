@@ -69,7 +69,7 @@ __ATGATE__
 __NEAR__
 __FAR__
 __LEFT__
-<div class="foot">__FOOT__<br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
+<div class="foot"><a href="cycle-map.html" style="color:var(--sub)">Cycle map &rarr;</a><br><br>__FOOT__<br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
 </body></html>"""
 
 def esc(s):

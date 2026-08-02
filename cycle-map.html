@@ -1,0 +1,161 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>APEX cycle map</title>
+
+<!-- ============================================================
+     DATA BLOCK — the only part of this file a Board read edits.
+     To refresh: say "refresh cycle map" in the APEX project,
+     paste the new block over this one, commit. x runs 0→1 along
+     the curve (stealth→despair). lx/ly/anchor place the label.
+     ============================================================ -->
+<script type="application/json" id="cycle-data">
+{
+  "read_date": "Jul 24, 2026",
+  "read_date_iso": "2026-07-24",
+  "themes": [
+    {
+      "name": "AI infra & memory",
+      "x": 0.735,
+      "stage": "blow-off \u2192 break",
+      "note": "Semis complex broke off the blow-off. NVDA / ASML / MU killed with re-entry gates armed.",
+      "lx": 482, "ly": 46, "anchor": "start"
+    },
+    {
+      "name": "Robotics / physical AI",
+      "x": 0.515,
+      "stage": "narrative mania \u00b7 proof phase opening",
+      "note": "Story is ahead of numbers. First hard test: HDSI humanoid-share disclosure in Aug.",
+      "lx": 318, "ly": 106, "anchor": "end"
+    },
+    {
+      "name": "Agentic AI",
+      "x": 0.94,
+      "stage": "despair \u2192 inflection",
+      "note": "Despair pricing on incumbents; inflection watch keys on proof, not price.",
+      "lx": 604, "ly": 252, "anchor": "end"
+    }
+  ],
+  "unplaced": ["Nuclear / SMRs", "Grid & power", "Defense", "Stablecoins", "Quantum", "Copper", "Sovereign AI"]
+}
+</script>
+
+<style>
+:root{--bg:#faf9f5;--card:#f1efe8;--ink:#2c2c2a;--sub:#5f5e5a;--mut:#888780;
+--line:#d3d1c7;--warnbg:#faeeda;--warnink:#854f0b;--dot:#2c2c2a}
+@media (prefers-color-scheme:dark){:root{--bg:#1a1a18;--card:#262624;--ink:#eceae4;
+--sub:#b4b2a9;--mut:#888780;--line:#444441;--warnbg:#412402;--warnink:#fac775;--dot:#eceae4}}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--ink);
+font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px 16px 48px;max-width:640px;margin:0 auto}
+h1{font-size:18px;font-weight:600}.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.stamp{font-size:12px;color:var(--mut)}.sec{font-size:12px;font-weight:600;letter-spacing:.03em;
+text-transform:uppercase;color:var(--sub);margin:22px 0 8px}
+.rule{font-size:12.5px;color:var(--sub);margin:-8px 0 16px}
+.chart{margin:6px 0 4px}
+svg{display:block;width:100%;height:auto}
+.curve{fill:none;stroke:var(--sub);stroke-width:2;stroke-linecap:round}
+.tick{stroke:var(--line);stroke-width:1}
+.stg{font-size:12px;fill:var(--mut)}
+.lead{stroke:var(--line);stroke-width:1}
+.dot{fill:var(--dot);opacity:0;animation:pop .5s ease .15s forwards}
+.lbl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none;opacity:1}}
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{padding:11px 14px}.row+.row{border-top:1px solid var(--line)}
+.rh{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.rh .tk{font-size:14px;font-weight:600}.rh .ds{font-size:13px;color:var(--sub);text-align:right}
+.row .n{font-size:13px;color:var(--sub);margin-top:3px}
+p.body{font-size:13.5px;color:var(--sub)}
+.foot{border-top:1px solid var(--line);margin-top:22px;padding-top:12px;font-size:12px;color:var(--mut)}
+.foot a{color:var(--sub)}
+</style></head><body>
+
+<div class="top"><h1>Cycle map</h1><span class="stamp" id="stamp">Board read —</span></div>
+<p class="rule">Dots are Board judgments, not price math — the nightly price job never moves them.</p>
+
+<div class="chart">
+<svg viewBox="0 0 640 320" role="img" aria-label="Theme positions on the stealth to despair cycle curve">
+  <path id="curve" class="curve" d="M 12 236
+    C 120 234, 200 212, 268 172
+    C 330 134, 372 94, 428 76
+    C 468 63, 486 70, 508 114
+    C 532 158, 548 196, 578 210
+    C 600 218, 618 214, 632 204"/>
+  <line class="tick" x1="115" y1="268" x2="115" y2="276"/>
+  <line class="tick" x1="265" y1="268" x2="265" y2="276"/>
+  <line class="tick" x1="400" y1="268" x2="400" y2="276"/>
+  <line class="tick" x1="520" y1="268" x2="520" y2="276"/>
+  <text class="stg" x="57"  y="292" text-anchor="middle">stealth</text>
+  <text class="stg" x="190" y="292" text-anchor="middle">awareness</text>
+  <text class="stg" x="332" y="292" text-anchor="middle">mania</text>
+  <text class="stg" x="460" y="292" text-anchor="middle">blow-off</text>
+  <text class="stg" x="580" y="292" text-anchor="middle">despair</text>
+  <g id="marks"></g>
+</svg>
+</div>
+
+<div class="sec">Reads</div>
+<div class="rows" id="reads"></div>
+
+<div class="sec">No fresh read</div>
+<p class="body" id="unplaced"></p>
+<p class="body" style="margin-top:6px">Say &ldquo;refresh cycle map&rdquo; in a Board session to place these &mdash; they stay off the curve until a read is stamped.</p>
+
+<div class="foot">To update: run &ldquo;refresh cycle map&rdquo; in the APEX project, paste the new data block at the top of this file, commit. This page is static &mdash; the Update&nbsp;board workflow only rebuilds the gate page.<br><br><a href="./">&larr; Back to board</a></div>
+
+<script>
+(function(){
+  var data = JSON.parse(document.getElementById('cycle-data').textContent);
+  var stamp = document.getElementById('stamp');
+  stamp.textContent = 'Board read ' + data.read_date;
+  if (data.read_date_iso) {
+    var days = Math.floor((Date.now() - new Date(data.read_date_iso + 'T00:00:00Z')) / 864e5);
+    if (days > 35) {
+      stamp.textContent += ' \u00b7 ' + days + 'd old \u2014 refresh due';
+      stamp.style.color = 'var(--warnink)';
+    }
+  }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var path = document.getElementById('curve');
+  var marks = document.getElementById('marks');
+  var L = path.getTotalLength();
+  var pts = [];
+  for (var i = 0; i <= 600; i++) pts.push(path.getPointAtLength(L * i / 600));
+  function atX(x){
+    var best = pts[0];
+    for (var j = 1; j < pts.length; j++)
+      if (Math.abs(pts[j].x - x) < Math.abs(best.x - x)) best = pts[j];
+    return best;
+  }
+  function el(tag, attrs){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  var reads = document.getElementById('reads');
+  data.themes.forEach(function(t){
+    var p = atX(t.x * 640);
+    // leader line from dot toward label point
+    var tx = t.lx + (t.anchor === 'start' ? 2 : t.anchor === 'end' ? -2 : 0);
+    var lead = el('line', {x1:p.x, y1:p.y, x2:tx, y2:t.ly + 4, 'class':'lead'});
+    marks.appendChild(lead);
+    marks.appendChild(el('circle', {cx:p.x, cy:p.y, r:5, 'class':'dot'}));
+    var txt = el('text', {x:t.lx, y:t.ly, 'text-anchor':t.anchor, 'class':'lbl'});
+    txt.textContent = t.name;
+    marks.appendChild(txt);
+    // list row
+    var row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = '<div class="rh"><span class="tk"></span><span class="ds"></span></div><div class="n"></div>';
+    row.querySelector('.tk').textContent = t.name;
+    row.querySelector('.ds').textContent = t.stage;
+    row.querySelector('.n').textContent = t.note;
+    reads.appendChild(row);
+  });
+
+  document.getElementById('unplaced').textContent = data.unplaced.join(' \u00b7 ');
+})();
+</script>
+</body></html>
