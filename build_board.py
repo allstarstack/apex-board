@@ -19,10 +19,15 @@ def fetch(path, **params):
     raise RuntimeError(f"FMP unreachable: {path} :: {err}")
 
 def quote(sym, crypto=False):
-    rows = fetch("cryptocurrency-quote" if crypto else "quote", symbol=sym)
-    if not (isinstance(rows, list) and rows and rows[0].get("price")):
-        return None
-    return rows[0]
+    endpoints = ("quote", "cryptocurrency-quote") if crypto else ("quote",)
+    for ep in endpoints:
+        try:
+            rows = fetch(ep, symbol=sym)
+        except RuntimeError:
+            continue
+        if isinstance(rows, list) and rows and rows[0].get("price"):
+            return rows[0]
+    return None
 
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
