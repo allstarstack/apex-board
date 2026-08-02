@@ -3,21 +3,21 @@
   "read_date_iso": "2026-07-24",
   "note": "Order = where action lives today. The stage sets the entry window; the Board sets the entry.",
   "themes": [
-    {"name": "Agentic AI", "x": 0.94, "stage": "despair → inflection", "window": "ENTRY WINDOW OPEN",
+    {"name": "Agentic AI", "x": 0.94, "lx": 604, "ly": 252, "anchor": "end", "stage": "despair → inflection", "window": "ENTRY WINDOW OPEN",
      "action": "Max-pessimism window — probation size only, needs a stabilization proof. Despair prices mean the expectation gap is free; this is where fresh capital can act first.",
      "names": [
        {"t": "PLTR", "hook": "reports Aug 3 — gate $90 or estimate reset"},
        {"t": "NOW",  "hook": "agentic proof 7/24 — fresh mark at Aug 5 Board"},
        {"t": "TEAM", "hook": "FQ4 print — last PW 17.2%"},
        {"t": "GOOGL","hook": "gate $235 or FCF inflection w/ Cloud margin >60%"}]},
-    {"name": "Robotics / physical AI", "x": 0.515, "stage": "narrative mania · proof phase opening", "window": "WATCH — NO PROOF YET",
+    {"name": "Robotics / physical AI", "x": 0.515, "lx": 318, "ly": 106, "anchor": "end", "stage": "narrative mania · proof phase opening", "window": "WATCH — NO PROOF YET",
      "action": "Biggest curve IF it proves out, but mania pricing with zero admissible proof is the PTON/ZM trade. No entry until a proof event lands; then underwrite from that day's price, premium included.",
      "names": [
        {"t": "HDSI", "hook": "Aug humanoid-share disclosure — the first hard test"},
        {"t": "AMBA", "hook": ">25% growth re-acceleration"},
        {"t": "OUST", "hook": "gate $22 — ran 82% past it on narrative, no chase"},
        {"t": "KRMN", "hook": "gate $32"}]},
-    {"name": "AI infra & memory", "x": 0.735, "stage": "blow-off → break", "window": "CLOSED — GATES ONLY",
+    {"name": "AI infra & memory", "x": 0.735, "lx": 482, "ly": 46, "anchor": "start", "stage": "blow-off → break", "window": "CLOSED — GATES ONLY",
      "action": "Complex broke off the blow-off; kills sustained. Fresh capital waits at armed re-entry gates — a gate hit is a summons, not a buy.",
      "names": [
        {"t": "NVDA", "hook": "gate $140 — reports Aug 26"},

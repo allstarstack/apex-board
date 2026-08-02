@@ -166,7 +166,15 @@ CYCLEMAP_SECTION = """<div class="sec" id="cyclemap">Cycle map</div>
   var reads = document.getElementById('cm-reads');
   (data.themes || []).forEach(function(t){
     var p = atX(t.x * 640);
+    var lx = (t.lx != null) ? t.lx : p.x + 10;
+    var ly = (t.ly != null) ? t.ly : p.y - 14;
+    var anchor = t.anchor || 'start';
+    var tx = lx + (anchor === 'start' ? 2 : anchor === 'end' ? -2 : 0);
+    marks.appendChild(el('line', {x1:p.x, y1:p.y, x2:tx, y2:ly + 4, 'class':'lead'}));
     marks.appendChild(el('circle', {cx:p.x, cy:p.y, r:5, 'class':'dot'}));
+    var txt = el('text', {x:lx, y:ly, 'text-anchor':anchor, 'class':'lbl'});
+    txt.textContent = t.name;
+    marks.appendChild(txt);
     var card = document.createElement('div'); card.className = 'cm-card';
     var h = document.createElement('div'); h.className = 'cm-h';
     var nm = document.createElement('span'); nm.className = 'cm-name'; nm.textContent = t.name;
