@@ -1,29 +1,32 @@
 {
   "read_date": "Jul 24, 2026",
   "read_date_iso": "2026-07-24",
-  "note": "Order = where action lives today. The stage sets the entry window; the Board sets the entry.",
+  "note": "Themes listed in order of what needs your attention today. Where a theme sits on the curve decides IF buying is even allowed; a review session decides WHAT and WHEN.",
   "themes": [
-    {"name": "Agentic AI", "x": 0.94, "lx": 604, "ly": 252, "anchor": "end", "stage": "despair → inflection", "window": "ENTRY WINDOW OPEN",
-     "action": "Max-pessimism window — probation size only, needs a stabilization proof. Despair prices mean the expectation gap is free; this is where fresh capital can act first.",
+    {"name": "Agentic AI", "x": 0.94, "stage": "despair, turning toward recovery", "window": "OPEN - BUYS POSSIBLE",
+     "action": "Everyone has given up on these stocks - which is exactly when buying gets interesting. Rules here: small starter positions only, and only after a company shows hard proof things have stabilized. Prices are so low that good news does the heavy lifting.",
+     "lx": 604, "ly": 252, "anchor": "end",
      "names": [
-       {"t": "PLTR", "hook": "reports Aug 3 — gate $90 or estimate reset"},
-       {"t": "NOW",  "hook": "agentic proof 7/24 — fresh mark at Aug 5 Board"},
-       {"t": "TEAM", "hook": "FQ4 print — last PW 17.2%"},
-       {"t": "GOOGL","hook": "gate $235 or FCF inflection w/ Cloud margin >60%"}]},
-    {"name": "Robotics / physical AI", "x": 0.515, "lx": 318, "ly": 106, "anchor": "end", "stage": "narrative mania · proof phase opening", "window": "WATCH — NO PROOF YET",
-     "action": "Biggest curve IF it proves out, but mania pricing with zero admissible proof is the PTON/ZM trade. No entry until a proof event lands; then underwrite from that day's price, premium included.",
+       {"t": "PLTR", "hook": "Earnings Monday. Worth a look below $90, or if analysts cut forecasts after the report."},
+       {"t": "NOW",  "hook": "Proved its AI-agents business Jul 24 - gets fresh numbers Wednesday."},
+       {"t": "TEAM", "hook": "Year-end earnings due - was just under our return bar last check."},
+       {"t": "GOOGL","hook": "Worth a look below $235, or when AI spending stops eating its cash flow."}]},
+    {"name": "Robotics / physical AI", "x": 0.515, "stage": "hype running ahead of proof", "window": "WATCHING - NO PROOF YET",
+     "action": "Could be the biggest prize of all IF the proof shows up. But right now it is all story at hot prices - the exact combo that burned Peloton and Zoom buyers in 2020. We buy nothing until a real proof event lands; then we pay that day's price, premium and all, as long as the math still works.",
+     "lx": 318, "ly": 106, "anchor": "end",
      "names": [
-       {"t": "HDSI", "hook": "Aug humanoid-share disclosure — the first hard test"},
-       {"t": "AMBA", "hook": ">25% growth re-acceleration"},
-       {"t": "OUST", "hook": "gate $22 — ran 82% past it on narrative, no chase"},
-       {"t": "KRMN", "hook": "gate $32"}]},
-    {"name": "AI infra & memory", "x": 0.735, "lx": 482, "ly": 46, "anchor": "start", "stage": "blow-off → break", "window": "CLOSED — GATES ONLY",
-     "action": "Complex broke off the blow-off; kills sustained. Fresh capital waits at armed re-entry gates — a gate hit is a summons, not a buy.",
+       {"t": "HDSI", "hook": "August report reveals its humanoid-robot share - the first real test."},
+       {"t": "AMBA", "hook": "Watching for growth past 25% again."},
+       {"t": "OUST", "hook": "Ran 82% past our level on hype, no new contracts - no chasing."},
+       {"t": "KRMN", "hook": "Worth a look below $32."}]},
+    {"name": "AI infra & memory", "x": 0.735, "stage": "the boom cracked", "window": "CLOSED - WAITING AT SET PRICES",
+     "action": "The boom broke in July. We sold or avoided, and now wait at pre-set re-look prices. A price alert here means come review the name - it never means buy.",
+     "lx": 482, "ly": 46, "anchor": "start",
      "names": [
-       {"t": "NVDA", "hook": "gate $140 — reports Aug 26"},
-       {"t": "ASML", "hook": "gate ~$1,100 · disclosure-regression flag live"},
-       {"t": "MU",   "hook": "kill sustained — no chase"},
-       {"t": "AEHR / VICR / PENG / TSEM", "hook": "gates $27 / $130 / $40 / $160"}]}
+       {"t": "NVDA", "hook": "Worth a look below $140 - reports Aug 26."},
+       {"t": "ASML", "hook": "Worth a look below ~$1,100. Caution: it stopped reporting order numbers."},
+       {"t": "MU",   "hook": "We missed the middle of its run - no chasing now."},
+       {"t": "AEHR / VICR / PENG / TSEM", "hook": "Waiting levels: $27 / $130 / $40 / $160."}]}
   ],
   "unplaced": ["Nuclear / SMRs", "Grid & power", "Defense", "Stablecoins", "Quantum", "Copper", "Sovereign AI"]
 }

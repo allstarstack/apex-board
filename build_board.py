@@ -214,6 +214,8 @@ def build():
     today = datetime.date.today()
     week = ""
     for c in cfg["calendar"]:
+        if not c.get("date"):
+            continue  # recurring entries (e.g. first_monday) drive the alert banner, not dated cards
         if datetime.date.fromisoformat(c["date"]) >= today:
             week += (f'<div class="wcard"><div class="d">{esc(c["label"])}</div>'
                      f'<div class="t">{esc(c["title"])}</div><div class="s">{esc(c["sub"])}</div></div>')
@@ -254,7 +256,7 @@ def build():
         lst = ", ".join(x["t"] for x in sorted(far, key=lambda x: x["dist"]))
         lo, hi = min(x["dist"] for x in far), max(x["dist"] for x in far)
         far_html = (f'<div class="sec">Far away &mdash; nothing to do</div><p class="body">'
-                    f'{len(far)} gates sit {lo:.0f}&ndash;{hi:.0f}% below last close: {lst}. '
+                    f'{len(far)} gates sit {lo:.0f}&ndash;{hi:.0f}% below today&#39;s price: {lst}. '
                     f'They only matter on a big drop or a proof trigger.</p>')
 
     left_html = ""
