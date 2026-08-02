@@ -61,6 +61,26 @@ text-transform:uppercase;color:var(--sub);margin:22px 0 8px}.sec.warn{color:var(
 p.body{font-size:13.5px;color:var(--sub)}.legend{font-size:12px;color:var(--mut);margin:0 0 8px}
 .foot{border-top:1px solid var(--line);margin-top:22px;padding-top:12px;font-size:12px;color:var(--mut)}
 .rule{font-size:12.5px;color:var(--sub);margin:-8px 0 16px}
+.chart{margin:6px 0 4px}
+svg{display:block;width:100%;height:auto}
+.curve{fill:none;stroke:var(--sub);stroke-width:2;stroke-linecap:round}
+.tick{stroke:var(--line);stroke-width:1}
+.stg{font-size:12px;fill:var(--mut)}
+.lead{stroke:var(--line);stroke-width:1}
+.dot{fill:var(--dot);opacity:0;animation:pop .5s ease .15s forwards}
+.lbl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none;opacity:1}}
+.cm-note{font-size:12.5px;font-style:italic;color:var(--sub);margin:2px 0 10px}
+.cm-card{padding:12px 0;border-top:1px solid var(--line)}
+.cm-card:first-of-type{border-top:none;padding-top:4px}
+.cm-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cm-name{font-size:15px;font-weight:600}
+.cm-win{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;text-align:right}
+.cm-stage{font-size:12px;color:var(--mut);margin-top:2px}
+.cm-action{font-size:13px;color:var(--sub);margin-top:6px}
+.cm-nm{font-size:13px;color:var(--ink);margin-top:5px}
+.cm-nm:first-of-type{margin-top:8px}
 </style></head><body>
 <div class="top"><h1>APEX board</h1><span class="stamp">updated __UPDATED__</span></div>
 <p class="rule">A gate hit means open a Board Review in Claude &mdash; gates are hurdles, not green lights.</p>
@@ -69,15 +89,112 @@ __ATGATE__
 __NEAR__
 __FAR__
 __LEFT__
+<p class="body" style="margin-top:16px">__FOOT__</p>
+__CYCLEMAP__
 __TRIGGERS__
-<div class="foot"><a href="cycle-map.html" style="color:var(--sub)">Cycle map &rarr;</a><br><br>__FOOT__<br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
+<div class="foot"><a href="#cyclemap" style="color:var(--sub)">Cycle map &rarr;</a><br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
 </body></html>"""
+
+CYCLEMAP_SECTION = """<div class="sec" id="cyclemap">Cycle map</div>
+<p class="rule" id="cm-stamp">Board read &mdash;</p>
+<p class="cm-note" id="cm-note"></p>
+<div class="chart">
+<svg viewBox="0 0 640 320" role="img" aria-label="Theme positions on the stealth to despair cycle curve">
+  <path id="cm-curve" class="curve" d="M 12 236
+    C 120 234, 200 212, 268 172
+    C 330 134, 372 94, 428 76
+    C 468 63, 486 70, 508 114
+    C 532 158, 548 196, 578 210
+    C 600 218, 618 214, 632 204"/>
+  <line class="tick" x1="115" y1="268" x2="115" y2="276"/>
+  <line class="tick" x1="265" y1="268" x2="265" y2="276"/>
+  <line class="tick" x1="400" y1="268" x2="400" y2="276"/>
+  <line class="tick" x1="520" y1="268" x2="520" y2="276"/>
+  <text class="stg" x="57"  y="292" text-anchor="middle">stealth</text>
+  <text class="stg" x="190" y="292" text-anchor="middle">awareness</text>
+  <text class="stg" x="332" y="292" text-anchor="middle">mania</text>
+  <text class="stg" x="460" y="292" text-anchor="middle">blow-off</text>
+  <text class="stg" x="580" y="292" text-anchor="middle">despair</text>
+  <g id="cm-marks"></g>
+</svg>
+</div>
+<div id="cm-reads"></div>
+<div class="sec">No fresh read</div>
+<p class="body" id="cm-unplaced"></p>
+<script type="application/json" id="cycle-data">__CYCLEMAP_JSON__</script>
+<script>
+(function(){
+  var el0 = document.getElementById('cycle-data');
+  if (!el0) return;
+  var data;
+  try { data = JSON.parse(el0.textContent); } catch(e){ return; }
+  var stamp = document.getElementById('cm-stamp');
+  stamp.textContent = 'Board read ' + data.read_date;
+  if (data.read_date_iso) {
+    var days = Math.floor((Date.now() - new Date(data.read_date_iso + 'T00:00:00Z')) / 864e5);
+    if (days > 35) {
+      stamp.textContent += ' · ' + days + 'd old — refresh due';
+      stamp.style.color = 'var(--warnink)';
+    }
+  }
+  if (data.note) document.getElementById('cm-note').textContent = data.note;
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var path = document.getElementById('cm-curve');
+  var marks = document.getElementById('cm-marks');
+  var L = path.getTotalLength();
+  var pts = [];
+  for (var i = 0; i <= 600; i++) pts.push(path.getPointAtLength(L * i / 600));
+  function atX(x){
+    var best = pts[0];
+    for (var j = 1; j < pts.length; j++)
+      if (Math.abs(pts[j].x - x) < Math.abs(best.x - x)) best = pts[j];
+    return best;
+  }
+  function el(tag, attrs){
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function winColor(w){
+    w = w || '';
+    if (w.indexOf('OPEN') > -1) return 'var(--warnink)';
+    if (w.indexOf('WATCH') > -1) return 'var(--sub)';
+    if (w.indexOf('CLOSED') > -1) return 'var(--mut)';
+    return 'var(--sub)';
+  }
+  var reads = document.getElementById('cm-reads');
+  (data.themes || []).forEach(function(t){
+    var p = atX(t.x * 640);
+    marks.appendChild(el('circle', {cx:p.x, cy:p.y, r:5, 'class':'dot'}));
+    var card = document.createElement('div'); card.className = 'cm-card';
+    var h = document.createElement('div'); h.className = 'cm-h';
+    var nm = document.createElement('span'); nm.className = 'cm-name'; nm.textContent = t.name;
+    var wl = document.createElement('span'); wl.className = 'cm-win'; wl.textContent = t.window || '';
+    wl.style.color = winColor(t.window);
+    h.appendChild(nm); h.appendChild(wl); card.appendChild(h);
+    var st = document.createElement('div'); st.className = 'cm-stage'; st.textContent = t.stage || ''; card.appendChild(st);
+    if (t.action){ var ac = document.createElement('div'); ac.className = 'cm-action'; ac.textContent = t.action; card.appendChild(ac); }
+    (t.names || []).forEach(function(n){
+      var row = document.createElement('div'); row.className = 'cm-nm';
+      row.textContent = n.t + ' — ' + n.hook;
+      card.appendChild(row);
+    });
+    reads.appendChild(card);
+  });
+  document.getElementById('cm-unplaced').textContent = (data.unplaced || []).join(' · ');
+})();
+</script>"""
 
 def esc(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 def build():
     cfg = json.load(open("gates.json"))
+    try:
+        cyclemap_json = open("cycle_map.json").read()
+    except FileNotFoundError:
+        cyclemap_json = ""
     today = datetime.date.today()
     week = ""
     for c in cfg["calendar"]:
@@ -145,7 +262,8 @@ def build():
     html = (TEMPLATE.replace("__UPDATED__", now).replace("__WEEK__", week)
             .replace("__ATGATE__", ('<div class="sec warn">At the gate &mdash; action owed</div>' + at_html) if at_html else "")
             .replace("__NEAR__", near_html).replace("__FAR__", far_html)
-            .replace("__LEFT__", left_html).replace("__TRIGGERS__", triggers_html(cfg))
+            .replace("__LEFT__", left_html).replace("__CYCLEMAP__", cyclemap_html(cyclemap_json))
+            .replace("__TRIGGERS__", triggers_html(cfg))
             .replace("__FOOT__", esc_foot(foot)))
     open("index.html", "w").write(html)
     print(f"index.html written: {len(at_html and 'x')} at-gate, {len(near)} near, {len(far)} far, {len(left)} left-behind")
@@ -163,6 +281,14 @@ def triggers_html(cfg):
         for tr in trigs)
     return ('<div class="sec">Proof triggers &mdash; events, not prices</div>'
             f'<div class="rows">{rows}</div>')
+
+def cyclemap_html(json_text):
+    """Cycle map merged into the board: same SVG curve + dot JS as the old
+    standalone page, but the list below is rendered in array order (the focus
+    ranking) with window / stage / action / names. Data injected at build time."""
+    if not json_text.strip():
+        return ""
+    return CYCLEMAP_SECTION.replace("__CYCLEMAP_JSON__", json_text)
 
 def atgate_card(n):
     return (f'<div class="atgate"><div class="h"><span>{n["t"]} &middot; ${n["price"]:,.2f}</span>'
