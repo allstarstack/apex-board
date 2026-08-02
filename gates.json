@@ -23,5 +23,16 @@
     {"t": "LEU",  "gate": 100,  "note": ""},
     {"t": "BLLN", "gate": 60,   "note": ""},
     {"t": "AEHR", "gate": 27,   "note": ""}
+  ],
+  "triggers": [
+    {"t": "PLTR", "event": "Aug 3 print (estimate reset flips gate)"},
+    {"t": "CAI",  "event": "Aug 5 Q2 print"},
+    {"t": "NVO",  "event": "Aug 5 (raised guide + 2nd US GLP-1 stabilization qtr)"},
+    {"t": "TEAM", "event": "FQ4 print"},
+    {"t": "HDSI", "event": "Aug humanoid-share disclosure"},
+    {"t": "AMBA", "event": ">25% growth re-acceleration"},
+    {"t": "NOW",  "event": "fresh mark at next Board"},
+    {"t": "NU",   "event": "2 qtrs risk-adj NIM ≥9.5% with allowance ≤ portfolio growth"},
+    {"t": "BTC",  "event": "ratification pending (ETF inflows 2–3 wks + weekly close ≥$59–60k)"}
   ]
 }

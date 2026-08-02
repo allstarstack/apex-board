@@ -69,6 +69,7 @@ __ATGATE__
 __NEAR__
 __FAR__
 __LEFT__
+__TRIGGERS__
 <div class="foot"><a href="cycle-map.html" style="color:var(--sub)">Cycle map &rarr;</a><br><br>__FOOT__<br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
 </body></html>"""
 
@@ -144,12 +145,24 @@ def build():
     html = (TEMPLATE.replace("__UPDATED__", now).replace("__WEEK__", week)
             .replace("__ATGATE__", ('<div class="sec warn">At the gate &mdash; action owed</div>' + at_html) if at_html else "")
             .replace("__NEAR__", near_html).replace("__FAR__", far_html)
-            .replace("__LEFT__", left_html).replace("__FOOT__", esc_foot(foot)))
+            .replace("__LEFT__", left_html).replace("__TRIGGERS__", triggers_html(cfg))
+            .replace("__FOOT__", esc_foot(foot)))
     open("index.html", "w").write(html)
     print(f"index.html written: {len(at_html and 'x')} at-gate, {len(near)} near, {len(far)} far, {len(left)} left-behind")
 
 def esc_foot(s):
     return s
+
+def triggers_html(cfg):
+    trigs = cfg.get("triggers", [])
+    if not trigs:
+        return ""
+    rows = "".join(
+        f'<div class="row"><span class="tk">{esc(tr["t"])}</span> '
+        f'<span class="ds">{esc(tr["event"])}</span></div>'
+        for tr in trigs)
+    return ('<div class="sec">Proof triggers &mdash; events, not prices</div>'
+            f'<div class="rows">{rows}</div>')
 
 def atgate_card(n):
     return (f'<div class="atgate"><div class="h"><span>{n["t"]} &middot; ${n["price"]:,.2f}</span>'
