@@ -10,7 +10,7 @@
   ],
   "btc": {"trigger_low": 59000, "trigger_high": 60000, "falsifier": 40000},
   "names": [
-    {"t": "MP",   "gate": 32,   "at_gate": true, "zone": "DECISION NEEDED Wednesday - before Thursday's earnings", "note": "Two recent reviews disagree: one said avoid entirely (only interesting near $20), the other said maybe $36-38 but only if Thursday's report confirms magnet revenue is starting. Wednesday's review picks one. Until then the price alert sits at $32."},
+    {"t": "MP",   "gate": 20,   "note": "Hurdle-derived: PW(P)=3.2766/P^(1/3)-1, P=$20.36 at the 20% hurdle. Or 2-of-4 named proof flips. Killed 8/5, PW -9.8% at $47.91."},
     {"t": "ISRG", "gate": 305,  "note": "or if US surgery volumes start growing faster again"},
     {"t": "COIN", "gate": 120,  "note": ""},
     {"t": "HOOD", "gate": 70,   "note": ""},
@@ -32,9 +32,12 @@
     {"t": "LEGN", "gate": 19.5, "note": "BELOW ITS TRIGGER NOW - on Wednesday's review agenda. Also flips on a first-line approval or a rival stumbling."},
     {"t": "KRMN", "gate": 32,   "note": ""},
     {"t": "OUST", "gate": 22,   "note": "ran 82% past our level on hype with no new contracts - we don't chase"},
-    {"t": "2454.TW", "gate": 2000, "note": "MediaTek, Taiwan (NT$). Or its custom-chip business hitting $2B with a named second customer. Price feed can't quote Taiwan."}
+    {"t": "2454.TW", "gate": 2000, "note": "MediaTek, Taiwan (NT$). Or its custom-chip business hitting $2B with a named second customer. Price feed can't quote Taiwan."},
+    {"t": "MTRN", "gate": 150,  "note": "Base terminal $249 discounted at hurdle. Or 2 qtrs VA-sales growth >=15% with backlog expanding and no one-time items in adjusted EBITDA. Killed 8/5, PW -5.8% at $297.08."},
+    {"t": "PGEN", "gate": 4.30, "note": "Collections-keyed, not revenue-keyed. Or 2 qtrs collections-confirmed ramp with DSO under 75 days. Killed 8/5, PW ~0% at $6.89."}
   ],
   "triggers": [
+    {"t": "MP",    "event": "$32 - RE-UNDERWRITE TRIGGER, NOT A GATE. Returns +4.3% against the 20% hurdle. NOT price-monitored - this level needs a manual check."},
     {"t": "TEAM",  "event": "Year-end earnings due. Last math: ~17%/yr expected return - just under our ~20% bar, so the report could tip it."},
     {"t": "NOW",   "event": "Proved its AI-agents business is real revenue (Jul 24). Gets fresh numbers at Wednesday's review."},
     {"t": "NVO",   "event": "Wednesday: needs to hold its raised forecast plus a second stable quarter for US weight-loss drugs."},
