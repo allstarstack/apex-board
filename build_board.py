@@ -93,6 +93,7 @@ svg{display:block;width:100%;height:auto}
 __ATGATE__
 __NEAR__
 __FAR__
+__FRESH__
 __LEFT__
 <p class="body" style="margin-top:16px">__FOOT__</p>
 __CYCLEMAP__
@@ -223,6 +224,8 @@ def build():
         week = '<div class="wcard"><div class="s">No dated catalysts on file &mdash; sync gates.json at next Board.</div></div>'
 
     at_html, near, far, left, failed = "", [], [], [], []
+    fresh = []
+    board_date = cfg.get("board_date")            # ISO date of the most recent Board
     for n in cfg["names"]:
         q = quote(n["t"])
         if not q:
@@ -232,7 +235,10 @@ def build():
         if n.get("at_gate") or d <= 10: at_html += atgate_card(n2)
         elif d <= 30: near.append(n2)
         elif d <= 80: far.append(n2)
-        else: left.append(n2)
+        elif n.get("verdict_date") and n["verdict_date"] == board_date:
+            fresh.append(n2)          # armed at the latest Board — deep by design, not "ran away"
+        else:
+            left.append(n2)
     if failed and len(failed) >= len(cfg["names"]) // 2:
         raise RuntimeError(f"quotes failed for {failed} -- refusing to publish a blind board")
 
@@ -259,11 +265,20 @@ def build():
                     f'{len(far)} gates sit {lo:.0f}&ndash;{hi:.0f}% below today&#39;s price: {lst}. '
                     f'They only matter on a big drop or a proof trigger.</p>')
 
+    fresh_html = ""
+    if fresh:
+        lst = ", ".join(f'{x["t"]} (gate ${x["gate"]:,}, +{x["dist"]:.0f}%)'
+                        for x in sorted(fresh, key=lambda x: -x["dist"]))
+        fresh_html = (f'<div class="sec">Freshly armed &mdash; deep by design</div><p class="body">'
+                      f'Set at the latest Board ({esc(board_date)}) at hurdle-derived levels: {lst}. '
+                      f'The gap is the verdict, not a stale gate &mdash; not a culling candidate.</p>')
+
     left_html = ""
     if left:
         lst = ", ".join(f'{x["t"]} (+{x["dist"]:.0f}%)' for x in sorted(left, key=lambda x: x["dist"]))
-        left_html = (f'<div class="sec">Ran away without us &mdash; delete these triggers?</div><p class="body">'
-                     f'{lst} ran without you; their gates are effectively dead. Culling decision at Board.</p>')
+        left_html = (f'<div class="sec">Review for culling</div><p class="body">'
+                     f'{lst} sit far above older gates. Review at the culling pass (agenda item 5) &mdash; '
+                     f'distance is not a verdict; confirm no new proof before retiring.</p>')
 
     foot = ""
     b = quote("BTCUSD", crypto=True)
@@ -280,6 +295,7 @@ def build():
     html = (TEMPLATE.replace("__UPDATED__", now).replace("__WEEK__", week)
             .replace("__ATGATE__", ('<div class="sec">At the trigger &mdash; decision needed</div>' + at_html) if at_html else "")
             .replace("__NEAR__", near_html).replace("__FAR__", far_html)
+            .replace("__FRESH__", fresh_html)
             .replace("__LEFT__", left_html).replace("__CYCLEMAP__", cyclemap_html(cyclemap_json))
             .replace("__TRIGGERS__", triggers_html(cfg))
             .replace("__FOOT__", esc_foot(foot)))
