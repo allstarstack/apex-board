@@ -1,13 +1,18 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>APEX board</title><style>
+<title>APEX board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
 :root{--bg:#faf9f5;--card:#f1efe8;--ink:#2c2c2a;--sub:#5f5e5a;--mut:#888780;
 --line:#d3d1c7;--warnbg:#faeeda;--warnink:#854f0b;--dot:#2c2c2a}
 @media (prefers-color-scheme:dark){:root{--bg:#1a1a18;--card:#262624;--ink:#eceae4;
 --sub:#b4b2a9;--mut:#888780;--line:#444441;--warnbg:#412402;--warnink:#fac775;--dot:#eceae4}}
 *{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--ink);
-font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px 16px 48px;max-width:640px;margin:0 auto}
+font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#board{padding:24px 16px 48px;max-width:640px;margin:0 auto}
 /* Five text styles — every text node maps to one of these. */
 h1{font-size:18px;font-weight:600;color:var(--ink)}                                                 /* t1 */
 .sec{font-size:12px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--sub);margin:22px 0 8px} /* sec */
@@ -54,8 +59,113 @@ svg{display:block;width:100%;height:auto}
 .cm-nm{margin-top:5px}.cm-nm .ds{margin-left:2px}
 .cm-win{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap} /* window pill */
 .cm-unplaced-note{margin:22px 0 4px}
-</style></head><body>
-<div class="top"><h1>APEX board</h1><span class="stamp">updated Aug 14, 22:53 UTC</span></div>
+/* ── Tabs (board / signals). Board CSS above is unchanged; everything Signals is scoped to #signals. ── */
+nav.tabs{max-width:640px;margin:0 auto;padding:16px 16px 4px;display:flex;gap:8px;align-items:baseline}
+nav.tabs a{font:600 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;color:var(--sub);padding:7px 14px;border:1px solid var(--line);border-radius:999px}
+nav.tabs a[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}
+nav.tabs a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tabpanel[hidden]{display:none}
+body.tab-signals{background:#0d0c0a}
+body.tab-signals nav.tabs{max-width:900px}
+body.tab-signals nav.tabs a{color:#8a8275;border-color:#2a2620;font-family:'IBM Plex Mono',monospace}
+body.tab-signals nav.tabs a[aria-selected="true"]{color:#c8a05e;border-color:#c8a05e}
+/* ── Signals — ported from stack.html, every selector scoped to #signals, vars scoped to the panel ── */
+#signals{--bg:#0d0c0a;--panel:#16140f;--line:#2a2620;--text:#e8e4d8;--dim:#8a8275;--mute:#5a5448;
+--gold:#c8a05e;--amber:#b8804a;--rust:#a05438;--sage:#7a8a6e;--danger:#8b1a1a;--blue:#5a7a8c;--violet:#7d6b9e;--nv:#76b900;--grey:#6b5d45;
+font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.6;color:var(--text);-webkit-font-smoothing:antialiased}
+#signals *{box-sizing:border-box;margin:0;padding:0}
+#signals .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+@media(min-width:700px){#signals .wrap{padding:0 40px}}
+#signals .eyebrow{font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+#signals a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,160,94,.3)}
+#signals a:hover{border-bottom-color:var(--gold)}
+#signals a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#signals header{border-bottom:1px solid var(--line);padding:32px 0 24px}
+#signals h1{font-family:'Instrument Serif',serif;font-size:44px;line-height:1;font-weight:400;margin:8px 0 0;color:var(--text)}
+#signals h1 em{color:var(--gold)}
+#signals .sub{color:var(--dim);font-size:12px;margin-top:12px;max-width:56ch}
+#signals .navrow{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;margin-top:18px;font-size:11px;color:var(--mute)}
+#signals section{padding:32px 0;border-bottom:1px solid var(--line)}
+#signals h2{font-family:'Instrument Serif',serif;font-size:26px;font-style:italic;font-weight:400;margin:6px 0 4px}
+#signals .lede{color:var(--dim);font-size:12px;max-width:64ch;margin-bottom:18px}
+#signals .stale{background:linear-gradient(180deg,rgba(184,128,74,.10),transparent);border-left:3px solid var(--amber);padding:14px 16px;margin-top:18px}
+#signals .stale b{color:var(--text)}
+#signals .stale table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}
+#signals .stale td{padding:3px 0;color:var(--dim)}
+#signals .stale td:last-child{text-align:right}
+#signals .ok{color:var(--sage)} #signals .old{color:var(--amber)}
+#signals .unavail{color:var(--amber);font-size:11px;margin-top:12px}
+#signals .cards{display:grid;gap:10px}
+@media(min-width:700px){#signals .cards{grid-template-columns:1fr 1fr}}
+#signals .card{background:var(--panel);border-left:3px solid var(--grey);padding:14px 16px}
+#signals .card h3{font-family:'Instrument Serif',serif;font-size:18px;font-weight:400;margin-bottom:6px}
+#signals .card p{font-size:11px;color:var(--dim)}
+#signals .card .tag{font-size:9px;letter-spacing:.2em;float:right}
+#signals .card .lesson{font-size:10px;color:var(--mute);font-style:italic;border-top:1px solid var(--line);margin-top:8px;padding-top:7px}
+#signals .zone{margin-bottom:34px}
+#signals .zonehead{background:var(--panel);border-left:4px solid var(--gold);padding:12px 16px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+#signals .zonehead .t{font-family:'Instrument Serif',serif;font-size:24px;font-style:italic}
+#signals .zonehead .s{font-size:10px;color:var(--dim);margin-top:2px}
+#signals .theme{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--grey);padding:14px 16px;margin-bottom:9px}
+#signals .theme.held{border-color:var(--gold)}
+#signals .theme .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:0}
+#signals .theme .name{font-family:'Instrument Serif',serif;font-size:19px}
+#signals .theme .score{font-family:'Instrument Serif',serif;font-size:21px}
+#signals .theme .act{font-family:'Instrument Serif',serif;font-size:15px;font-style:italic;margin-top:6px}
+#signals .theme .when{font-size:10px;color:var(--dim);float:right;margin-top:9px}
+#signals .theme .why{font-size:11px;color:var(--dim);margin-top:5px;clear:both}
+#signals .badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+#signals .b{font-size:8px;letter-spacing:.15em;padding:2px 6px;border:1px solid currentColor}
+#signals .tk{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+#signals .tk span{font-size:10px;font-weight:400;color:var(--dim);padding:1px 6px;background:var(--panel);border:1px solid var(--line)}
+#signals .tk span.own{color:var(--gold);border-color:var(--gold)}
+#signals .px{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+#signals .pc{font-size:10px;color:var(--dim);padding:1px 6px;background:var(--bg);border:1px dashed var(--line)}
+#signals .pc b{color:var(--text);font-weight:500}
+#signals .pc em{font-style:normal;margin-left:3px}
+#signals .pc em.pos{color:var(--sage)} #signals .pc em.neg{color:var(--rust)}
+#signals .pc.na{color:var(--amber);border-color:var(--amber);border-style:solid}
+#signals details{margin-top:9px}
+#signals summary{font-size:10px;color:var(--mute);cursor:pointer;list-style:none}
+#signals summary::-webkit-details-marker{display:none}
+#signals summary:hover{color:var(--dim)}
+#signals .trail{margin-top:8px;border-top:1px solid var(--line)}
+#signals .sig{display:grid;grid-template-columns:52px 1fr 34px;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:10px;align-items:baseline}
+#signals .sig .t{color:var(--text)}
+#signals .sig .src{font-size:8px;letter-spacing:.1em;color:var(--mute)}
+#signals .sig .d{color:var(--dim)}
+#signals .sig .n{text-align:right;font-family:'Instrument Serif',serif;font-size:12px}
+#signals .pos{color:var(--sage)} #signals .neg{color:var(--rust)}
+#signals .rules{display:grid;gap:9px}
+@media(min-width:700px){#signals .rules{grid-template-columns:1fr 1fr}}
+#signals .rule{background:var(--panel);border-left:2px solid var(--grey);padding:12px 14px;margin:0}
+#signals .rule .w{font-size:11px;color:var(--text)}
+#signals .rule .t{font-family:'Instrument Serif',serif;font-size:14px;font-style:italic;margin:6px 0 4px}
+#signals .rule .n{font-size:10px;color:var(--dim)}
+#signals .mgr{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--sage);padding:16px;margin-bottom:12px}
+#signals .mgr.north{border-left-color:var(--gold)} #signals .mgr.strat{border-left-color:var(--nv)}
+#signals .mgr .h{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+#signals .mgr .nm{font-family:'Instrument Serif',serif;font-size:20px}
+#signals .mgr .who{font-size:10px;color:var(--mute)}
+#signals .mgr .pill{font-size:9px;letter-spacing:.15em;padding:2px 7px;border:1px solid currentColor}
+#signals .mgr .val{font-size:10px;color:var(--mute);margin-top:5px}
+#signals .mgr .note{font-size:11px;color:var(--dim);font-style:italic;margin:9px 0}
+#signals .mgr .cols{display:grid;gap:12px;margin-top:10px}
+@media(min-width:700px){#signals .mgr .cols{grid-template-columns:1fr 1fr}}
+#signals .mgr .cols h4{font-size:9px;letter-spacing:.2em;font-weight:400;margin-bottom:5px}
+#signals .mgr .cols div{font-size:10px;color:var(--dim);line-height:1.7}
+#signals footer{padding:28px 0 40px;text-align:center;font-size:10px;color:var(--mute)}
+#signals footer .how{background:var(--panel);border-left:3px solid var(--line);padding:12px 14px;text-align:left;font-size:11px;color:var(--dim);margin-bottom:20px;line-height:1.8}
+#signals footer .sig-line{font-family:'Instrument Serif',serif;font-style:italic;letter-spacing:.15em}
+@media(prefers-reduced-motion:no-preference){#signals section{animation:sigfade .5s ease both}
+@keyframes sigfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}}
+</style></head><body class="tab-board">
+<nav class="tabs" aria-label="Views">
+<a id="tab-board" href="#board" aria-selected="true">Board</a>
+<a id="tab-signals" href="#signals" aria-selected="false">Signals</a>
+</nav>
+<div id="board" class="tabpanel">
+<div class="top"><h1>APEX board</h1><span class="stamp">updated Aug 14, 23:58 UTC</span></div>
 <p class="rule">A gate hit means open a Board Review in Claude &mdash; gates are hurdles, not green lights.</p>
 <p class="tagmeta">A trigger is a pre-set price or event that makes us look again &mdash; never an automatic buy.</p>
 <div class="sec">This week</div><div class="week"><div class="wcard"><div class="d">Aug 15</div><div class="t">Alert-system report card</div><div class="s">first grading of the new detection screens</div></div><div class="wcard"><div class="d">Aug 26</div><div class="t">Nvidia (NVDA) reports</div><div class="s">context for its $140 re-look level</div></div><div class="wcard"><div class="d">Sep 16</div><div class="t">IREN year-end report</div><div class="s">its first proof date (still needs Board sign-off)</div></div></div>
@@ -64,7 +174,7 @@ svg{display:block;width:100%;height:auto}
 <div class="sec">Far away &mdash; nothing to do</div><p class="body">12 gates sit 37&ndash;70% below today&#39;s price: HOOD, PGEN, GOOGL, NU, BLLN, NTSK, PENG, NVDA, KNSL, TSEM, ASML, GEV. They only matter on a big drop or a proof trigger.</p>
 <div class="sec">Freshly armed &mdash; deep by design</div><p class="body">Set at the latest Board (2026-08-05) at hurdle-derived levels: MP (gate $20, +194%), MTRN (gate $150, +89%). The gap is the verdict, not a stale gate &mdash; not a culling candidate.</p>
 <div class="sec">Review for culling</div><p class="body">VICR (+81%), LEU (+90%), PLTR (+93%), KRMN (+94%), OUST (+121%), AEHR (+397%) sit far above older gates. Review at the culling pass (agenda item 5) &mdash; distance is not a verdict; confirm no new proof before retiring.</p>
-<p class="body" style="margin-top:16px">BTC $62,820 — armed above the trigger zone, pending Board ratification. Quotes unavailable: 2454.TW.</p>
+<p class="body" style="margin-top:16px">BTC $62,971 — armed above the trigger zone, pending Board ratification. Quotes unavailable: 2454.TW.</p>
 <div class="sec" id="cyclemap">Cycle map</div>
 <p class="cm-stamp" id="cm-stamp">Board read &mdash;</p>
 <p class="cm-note" id="cm-note"></p>
@@ -200,4 +310,241 @@ svg{display:block;width:100%;height:auto}
 </script>
 <div class="sec">Waiting on news, not prices</div><div class="rows"><div class="row"><span class="tk">MP</span> <span class="ds">$32 - RE-UNDERWRITE TRIGGER, NOT A GATE. Returns +4.3% against the 20% hurdle. NOT price-monitored - this level needs a manual check.</span></div><div class="row"><span class="tk">TEAM</span> <span class="ds">Year-end earnings due. Last math: ~17%/yr expected return - just under our ~20% bar, so the report could tip it.</span></div><div class="row"><span class="tk">NOW</span> <span class="ds">Proved its AI-agents business is real revenue (Jul 24). Gets fresh numbers at Wednesday's review.</span></div><div class="row"><span class="tk">NVO</span> <span class="ds">Wednesday: needs to hold its raised forecast plus a second stable quarter for US weight-loss drugs.</span></div><div class="row"><span class="tk">HDSI</span> <span class="ds">August report reveals how much of the business is humanoid robots - the first real robotics proof.</span></div><div class="row"><span class="tk">AMBA</span> <span class="ds">Watching for growth to speed back up past 25%.</span></div><div class="row"><span class="tk">SNPS</span> <span class="ds">Everyone hates it right now - watching for signs the worst is over.</span></div><div class="row"><span class="tk">HIMS</span> <span class="ds">Needs all three: 2026 forecast of $2.8B+, subscriber growth, and 10%+ profit margin.</span></div><div class="row"><span class="tk">NU</span> <span class="ds">Two straight quarters of 9.5%+ lending margins without bad loans rising.</span></div><div class="row"><span class="tk">ISRG</span> <span class="ds">US surgery volumes speeding up again.</span></div><div class="row"><span class="tk">LEU</span> <span class="ds">A sole-source government contract or a big partner deal.</span></div><div class="row"><span class="tk">BTC</span> <span class="ds">Armed, awaiting sign-off: steady ETF inflows for 2-3 weeks plus weekly closes above ~$59-60k.</span></div><div class="row"><span class="tk">IESC</span> <span class="ds">Wednesday review with its checklist (from the Aug 1 session - needs sign-off).</span></div><div class="row"><span class="tk">IREN</span> <span class="ds">Sep 16 year-end report is its proof date (needs sign-off).</span></div><div class="row"><span class="tk">KALSHI</span> <span class="ds">Passed on the private deal; revisit only if it files to go public (2027 or later). (needs sign-off)</span></div></div>
 <div class="foot"><a href="#cyclemap" style="color:var(--sub)">Cycle map &rarr;</a><br><br>Rebuilds each market night after US close. Manual refresh: repo &rarr; Actions &rarr; Update board &rarr; Run workflow. For underwriting, open the APEX project in Claude.</div>
+</div>
+<div id="signals" class="tabpanel" hidden>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Stack &mdash; signal layer, upstream of APEX</div>
+  <h1>Theme <em>Map</em></h1>
+  <div class="sub">Six concentrated managers, insider clusters, congressional trades, NVDA strategic capital, and price. Generates candidates. Never verdicts &mdash; APEX decides.</div>
+  <div class="navrow"><span id="sig-meta"></span><span>prices Aug 14, 23:58 UTC</span></div>
+</header>
+<section>
+  <div class="eyebrow">Data freshness &mdash; read this first</div>
+  <h2>What this page actually knows</h2>
+  <div class="lede">Positions are point-in-time snapshots from 13F filings, not live. A manager could have exited the day after the reporting date.</div>
+  <div class="stale"><span id="stale-intro"></span>
+    <table><tbody id="stale-rows"></tbody></table>
+  </div>
+  
+</section>
+<section>
+  <div class="eyebrow" id="audit-eyebrow"></div>
+  <h2>What the engine got right and wrong</h2>
+  <div class="lede">Two refresh windows were missed, which left the May calls untouched long enough to score honestly. Every miss below produced a rule change, and those rules are now live in the scoring.</div>
+  <div class="cards" id="audit"></div>
+</section>
+<section>
+  <div class="eyebrow">What changed</div>
+  <h2 id="changed-h2"></h2>
+  <div class="cards" id="changed"></div>
+</section>
+<section>
+  <div class="eyebrow">Zones</div>
+  <h2>Sorted by what to do about it</h2>
+  <div class="lede">Zone order adapts: urgent exits lead when you hold something in them, otherwise opportunity leads. Within a zone &mdash; exits by urgency, buys by score, watch by recency. Anything you already hold sorts first.</div>
+  <div id="zones"></div>
+</section>
+<section>
+  <div class="eyebrow">Exit timing &mdash; recalibrated from the audit</div>
+  <h2>How long you have, by trigger</h2>
+  <div class="rules" id="rules"></div>
+</section>
+<section>
+  <div class="eyebrow">Seven sources</div>
+  <h2>Who we track, what they hold</h2>
+  <div id="mgrs"></div>
+</section>
+<footer>
+  <div class="how">
+    <b style="color:var(--text)">Refreshing this page</b> &mdash; quarterly, about five business days after each 13F deadline:
+    <b style="color:var(--text)">Feb 24 &middot; May 22 &middot; Aug 21 &middot; Nov 23</b>.
+    Open the Stack project in Claude, say <b style="color:var(--text)">refresh theme map</b>, then edit <code>signals.json</code> in the apex-board repo and push. GitHub Pages redeploys on commit; the nightly job keeps the prices current.
+    <br><br>
+    The APEX board rebuilds itself nightly and needs none of this.
+  </div>
+  <div class="sig-line">whale rock 1.5&times; &middot; nvda strategic 2.0&times; &middot; signals expire</div>
+</footer>
+</div>
+</div>
+<script type="application/json" id="signals-data">{"as_of": "2026-08-14", "next_refresh": "2026-11-23", "meta": "Q1 2026 holdings · read Aug 14", "copy": {"audit_eyebrow": "Signal audit — May 8 calls scored against Aug 14 outcomes", "changed_h2": "Q1 2026 holdings, three months late"}, "freshness": {"intro": "<b>Q2 2026 filings were due Aug 14 and are still propagating.<\/b> Re-read around Aug 21 for complete Q2 data across all sources.", "rows": [{"src": "Whale Rock · Altimeter · Druckenmiller · NVDA Corp", "state": "Q1 — positions as of Mar 31", "cls": "old"}, {"src": "D1 · Light Street · SRS", "state": "Q4 2025 — positions as of Dec 31", "cls": "old"}, {"src": "Insider · congressional · price", "state": "Current", "cls": "ok"}]}, "manager_weights": {"Whale Rock": 1.5, "Whale Rock+Light Street": 1.5, "Whale Rock+Druckenmiller": 1.5, "Altimeter": 1.2, "Altimeter+Druckenmiller": 1.2, "D1": 1.2, "Light Street": 1.2, "SRS": 1.1, "Druckenmiller": 1.0, "multi-senator": 0.7, "Boozman": 0.5, "Fetterman": 0.5, "Warner": 0.5, "Magnetar 10% owner": 1.8, "Fluor 10% owner": 1.5, "officer cluster": 1.5, "single director": 0.4, "NVDA Corp": 2.0, "inflection-screen": 1.0, "Q2 earnings": 1.0, "market": 1.0}, "held": ["BTC", "PLTR", "CRDO", "VRT", "TSLA"], "signals": [{"t": "SNDK", "src": "manager", "by": "Whale Rock", "a": "top buy +$270M — now the #2 holding", "v": 9, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "SNDK", "src": "manager", "by": "Druckenmiller", "a": "NEW position (+$24M added same quarter)", "v": 6, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "SNDK", "src": "screen", "by": "inflection-screen", "a": "fired RED Jan 2026 and Apr 2026 — your own mechanical screen, fully independent of any 13F", "v": 7, "th": "AI Memory & Compute", "w": 30, "nu": true}, {"t": "CLS", "src": "manager", "by": "Whale Rock", "a": "top-5 holding, held through the quarter", "v": 6, "th": "AI Memory & Compute", "w": 19}, {"t": "CLS", "src": "manager", "by": "Druckenmiller", "a": "NEW position", "v": 6, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "ARM", "src": "manager", "by": "Altimeter", "a": "NEW $259M — largest new position of the quarter", "v": 7, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "ARM", "src": "manager", "by": "Druckenmiller", "a": "NEW position", "v": 6, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "MU", "src": "manager", "by": "Druckenmiller", "a": "NEW position", "v": 6, "th": "AI Memory & Compute", "w": 19, "nu": true}, {"t": "MU", "src": "senate", "by": "Fetterman", "a": "purchased", "v": 3, "th": "AI Memory & Compute", "w": 26}, {"t": "AEIS", "src": "manager", "by": "Whale Rock", "a": "NEW $330M — largest single new position", "v": 9, "th": "Semicap Equipment", "w": 19, "nu": true}, {"t": "MKSI", "src": "manager", "by": "Whale Rock+Light Street", "a": "NEW $300M by Whale Rock in Q1; Light Street had already bought in Q4 — cross-manager, cross-quarter", "v": 9, "th": "Semicap Equipment", "w": 19, "nu": true}, {"t": "LRCX", "src": "manager", "by": "Whale Rock", "a": "NEW $205M", "v": 7, "th": "Semicap Equipment", "w": 19, "nu": true}, {"t": "CRWV", "src": "strategic", "by": "NVDA Corp", "a": "added 22,935,780 sh (+94.5%, ~$1.78B) — bought the cascade the insiders sold into. Now holds 24.3M sh.", "v": 9, "th": "AI Infra", "w": 19, "nu": true}, {"t": "CRWV", "src": "manager", "by": "Altimeter", "a": "added +40% through the drawdown, held conviction", "v": 7, "th": "AI Infra", "w": 19, "nu": true}, {"t": "CRWV", "src": "earnings", "by": "Q2 earnings", "a": "Aug 11 — revenue $2.58B (+112% YoY) beat, backlog $104B, Anthropic and Meta deals, guidance raised", "v": 8, "th": "AI Infra", "w": 0, "nu": true}, {"t": "CRWV", "src": "insider", "by": "Magnetar 10% owner", "a": "anchor pre-IPO holder dumped at $117–121 in May — stock then fell to $60.55. They were right.", "v": -8, "th": "AI Infra", "w": 15}, {"t": "CRWV", "src": "price", "by": "market", "a": "$109.77 — recovered off the $60.55 low but still -28% from the $153 high", "v": -2, "th": "AI Infra", "w": 0, "nu": true}, {"t": "EWZ", "src": "manager", "by": "Druckenmiller", "a": "#2 position at 8.7% — $162.3M calls (NEW) plus $131.9M shares (-19%) = $294.2M", "v": 8, "th": "Brazil & EM", "w": 19, "nu": true}, {"t": "YPF", "src": "manager", "by": "Druckenmiller", "a": "added +433% — $22M to $150M", "v": 7, "th": "Brazil & EM", "w": 19, "nu": true}, {"t": "ARGT", "src": "manager", "by": "Druckenmiller", "a": "NEW Argentina ETF +$36M", "v": 5, "th": "Brazil & EM", "w": 19, "nu": true}, {"t": "NVDA", "src": "manager", "by": "Altimeter", "a": "added +15% to $1.628B — largest position", "v": 5, "th": "AI Compute", "w": 19, "nu": true}, {"t": "TSM", "src": "manager", "by": "Altimeter", "a": "added +12%", "v": 3, "th": "AI Compute", "w": 19, "nu": true}, {"t": "TSM", "src": "manager", "by": "Druckenmiller", "a": "trimmed -9%", "v": -2, "th": "AI Compute", "w": 19, "nu": true}, {"t": "AVGO", "src": "manager", "by": "Druckenmiller", "a": "NEW +$61M", "v": 4, "th": "AI Compute", "w": 19, "nu": true}, {"t": "META", "src": "manager", "by": "Altimeter", "a": "added +6%", "v": 3, "th": "AI Compute", "w": 19}, {"t": "GOOGL", "src": "manager", "by": "Whale Rock", "a": "largest holding at $768M", "v": 5, "th": "AI Compute", "w": 19}, {"t": "GOOGL", "src": "manager", "by": "Altimeter+Druckenmiller", "a": "BOTH exited — Altimeter -$163M, Duquesne -$121M, while Whale Rock holds it as #1", "v": -6, "th": "AI Compute", "w": 19, "nu": true}, {"t": "NVDA", "src": "senate", "by": "Boozman", "a": "purchased", "v": 2, "th": "AI Compute", "w": 26}, {"t": "MSFT", "src": "senate", "by": "multi-senator", "a": "multiple senators buying", "v": 4, "th": "AI Compute", "w": 26}, {"t": "WULF", "src": "insider", "by": "officer cluster", "a": "CTO, CEO and CFO all sold around $20 in April", "v": -7, "th": "Miner-to-AI Distribution", "w": 16}, {"t": "WULF", "src": "price", "by": "market", "a": "ran to $29.84 first, then fell -43% to $16.95 — below where insiders sold. Right call, six weeks early.", "v": -6, "th": "Miner-to-AI Distribution", "w": 0, "nu": true}, {"t": "PLTR", "src": "insider", "by": "single director", "a": "Moore sold at $135–140 in April. Stock is now $178.66. Weight cut to 0.4× after this false positive.", "v": -3, "th": "AI Software", "w": 17}, {"t": "PLTR", "src": "price", "by": "market", "a": "$178.66, +30% since the May read. 50-day at $134 — uptrend intact.", "v": 5, "th": "AI Software", "w": 0, "nu": true}, {"t": "TEVA", "src": "manager", "by": "Druckenmiller", "a": "cut 60% after a +91% gain — the five-quarter buying thesis is over", "v": -6, "th": "Generic Pharma", "w": 19, "nu": true}, {"t": "CPNG", "src": "manager", "by": "Altimeter+Druckenmiller", "a": "Altimeter exited -$370M; Duquesne also cut", "v": -7, "th": "Intl E-comm", "w": 19, "nu": true}, {"t": "MELI", "src": "manager", "by": "Whale Rock+Druckenmiller", "a": "both exited — -$198M and -$77M", "v": -7, "th": "Intl E-comm", "w": 19, "nu": true}, {"t": "APP", "src": "manager", "by": "Whale Rock", "a": "top sell of the quarter, -$268M", "v": -5, "th": "Adtech", "w": 19, "nu": true}, {"t": "TEAM", "src": "manager", "by": "Light Street", "a": "NEW (Q4)", "v": 6, "th": "Infra Software", "w": 32}, {"t": "TEAM", "src": "senate", "by": "Warner", "a": "purchased", "v": 2, "th": "Infra Software", "w": 26}, {"t": "AMPL", "src": "manager", "by": "Light Street", "a": "NEW (Q4)", "v": 5, "th": "Infra Software", "w": 32}, {"t": "RDDT", "src": "manager", "by": "Light Street", "a": "NEW, D1 added same quarter (Q4)", "v": 8, "th": "Social", "w": 32}, {"t": "UBER", "src": "manager", "by": "Altimeter", "a": "added +43% to $573M", "v": 6, "th": "Mobility", "w": 19, "nu": true}, {"t": "AXON", "src": "manager", "by": "Altimeter", "a": "NEW +$63M", "v": 5, "th": "Defense Tech", "w": 19, "nu": true}, {"t": "NTRA", "src": "manager", "by": "Druckenmiller", "a": "added +22% — now 18.1% of the book, his largest position", "v": 9, "th": "Genomics", "w": 19, "nu": true}, {"t": "CEG", "src": "manager", "by": "Light Street", "a": "added (Q4)", "v": 2, "th": "Quality Nuclear", "w": 32}, {"t": "CEG", "src": "senate", "by": "Warner", "a": "purchased", "v": 3, "th": "Quality Nuclear", "w": 26}, {"t": "ARES", "src": "senate", "by": "Boozman", "a": "private credit", "v": 4, "th": "Private Credit", "w": 30}], "audit": [{"c": "CRWV — cascading, avoid at $114", "o": "Fell to $60.55, down 47%. Only recovered to $110 after the Aug 11 earnings beat.", "v": "correct", "col": "--sage", "l": "Anchor-holder dump plus price cascade is now a confirmed trigger. Magnetar exited at $117–121, near the top."}, {"c": "WULF — officer cluster sell near $20", "o": "Ran to $29.84 first, up another 49%. Then fell 43% to $16.95.", "v": "right, early", "col": "--amber", "l": "Direction right, timing six weeks early. Officer clusters now need price confirmation before firing as urgent."}, {"c": "PLTR — director selling flagged as a concern", "o": "Up 30% to $178.66. The director sold at $135–140 and left the gain on the table.", "v": "false positive", "col": "--danger", "l": "Single-director sells in stock-comp-heavy growth names are mechanical noise. Weight cut from 1.0× to 0.4×."}, {"c": "TEVA — five straight quarters of Druckenmiller buying", "o": "He cut 60% in Q1 after a 91% gain.", "v": "expired", "col": "--grey", "l": "His roughly seven-month hold pattern held. Druckenmiller buy signals now expire after two quarters."}, {"c": "CPNG — cross-manager signal", "o": "Altimeter exited the position entirely.", "v": "expired", "col": "--grey", "l": "Cross-manager signals die when either leg leaves. Re-verify each quarter instead of carrying forward."}, {"c": "Ethereum position reported for Druckenmiller", "o": "The filing says iShares MSCI Brazil (EWZ), $294.2M. One aggregator mislabelled it and the ticker cited does not exist.", "v": "data error", "col": "--danger", "l": "No position enters the engine on one source. Cross-check a second aggregator and confirm the ticker resolves to a real quote."}], "changed": [{"h": "AI Memory &amp; Compute", "tag": "NEW · STRONGEST", "col": "--gold", "p": "Whale Rock, Altimeter and Druckenmiller independently bought into SNDK, CLS, ARM and MU in the same quarter. Your own inflection-screen fired RED on SNDK in January and April, with no knowledge of any 13F. That is four separate processes landing on the same names."}, {"h": "Semicap Equipment", "tag": "NEW", "col": "--gold", "p": "Whale Rock deployed roughly $835M into AEIS, MKSI and LRCX — its largest move this cycle. Light Street had already bought MKSI a quarter earlier."}, {"h": "Brazil &amp; EM", "tag": "CORRECTED", "col": "--violet", "p": "Druckenmiller's #2 position is iShares MSCI Brazil at $294.2M, not an Ethereum ETF. An earlier read mislabelled it. He also raised YPF by 433% and opened an Argentina ETF — this is a Latin America bet, not a crypto one."}, {"h": "Signals cleared out", "tag": "EXPIRED", "col": "--grey", "p": "TEVA cut 60%. CPNG and MELI exited. APP was the top sell. GOOGL is now split — Whale Rock's largest holding, while Altimeter and Duquesne both sold out. These no longer carry forward as positives."}], "rules": [{"w": "Anchor holder dumps while price is breaking", "t": "Immediate — it is already happening", "col": "--danger", "n": "Confirmed. CRWV fell 47% after Magnetar exited at $117–121."}, {"w": "C-suite cluster sells near a 52-week high", "t": "One to six months", "col": "--amber", "n": "Recalibrated from \"one to seven days.\" WULF ran another 49% before rolling over 43%. Needs price confirmation before it counts as urgent."}, {"w": "A single director sells a stock-comp-heavy growth name", "t": "Ignore it", "col": "--grey", "n": "New rule from the PLTR miss. Weight dropped to 0.4×."}, {"w": "The manager who generated the signal exits or cuts by half", "t": "Signal expired", "col": "--grey", "n": "New rule. TEVA and CPNG both carried forward as positives after their managers had already left."}, {"w": "A Druckenmiller buy passes two quarters", "t": "Auto-expire", "col": "--grey", "n": "New rule. His roughly seven-month average hold is well documented; carrying his buys indefinitely contradicts it."}, {"w": "Whale Rock trims", "t": "Six to twelve months — early warning", "col": "--amber", "n": "Unchanged. The north star losing conviction means plan an exit, not panic."}], "managers": [{"n": "Whale Rock", "who": "Alex Sacerdote", "w": "1.5×", "role": "NORTH STAR", "cls": "north", "as": "Q1 2026", "val": "$7.74B · 35 positions · top 10 = 51.4%", "note": "Caught CLS, APP and NVDA early and held them. Rotated hard in Q1 out of AI-adjacent winners into semicap equipment — the most decisive move by any manager tracked here.", "cols": [["Top 5", "GOOGL · SNDK · CLS · AMZN · TTMI"], ["New", "AEIS $330M · MKSI $300M · LRCX $205M — 11 new, $1.39B total"], ["Added", "SNDK +$270M, the top buy"], ["Sold", "APP -$268M · exits: SMTC, MELI, NU and 5 more, $831M"]]}, {"n": "Altimeter", "who": "Brad Gerstner", "w": "1.2×", "role": "CROSSOVER", "cls": "", "as": "Q1 2026", "val": "$5.70B · 13 positions · AUM -14.5%", "note": "Public and private crossover. Added 40% to CRWV through a 47% drawdown and was vindicated by the Q2 print.", "cols": [["Top 5", "NVDA $1.63B · META $1.12B · UBER $573M · TSM $462M · MSFT $438M"], ["New", "ARM $259M · AXON $63M"], ["Added", "NVDA +15% · UBER +43% · CRWV +40% · TSM +12%"], ["Exited", "CPNG -$370M · Confluent -$210M · GOOGL -$163M · MELI, SHOP, BE, Z"]]}, {"n": "Druckenmiller", "who": "Duquesne Family Office", "w": "1.0×", "role": "MACRO — BUYS ONLY", "cls": "", "as": "Q1 2026", "val": "$3.38B · 70 positions · AUM -24.9% · net seller -$1.0B", "note": "Buy signals only, and they now expire after two quarters. Q1 was a heavy reallocation: 30 new positions, most of the old top five cut.", "cols": [["Top 5", "NTRA 18.1% · EWZ 8.7% · INSM 5.6% · TSM 5.0% · RSP calls"], ["New", "MU · SNDK · CLS · ARM · AVGO · ARGT · LIN · LYB and 22 more"], ["Added", "YPF +433% · NTRA +22% · STM · AVGO · SNDK"], ["Cut", "WWD -64% · TEVA -60% · EWZ shares -19% · RSP -30% · AMZN, GOOGL, CPNG, MELI"]]}, {"n": "NVDA Corp", "who": "strategic capital — lane 7", "w": "2.0×", "role": "STRATEGIC", "cls": "strat", "as": "Q1 2026", "val": "5 positions · ~$15B", "note": "Not a financial investor. Non-public visibility into the whole AI capex pipeline, and its investments move the stock on announcement. Bought CRWV aggressively into the exact cascade insiders were selling.", "cols": [["Holdings", "CRWV 24.3M sh · INTC · SNPS · NOK · YNDX"], ["Added", "CRWV +22,935,780 sh (+94.5%, ~$1.78B)"]]}, {"n": "Light Street", "who": "Glen Kacher", "w": "1.2×", "role": "AI SEMIS", "cls": "", "as": "Q4 2025 — Q2 pending", "val": "$2.1B · 24 positions", "note": "Up 44% in 2024 on NVDA and TSMC. Bought MKSI in Q4; Whale Rock followed a quarter later.", "cols": [["Top 5", "NVDA · AVGO · TSM · CHYM · CEG"], ["New", "TEAM · NFLX · MKSI · AMPL · RDDT · AMKR"]]}, {"n": "D1", "who": "Dan Sundheim", "w": "1.2×", "role": "INDUSTRIALS", "cls": "", "as": "Q4 2025 — Q2 pending", "val": "$10.7B · 42 positions", "note": "Up 33.7% in 2025. Concentrated industrials and consumer. Caught AppLovin early.", "cols": [["Top 5", "CART · CLH · FLS · JHX · RDDT"], ["New", "JCI · ANET · LIN · SHW · TXN · SPOT"]]}, {"n": "SRS", "who": "Karthik Sarma", "w": "1.1×", "role": "ULTRA-CONCENTRATED", "cls": "", "as": "Q4 2025 — Q2 pending", "val": "~$10B · top 10 = 91.8%", "note": "37% in a single name. The highest conviction of anyone tracked here.", "cols": [["Top 5", "CAR · NFLX · META · SNAP · NVDA (trimmed)"]]}]}</script>
+<script type="application/json" id="signals-prices">{"SNDK": {"price": 1641.11, "pct": -30.29574539477317}, "CLS": {"price": 335.05, "pct": -29.318819483998897}, "ARM": {"price": 279.44, "pct": -38.27258670201016}, "MU": {"price": 971.66, "pct": -22.576892430278885}, "AEIS": {"price": 330.26, "pct": -16.903180354267313}, "MKSI": {"price": 310.73, "pct": -30.58174344309905}, "LRCX": {"price": 332.36, "pct": -24.205245153933863}, "CRWV": {"price": 105.26, "pct": -31.292428198433413}, "EWZ": {"price": 33.93, "pct": -19.252736792003812}, "YPF": {"price": 50.05, "pct": -12.941381109758227}, "ARGT": {"price": 90.97, "pct": -12.503606809656631}, "NVDA": {"price": 225.16, "pct": -4.811025619345564}, "TSM": {"price": 426.35, "pct": -10.99164926931106}, "AVGO": {"price": 392.99, "pct": -20.608080808080807}, "META": {"price": 589.85, "pct": -25.921507064364203}, "GOOGL": {"price": 345.9, "pct": -15.347152541543288}, "MSFT": {"price": 495.4, "pct": -10.532399046449479}, "WULF": {"price": 17.38, "pct": -41.75603217158177}, "PLTR": {"price": 174.04, "pct": -16.13338473400155}, "TEVA": {"price": 36.77, "pct": -1.6581973789783295}, "CPNG": {"price": 16.12, "pct": -52.69258987527513}, "MELI": {"price": 1844.58, "pct": -27.620953502060036}, "APP": {"price": 315.44, "pct": -57.69370046002602}, "TEAM": {"price": 162.22, "pct": -11.83695652173913}, "AMPL": {"price": 13.03, "pct": -4.050073637702509}, "RDDT": {"price": 177.97, "pct": -37.101961477292804}, "UBER": {"price": 75.95, "pct": -25.531914893617014}, "AXON": {"price": 612.83, "pct": -22.845560185826326}, "NTRA": {"price": 309.93, "pct": -4.938195871545553}, "CEG": {"price": 282.5, "pct": -31.548340198691545}, "ARES": {"price": 144.02, "pct": -24.74657748981084}}</script>
+<script>
+(function(){
+  var el0=document.getElementById('signals-data');
+  if(!el0) return;
+  var DATA,PRICES;
+  try{ DATA=JSON.parse(el0.textContent);
+       PRICES=JSON.parse(document.getElementById('signals-prices').textContent); }
+  catch(e){ return; }
+  var W=DATA.manager_weights, HELD=DATA.held, S=DATA.signals,
+      AUDIT=DATA.audit, CHANGED=DATA.changed, RULES=DATA.rules, MGRS=DATA.managers;
+
+  // ── scoring (verbatim from stack.html) ──────────────
+  const themes={};
+  S.forEach(s=>{
+    const k=s.th;
+    themes[k]=themes[k]||{n:k,sig:[],tk:new Set(),src:new Set(),who:new Set(),raw:0,old:0,fresh:999,nu:false,nv:false};
+    const t=themes[k];
+    t.sig.push(s); t.tk.add(s.t); t.src.add(s.src);
+    s.by.split('+').forEach(x=>{if(s.v>0)t.who.add(x.trim())});
+    t.raw+=s.v*(W[s.by]||1);
+    t.old=Math.max(t.old,s.w); t.fresh=Math.min(t.fresh,s.w);
+    if(s.nu)t.nu=true;
+    if(s.by==='NVDA Corp'&&s.v>0)t.nv=true;
+  });
+
+  const list=Object.values(themes).map(t=>{
+    const wr=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v>0);
+    const wrTrim=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v<0);
+    t.score=Math.round(t.raw+t.src.size*2+(wr?3:0)+(t.nv?4:0));
+    t.wr=wr; t.wrTrim=wrTrim;
+    t.own=[...t.tk].filter(x=>HELD.includes(x));
+
+    const pos=t.sig.filter(s=>s.v>0).reduce((a,s)=>a+s.v,0);
+    const neg=Math.abs(t.sig.filter(s=>s.v<0).reduce((a,s)=>a+s.v,0));
+    t.contested=pos>=12&&neg>=6;
+
+    const insider=t.sig.some(s=>s.src==='insider'&&s.v<=-6);
+    const broke=t.sig.some(s=>s.src==='price'&&s.v<=-6);
+    const left=t.sig.some(s=>/exited|cut \d|top sell/i.test(s.a))&&t.score<5;
+
+    if(t.contested){t.stage='CONTESTED';t.col='--violet';t.zone='watch';t.when='Resolve before acting';
+      t.act=t.own.length?'Hold — resolve the disagreement':'APEX must pick a side';
+      t.why='Bull and bear signals are both strong. The score hides a real disagreement — underwrite the specific tension rather than treating this as a mild positive.';t.u=50;}
+    else if(left){t.stage='EXPIRED';t.col='--grey';t.zone='exit';t.when='Already gone';
+      t.act=t.own.length?'Review':'Drop from the watchlist';
+      t.why='The manager whose conviction created this signal has left. Carrying it forward is stale-data risk.';t.u=30;}
+    else if(insider&&broke){t.stage='COLLAPSING';t.col='--danger';t.zone='exit';t.when='Immediate — 1 to 7 days';
+      t.act=t.own.length?'Exit now':'Avoid';
+      t.why='Insider selling is now confirmed by price. Distribution phase.';t.u=100;}
+    else if(t.score<0){t.stage='DECAYING';t.col='--rust';t.zone='exit';t.when='3 to 6 months';
+      t.act=t.own.length?'Trim 30% over 3–6 months':'Avoid';
+      t.why='Net negative. Smart money is rotating out.';t.u=40;}
+    else if(t.score>=25&&t.nu){t.stage='EMERGING · HIGH CONVICTION';t.col='--gold';t.zone='buy';
+      t.when='Entry window open now';
+      t.act=t.own.length?'Add to the position':'Top candidate — run APEX first';
+      t.why='A high score built from fresh positions, not aged ones. Several managers moved into this in the same quarter, which is conviction forming rather than consensus already priced.';t.u=90;}
+    else if(t.score>=25&&t.sig.length>=4){t.stage='ESTABLISHED';t.col='--amber';t.zone='hold';
+      t.when=wrTrim?'6 to 12 months — watch the north star':'6 to 18 months until decay';
+      t.act=t.own.length?(wrTrim?'Hold — plan a trim in 6–12 months':'Hold'):'Reference only';
+      t.why=wrTrim?'The north star is taking profits. The easy money is over.':'Consensus, and nothing new this quarter. No edge left unless it is mispriced.';t.u=20;}
+    else if(t.score>=10&&(t.src.size>=2||t.who.size>=2)){t.stage='EMERGING';t.col='--gold';t.zone='buy';t.when='8 to 26 weeks to established';
+      t.act=t.own.length?'Add to the position':'New candidate — run APEX';
+      t.why='More than one independent source confirming. Asymmetric entry window.';t.u=60;}
+    else if(t.score>=10){t.stage='EMERGING · ONE SOURCE';t.col='--gold';t.zone='buy';t.when='8 to 26 weeks';
+      t.act='New candidate — run APEX, single source';
+      t.why='Strong conviction, but from one source only. Unconfirmed — size accordingly.';t.u=55;}
+    else if(t.score>=5){t.stage='DEVELOPING';t.col='--sage';t.zone='watch';t.when='Waiting on a second source';
+      t.act='Watch';t.why='One source so far. Wait for confirmation.';t.u=15;}
+    else{t.stage='WATCH';t.col='--blue';t.zone='watch';t.when='Not enough signal';
+      t.act='Watch';t.why='Too early to call.';t.u=10;}
+    return t;
+  });
+
+  const held=(a,b)=>(b.own.length>0)-(a.own.length>0);
+  const byU=a=>a.sort((x,y)=>held(x,y)||y.u-x.u);
+  const byS=a=>a.sort((x,y)=>held(x,y)||y.score-x.score);
+  const byR=a=>a.sort((x,y)=>held(x,y)||x.fresh-y.fresh);
+  const z=n=>list.filter(t=>t.zone===n);
+
+  const ZONES=[
+  {k:'buy',t:'Buy zone',s:'Best entry windows — highest score first',c:'--gold',a:byS(z('buy'))},
+  {k:'watch',t:'Watch zone',s:'Forming or contested — most recent first',c:'--blue',a:byR(z('watch'))},
+  {k:'hold',t:'Hold zone',s:'Consensus and reference — highest score first',c:'--amber',a:byS(z('hold'))},
+  {k:'exit',t:'Exit zone',s:'Trim, avoid or expired — most urgent first',c:'--rust',a:byU(z('exit'))}];
+  const order=ZONES[3].a.some(t=>t.own.length)?[ZONES[3],ZONES[0],ZONES[1],ZONES[2]]:ZONES;
+
+  const esc=s=>String(s).replace(/&(?!\w+;)/g,'&amp;').replace(/</g,'&lt;');
+
+  // ── live prices (added): chip under each theme's tickers ──
+  function money(v){return v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function priceChip(x){
+    var q=PRICES[x];
+    if(!q||q.price==null) return '<span class="pc na">'+esc(x)+' — quote unavailable</span>';
+    var s='<span class="pc">'+esc(x)+' <b>$'+money(q.price)+'</b>';
+    if(q.pct!=null){var neg=q.pct<=0;s+=' <em class="'+(neg?'neg':'pos')+'">'+(neg?'':'+')+Math.round(q.pct)+'% vs 52w high</em>';}
+    return s+'</span>';
+  }
+
+  // ── data-driven copy (dated strings live in signals.json) ──
+  var m=document.getElementById('sig-meta'); if(m)m.textContent=DATA.meta||'';
+  var si=document.getElementById('stale-intro'); if(si)si.innerHTML=(DATA.freshness&&DATA.freshness.intro)||'';
+  var sr=document.getElementById('stale-rows');
+  if(sr)sr.innerHTML=((DATA.freshness&&DATA.freshness.rows)||[]).map(r=>
+    '<tr><td>'+esc(r.src)+'</td><td class="'+(r.cls||'')+'">'+esc(r.state)+'</td></tr>').join('');
+  var ae=document.getElementById('audit-eyebrow'); if(ae)ae.textContent=(DATA.copy&&DATA.copy.audit_eyebrow)||'Signal audit';
+  var ch=document.getElementById('changed-h2'); if(ch)ch.textContent=(DATA.copy&&DATA.copy.changed_h2)||'What changed';
+
+  // ── rendering (verbatim from stack.html, + price chips in card) ──
+  document.getElementById('audit').innerHTML=AUDIT.map(a=>
+  `<div class="card" style="border-left-color:var(${a.col})">
+  <span class="tag" style="color:var(${a.col})">${a.v.toUpperCase()}</span>
+  <h3>${a.c}</h3><p>${a.o}</p><div class="lesson">${a.l}</div></div>`).join('');
+
+  document.getElementById('changed').innerHTML=CHANGED.map(x=>
+  `<div class="card" style="border-left-color:var(${x.col})">
+  <span class="tag" style="color:var(${x.col})">${x.tag}</span>
+  <h3>${x.h}</h3><p>${x.p}</p></div>`).join('');
+
+  document.getElementById('rules').innerHTML=RULES.map(r=>
+  `<div class="rule" style="border-left-color:var(${r.col})">
+  <div class="w">${r.w}</div><div class="t" style="color:var(${r.col})">${r.t}</div>
+  <div class="n">${r.n}</div></div>`).join('');
+
+  const badges=t=>{
+    let b='';
+    if(t.nu)b+=`<span class="b" style="color:var(--gold)">NEW</span>`;
+    if(t.contested)b+=`<span class="b" style="color:var(--violet)">CONTESTED</span>`;
+    if(t.nv)b+=`<span class="b" style="color:var(--nv)">NVDA</span>`;
+    if(t.wr)b+=`<span class="b" style="color:var(--gold)">WHALE ROCK</span>`;
+    if(t.wrTrim)b+=`<span class="b" style="color:var(--amber)">WR TRIMMING</span>`;
+    if(t.own.length)b+=`<span class="b" style="color:var(--gold)">YOU HOLD ${t.own.join(', ')}</span>`;
+    return b?`<div class="badges">${b}</div>`:'';
+  };
+
+  const card=t=>`<div class="theme${t.own.length?' held':''}" style="border-left-color:var(${t.col})">
+  <div class="top"><span class="name">${t.n}</span><span class="score" style="color:var(${t.col})">${t.score>0?'+':''}${t.score}</span></div>
+  ${badges(t)}
+  <div class="act" style="color:var(${t.col})">${t.act}<span class="when">${t.when}</span></div>
+  <div class="why">${t.why}</div>
+  <div class="tk">${[...t.tk].map(x=>`<span class="${HELD.includes(x)?'own':''}">${x}</span>`).join('')}</div>
+  <div class="px">${[...t.tk].map(priceChip).join('')}</div>
+  <details><summary>${t.stage} · ${t.sig.length} signals · ${t.src.size} sources · latest ${t.fresh===0?'this week':t.fresh+'w ago'} ▾</summary>
+  <div class="trail">${t.sig.map(s=>`<div class="sig"><span class="t">${s.t}</span><span><span class="src">${s.src.toUpperCase()}</span> <span class="d">${esc(s.by)}: ${esc(s.a)}</span></span><span class="n ${s.v>0?'pos':'neg'}">${s.v>0?'+':''}${s.v}</span></div>`).join('')}</div>
+  </details></div>`;
+
+  document.getElementById('zones').innerHTML=order.map(zn=>
+  `<div class="zone"><div class="zonehead" style="border-left-color:var(${zn.c})">
+  <div><div class="t" style="color:var(${zn.c})">${zn.t}</div><div class="s">${zn.s}</div></div>
+  <div class="eyebrow">${zn.a.length} ${zn.a.length===1?'theme':'themes'}</div></div>
+  ${zn.a.length?zn.a.map(card).join(''):'<div style="padding:16px;text-align:center;font-size:11px;color:var(--mute);border:1px dashed var(--line)">Nothing here right now</div>'}
+  </div>`).join('');
+
+  document.getElementById('mgrs').innerHTML=MGRS.map(m=>{
+    const c=m.cls==='north'?'--gold':m.cls==='strat'?'--nv':'--sage';
+    const stale=m.as.indexOf('Q4')===0;
+    return `<div class="mgr ${m.cls}"${stale?' style="opacity:.8"':''}>
+  <div class="h"><span class="nm">${m.n}</span><span class="who">${m.who}</span>
+  <span class="pill" style="color:var(${c})">${m.role} · ${m.w}</span>
+  <span class="pill" style="color:var(${stale?'--amber':'--sage'})">${m.as}</span></div>
+  <div class="val">${m.val}</div><div class="note">${m.note}</div>
+  <div class="cols">${m.cols.map(([h,v])=>`<div><h4 style="color:var(--mute)">${h.toUpperCase()}</h4><div>${v}</div></div>`).join('')}</div></div>`;
+  }).join('');
+})();
+</script>
+<script>
+(function(){
+  var pb=document.getElementById('board'),ps=document.getElementById('signals');
+  var lb=document.getElementById('tab-board'),ls=document.getElementById('tab-signals');
+  function show(w){
+    if(w!=='signals'||!ps)w='board';
+    pb.hidden=w!=='board'; if(ps)ps.hidden=w!=='signals';
+    lb.setAttribute('aria-selected',w==='board'); ls.setAttribute('aria-selected',w==='signals');
+    document.body.className='tab-'+w;
+  }
+  function fromHash(){show(location.hash==='#signals'?'signals':'board');}
+  window.addEventListener('hashchange',fromHash); fromHash();
+})();
+</script>
 </body></html>
