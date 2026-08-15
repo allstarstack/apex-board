@@ -29,6 +29,31 @@ def quote(sym, crypto=False):
             return rows[0]
     return None
 
+def hist_close(sym, ref_date):
+    """Closing price on or before ref_date (a 13F period-end price never changes, so
+    this is cheap to reuse). Queries a short window and takes the latest bar at or
+    before ref_date, which absorbs quarter-ends that land on a weekend or holiday.
+    Returns a float, or None on any failure -- never raises, so a lookup miss degrades
+    to an unadjusted signal rather than blocking the nightly board."""
+    try:
+        end = datetime.date.fromisoformat(ref_date)
+    except Exception:
+        return None
+    start = (end - datetime.timedelta(days=7)).isoformat()
+    try:
+        rows = fetch("historical-price-eod/light", symbol=sym,
+                     **{"from": start, "to": ref_date})
+    except RuntimeError:
+        return None
+    if not isinstance(rows, list):
+        return None
+    best = None
+    for r in rows:
+        d, p = r.get("date"), r.get("price")
+        if d and p is not None and d <= ref_date and (best is None or d > best[0]):
+            best = (d, p)
+    return best[1] if best else None
+
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
@@ -167,6 +192,9 @@ font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.6;color:var(-
 #signals .sig .d{color:var(--dim)}
 #signals .sig .n{text-align:right;font-family:'Instrument Serif',serif;font-size:12px}
 #signals .pos{color:var(--sage)} #signals .neg{color:var(--rust)}
+#signals .pc em.drift.unk{color:var(--amber)}
+#signals .sigadj{font-size:9px;color:var(--mute);padding:2px 0 6px 60px;border-bottom:1px solid var(--line);letter-spacing:.03em}
+#signals .sigadj.neg{color:var(--rust)} #signals .sigadj.pos{color:var(--sage)} #signals .sigadj.unk{color:var(--amber)}
 #signals .rules{display:grid;gap:9px}
 @media(min-width:700px){#signals .rules{grid-template-columns:1fr 1fr}}
 #signals .rule{background:var(--panel);border-left:2px solid var(--grey);padding:12px 14px;margin:0}
@@ -405,7 +433,7 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
   const themes={};
   S.forEach(s=>{
     const k=s.th;
-    themes[k]=themes[k]||{n:k,sig:[],tk:new Set(),src:new Set(),who:new Set(),raw:0,old:0,fresh:999,nu:false,nv:false};
+    themes[k]=themes[k]||{n:k,sig:[],tk:new Set(),src:new Set(),who:new Set(),raw:0,old:0,fresh:999,nu:false,nv:false,adj:0,driftUnknown:false};
     const t=themes[k];
     t.sig.push(s); t.tk.add(s.t); t.src.add(s.src);
     s.by.split('+').forEach(x=>{if(s.v>0)t.who.add(x.trim())});
@@ -413,12 +441,14 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     t.old=Math.max(t.old,s.w); t.fresh=Math.min(t.fresh,s.w);
     if(s.nu)t.nu=true;
     if(s.by==='NVDA Corp'&&s.v>0)t.nv=true;
+    if(typeof s.adj==='number')t.adj+=s.adj;          // flat +/-3, outside the manager weight
+    if('drift' in s&&s.drift==null)t.driftUnknown=true;
   });
 
   const list=Object.values(themes).map(t=>{
     const wr=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v>0);
     const wrTrim=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v<0);
-    t.score=Math.round(t.raw+t.src.size*2+(wr?3:0)+(t.nv?4:0));
+    t.score=Math.round(t.raw+t.src.size*2+(wr?3:0)+(t.nv?4:0)+t.adj);
     t.wr=wr; t.wrTrim=wrTrim;
     t.own=[...t.tk].filter(x=>HELD.includes(x));
 
@@ -443,9 +473,9 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
       t.act=t.own.length?'Trim 30% over 3–6 months':'Avoid';
       t.why='Net negative. Smart money is rotating out.';t.u=40;}
     else if(t.score>=25&&t.nu){t.stage='EMERGING · HIGH CONVICTION';t.col='--gold';t.zone='buy';
-      t.when='Entry window open now';
-      t.act=t.own.length?'Add to the position':'Top candidate — run APEX first';
-      t.why='A high score built from fresh positions, not aged ones. Several managers moved into this in the same quarter, which is conviction forming rather than consensus already priced.';t.u=90;}
+      t.when='APEX to verify the entry is still live';
+      t.act=t.own.length?'Add only if the entry still works':'High conviction — APEX verifies the entry first';
+      t.why='A high score built from fresh positions, not aged ones. Several managers moved into this in the same quarter — conviction forming rather than consensus already priced. Stack surfaces the candidate; whether the price still works is for APEX to decide, especially where the drift is large.';t.u=90;}
     else if(t.score>=25&&t.sig.length>=4){t.stage='ESTABLISHED';t.col='--amber';t.zone='hold';
       t.when=wrTrim?'6 to 12 months — watch the north star':'6 to 18 months until decay';
       t.act=t.own.length?(wrTrim?'Hold — plan a trim in 6–12 months':'Hold'):'Reference only';
@@ -485,6 +515,10 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     if(!q||q.price==null) return '<span class="pc na">'+esc(x)+' — quote unavailable</span>';
     var s='<span class="pc">'+esc(x)+' <b>$'+money(q.price)+'</b>';
     if(q.pct!=null){var neg=q.pct<=0;s+=' <em class="'+(neg?'neg':'pos')+'">'+(neg?'':'+')+Math.round(q.pct)+'% vs 52w high</em>';}
+    if('drift' in q){
+      if(q.drift==null){s+=' <em class="drift unk">drift n/a since '+esc(q.ref||'ref')+'</em>';}
+      else{var dn=q.drift<0;s+=' <em class="drift '+(dn?'neg':'pos')+'">'+(dn?'':'+')+Math.round(q.drift)+'% since '+esc(q.ref||'ref')+'</em>';}
+    }
     return s+'</span>';
   }
 
@@ -521,6 +555,9 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     if(t.wr)b+=`<span class="b" style="color:var(--gold)">WHALE ROCK</span>`;
     if(t.wrTrim)b+=`<span class="b" style="color:var(--amber)">WR TRIMMING</span>`;
     if(t.own.length)b+=`<span class="b" style="color:var(--gold)">YOU HOLD ${t.own.join(', ')}</span>`;
+    if(t.adj<0)b+=`<span class="b" style="color:var(--rust)">STALE ${t.adj}</span>`;
+    else if(t.adj>0)b+=`<span class="b" style="color:var(--sage)">DISLOCATED +${t.adj}</span>`;
+    if(t.driftUnknown)b+=`<span class="b" style="color:var(--amber)">DRIFT UNKNOWN</span>`;
     return b?`<div class="badges">${b}</div>`:'';
   };
 
@@ -532,7 +569,15 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
   <div class="tk">${[...t.tk].map(x=>`<span class="${HELD.includes(x)?'own':''}">${x}</span>`).join('')}</div>
   <div class="px">${[...t.tk].map(priceChip).join('')}</div>
   <details><summary>${t.stage} · ${t.sig.length} signals · ${t.src.size} sources · latest ${t.fresh===0?'this week':t.fresh+'w ago'} ▾</summary>
-  <div class="trail">${t.sig.map(s=>`<div class="sig"><span class="t">${s.t}</span><span><span class="src">${s.src.toUpperCase()}</span> <span class="d">${esc(s.by)}: ${esc(s.a)}</span></span><span class="n ${s.v>0?'pos':'neg'}">${s.v>0?'+':''}${s.v}</span></div>`).join('')}</div>
+  <div class="trail">${t.sig.map(s=>{
+    let aud='';
+    if('drift' in s){
+      if(s.drift==null){aud='<div class="sigadj unk">drift unknown — score left unadjusted</div>';}
+      else{const a=s.adj||0,r=s.v+a,as=a>0?'+'+a:(a<0?''+a:'±0'),ds=(s.drift>0?'+':'')+Math.round(s.drift);
+        aud=`<div class="sigadj ${a<0?'neg':a>0?'pos':'flat'}">v ${s.v>0?'+':''}${s.v} · drift ${ds}% → adj ${as} → ${r>0?'+':''}${r}</div>`;}
+    }
+    return `<div class="sig"><span class="t">${s.t}</span><span><span class="src">${s.src.toUpperCase()}</span> <span class="d">${esc(s.by)}: ${esc(s.a)}</span></span><span class="n ${s.v>0?'pos':'neg'}">${s.v>0?'+':''}${s.v}</span></div>`+aud;
+  }).join('')}</div>
   </details></div>`;
 
   document.getElementById('zones').innerHTML=order.map(zn=>
@@ -579,13 +624,63 @@ def signals_html():
             sig_failed.append(t); continue
         p = q["price"]; yh = q.get("yearHigh")
         prices[t] = {"price": p, "pct": ((p - yh) / yh * 100) if yh else None}
+
+    # ── price-staleness (+/-3): adjust each signal carrying a ref_date by its drift
+    # vs the live price. Manager & strategic (13F) signals only -- insider/price/
+    # earnings/screen/senate omit ref_date and pass through unchanged. A hand-filled
+    # ref_price is honoured first and skips the lookup (period-end prices never move);
+    # a failed lookup leaves the signal unadjusted and visibly marked DRIFT UNKNOWN.
+    def q_label(rd):
+        try:
+            return "Q%d" % ((int(rd[5:7]) - 1) // 3 + 1)
+        except Exception:
+            return "ref"
+    ref_failed = []
+    try:                                            # never let staleness crash the board
+        ref_cache = {}
+        for s in sig.get("signals", []):
+            rd = s.get("ref_date")
+            if not rd:
+                continue
+            cur = prices.get(s["t"], {}).get("price")
+            rp = s.get("ref_price")
+            if rp is None:
+                key = (s["t"], rd)
+                if key not in ref_cache:
+                    ref_cache[key] = hist_close(s["t"], rd)
+                rp = ref_cache[key]
+            if not rp or cur is None:
+                s["drift"] = None                   # ref_date set but drift unresolved
+                if not rp:
+                    ref_failed.append(f'{s["t"]}@{rd}')
+                if s["t"] in prices:
+                    prices[s["t"]].setdefault("drift", None)
+                    prices[s["t"]].setdefault("ref", q_label(rd))
+                continue
+            drift = (cur - rp) / rp * 100.0
+            s["ref_close"] = round(rp, 2)
+            s["drift"] = round(drift, 1)
+            s["adj"] = -3 if drift > 30 else (3 if drift < -15 else 0)
+            if s["t"] in prices:
+                prices[s["t"]]["drift"] = s["drift"]
+                prices[s["t"]]["ref"] = q_label(rd)
+        ref_failed = sorted(set(ref_failed))
+    except Exception as e:
+        print(f"signals.json: staleness pass failed ({e}) -- publishing unadjusted scores")
+
     data_json = json.dumps(sig, ensure_ascii=False).replace("</", "<\\/")
     prices_json = json.dumps(prices).replace("</", "<\\/")
-    unavail = (f'<div class="unavail">Quotes unavailable: {", ".join(sig_failed)}.</div>'
-               if sig_failed else "")
+    unavail = ""
+    if sig_failed:
+        unavail += f'<div class="unavail">Quotes unavailable: {", ".join(sig_failed)}.</div>'
+    if ref_failed:
+        unavail += ('<div class="unavail">Reference prices unavailable: '
+                    f'{", ".join(ref_failed)} — shown with drift unknown, score unadjusted.</div>')
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%b %d, %H:%M UTC")
     print(f"signals.json: {len(prices)} priced, {len(sig_failed)} unavailable"
           + (f" ({', '.join(sig_failed)})" if sig_failed else ""))
+    if ref_failed:
+        print(f"signals.json: {len(ref_failed)} ref prices unavailable ({', '.join(ref_failed)})")
     return (SIGNALS_SECTION.replace("__SIGNALS_JSON__", data_json)
             .replace("__SIGNALS_PRICES__", prices_json)
             .replace("__SIGNALS_UNAVAIL__", unavail)
