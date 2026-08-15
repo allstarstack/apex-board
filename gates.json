@@ -1,57 +1,361 @@
 {
-  "board_date": "2026-08-05",
-  "calendar": [
-    {"date": "2026-08-03", "label": "Monday", "title": "Palantir (PLTR) reports", "sub": "watch for analyst forecast cuts after the report"},
-    {"date": "2026-08-05", "label": "Wednesday", "title": "Review day: CAI + NVO report", "sub": "two live decisions, the IESC checklist, and settling the MP question"},
-    {"date": "2026-08-06", "label": "Thursday", "title": "MP Materials reports", "sub": "settle the two conflicting MP reviews the day BEFORE this"},
-    {"date": "2026-08-15", "label": "Aug 15", "title": "Alert-system report card", "sub": "first grading of the new detection screens"},
-    {"date": "2026-08-26", "label": "Aug 26", "title": "Nvidia (NVDA) reports", "sub": "context for its $140 re-look level"},
-    {"date": "2026-09-16", "label": "Sep 16", "title": "IREN year-end report", "sub": "its first proof date (still needs Board sign-off)"},
-    {"recurring": "first_monday", "title": "Monthly fresh screen + cycle-map read", "sub": "open a Board session in Claude - the map is judgment, this is its clock"}
-  ],
-  "btc": {"trigger_low": 59000, "trigger_high": 60000, "falsifier": 40000},
-  "names": [
-    {"t": "MP",   "gate": 20,   "verdict_date": "2026-08-05", "note": "Hurdle-derived: PW(P)=3.2766/P^(1/3)-1, P=$20.36 at the 20% hurdle. Or 2-of-4 named proof flips. Killed 8/5, PW -9.8% at $47.91."},
-    {"t": "ISRG", "gate": 305,  "note": "or if US surgery volumes start growing faster again"},
-    {"t": "COIN", "gate": 120,  "note": ""},
-    {"t": "HOOD", "gate": 70,   "note": ""},
-    {"t": "DLO",  "gate": 12,   "note": ""},
-    {"t": "PLTR", "gate": 90,   "note": "reports Monday - also worth a look if analysts cut forecasts after, even above $90"},
-    {"t": "NU",   "gate": 10,   "note": "or two straight quarters of 9.5%+ lending margins without bad loans piling up"},
-    {"t": "NVDA", "gate": 140,  "note": ""},
-    {"t": "ASML", "gate": 1100, "note": "caution: the company stopped reporting its order numbers"},
-    {"t": "GOOGL","gate": 235,  "note": "or when AI spending stops eating the cash flow, with Cloud staying very profitable"},
-    {"t": "KNSL", "gate": 230,  "note": "or if premium growth speeds back up past 10% for two quarters"},
-    {"t": "GEV",  "gate": 625,  "note": "or the specific business proof points on file"},
-    {"t": "VICR", "gate": 130,  "note": "sweet spot ~$110-125, or three proof points on file"},
-    {"t": "LEU",  "gate": 100,  "note": "or a sole-source government uranium contract / major partner deal"},
-    {"t": "BLLN", "gate": 60,   "note": ""},
-    {"t": "AEHR", "gate": 27,   "note": "if orders top $50M two quarters running, we'd pay up to $45-55"},
-    {"t": "TSEM", "gate": 160,  "note": "only with its order backlog intact - two levels on file ($160 vs $105), Wednesday settles it"},
-    {"t": "NTSK", "gate": 10,   "note": "or growth re-accelerates while it's still under $11"},
-    {"t": "PENG", "gate": 40,   "note": "or AI infrastructure grows past 35% of its sales with a disclosed backlog"},
-    {"t": "LEGN", "gate": 19.5, "note": "BELOW ITS TRIGGER NOW - on Wednesday's review agenda. Also flips on a first-line approval or a rival stumbling."},
-    {"t": "KRMN", "gate": 32,   "note": ""},
-    {"t": "OUST", "gate": 22,   "note": "ran 82% past our level on hype with no new contracts - we don't chase"},
-    {"t": "2454.TW", "gate": 2000, "note": "MediaTek, Taiwan (NT$). Or its custom-chip business hitting $2B with a named second customer. Price feed can't quote Taiwan."},
-    {"t": "MTRN", "gate": 150,  "verdict_date": "2026-08-05", "note": "Base terminal $249 discounted at hurdle. Or 2 qtrs VA-sales growth >=15% with backlog expanding and no one-time items in adjusted EBITDA. Killed 8/5, PW -5.8% at $297.08."},
-    {"t": "PGEN", "gate": 4.30, "verdict_date": "2026-08-05", "note": "Collections-keyed, not revenue-keyed. Or 2 qtrs collections-confirmed ramp with DSO under 75 days. Killed 8/5, PW ~0% at $6.89."}
-  ],
-  "triggers": [
-    {"t": "MP",    "event": "$32 - RE-UNDERWRITE TRIGGER, NOT A GATE. Returns +4.3% against the 20% hurdle. NOT price-monitored - this level needs a manual check."},
-    {"t": "TEAM",  "event": "Year-end earnings due. Last math: ~17%/yr expected return - just under our ~20% bar, so the report could tip it."},
-    {"t": "NOW",   "event": "Proved its AI-agents business is real revenue (Jul 24). Gets fresh numbers at Wednesday's review."},
-    {"t": "NVO",   "event": "Wednesday: needs to hold its raised forecast plus a second stable quarter for US weight-loss drugs."},
-    {"t": "HDSI",  "event": "August report reveals how much of the business is humanoid robots - the first real robotics proof."},
-    {"t": "AMBA",  "event": "Watching for growth to speed back up past 25%."},
-    {"t": "SNPS",  "event": "Everyone hates it right now - watching for signs the worst is over."},
-    {"t": "HIMS",  "event": "Needs all three: 2026 forecast of $2.8B+, subscriber growth, and 10%+ profit margin."},
-    {"t": "NU",    "event": "Two straight quarters of 9.5%+ lending margins without bad loans rising."},
-    {"t": "ISRG",  "event": "US surgery volumes speeding up again."},
-    {"t": "LEU",   "event": "A sole-source government contract or a big partner deal."},
-    {"t": "BTC",   "event": "Armed, awaiting sign-off: steady ETF inflows for 2-3 weeks plus weekly closes above ~$59-60k."},
-    {"t": "IESC",  "event": "Wednesday review with its checklist (from the Aug 1 session - needs sign-off)."},
-    {"t": "IREN",  "event": "Sep 16 year-end report is its proof date (needs sign-off)."},
-    {"t": "KALSHI","event": "Passed on the private deal; revisit only if it files to go public (2027 or later). (needs sign-off)"}
-  ]
+ "board_date": "2026-08-14",
+ "calendar": [
+  {
+   "date": "2026-08-15",
+   "label": "Aug 15",
+   "title": "Scanner audit + band fix",
+   "sub": "decision taken Aug 14: fix routing, not construction - see the Aug 14 log entry"
+  },
+  {
+   "date": "2026-08-16",
+   "label": "Sun Aug 16",
+   "title": "BTC weekly close + ETF flow check",
+   "sub": "the last unfinished leg of the BTC trigger"
+  },
+  {
+   "date": "2026-08-26",
+   "label": "Aug 26",
+   "title": "Nvidia (NVDA) reports",
+   "sub": "context for its $140 re-look level"
+  },
+  {
+   "date": "2026-08-31",
+   "label": "end-Aug",
+   "title": "USA Rare Earth: Serra Verde close",
+   "sub": "the share count roughly doubles - and the Aug 10 print is still unread"
+  },
+  {
+   "date": "2026-09-16",
+   "label": "Sep 16",
+   "title": "IREN year-end report",
+   "sub": "its proof date, and the highest live mark on the board"
+  },
+  {
+   "date": "2026-10-22",
+   "label": "Oct 22",
+   "title": "Harmony Biosciences: AET closing arguments",
+   "sub": "one of three dated items on the HRMY binary"
+  },
+  {
+   "date": "2026-11-04",
+   "label": "~Nov 4",
+   "title": "Novo Nordisk Q3",
+   "sub": "US GLP-1 growth positive ex-rebate - the unmet probation condition"
+  },
+  {
+   "recurring": "first_monday",
+   "title": "Monthly fresh screen + cycle-map read",
+   "sub": "open a Board session in Claude - the map is judgment, this is its clock"
+  }
+ ],
+ "btc": {
+  "trigger_low": 59000,
+  "trigger_high": 60000,
+  "falsifier": 40000
+ },
+ "names": [
+  {
+   "t": "NU",
+   "gate": 12.58,
+   "note": "NEW 8/14. Killed for fresh capital at $15.23 (+9.3% on the Q2 print). Trigger tested and FAILED leg 2: risk-adj NIM leg passed (9.5% Q1 -> 12.4% Q2) but the loan-loss reserve grew 8.1% while the loan book grew 5%. Solved gate: PW(P)=2.7908/P^(1/3)-1 = 20% at $12.58. Frozen terminals $10.00/$24.00/$34.00.",
+   "verdict_date": "2026-08-14"
+  },
+  {
+   "t": "PLTR",
+   "gate": 90.65,
+   "note": "NEW 8/14 - the 11-day-overdue Aug 3 read, now done. Killed at $174.04. Business proof is real and accelerating (revenue +93%, US commercial +149%, FY guide $8.15B). The kill is price: even the full-execution bull returns +15.3%/yr, under the 20% bar, before any bear is considered. Solved gate PW(P)=5.3907/P^(1/3)-1. Frozen terminals $74/$163/$267.",
+   "verdict_date": "2026-08-14"
+  },
+  {
+   "t": "LEGN",
+   "gate": 17.22,
+   "note": "RE-ARMED 8/14, replacing $19.50. Post-print re-underwrite done at $20.37: PW +13.5%. First company-wide profitable quarter (adj NI $63.1M, op margin +15% vs -9%) - a real Window-1 shape - but Carvykti growth decelerated 62% -> 50% and the June equity raise diluted. Bull-alone +44.5% clears, so this gate is live. Solved PW(P)=3.0987/P^(1/3)-1. Frozen terminals $9.50/$31.70/$61.50. Old $19.50 was the 15%-hurdle level ($19.56), not the 20% level.",
+   "verdict_date": "2026-08-14"
+  },
+  {
+   "t": "AVAH",
+   "gate": 7.76,
+   "note": "Killed 8/13 at $11.29, now $12.32 (PW +2.9%). Or two straight quarters of organic ex-Family-First revenue +15% or better with adj EBITDA margin at least 14.5%; or preferred-payer coverage reaching 75% of MCO volume with margin held. First look: Q3 print, early Nov.",
+   "verdict_date": "2026-08-13"
+  },
+  {
+   "t": "NBIS",
+   "gate": 73.42,
+   "note": "Killed 8/12 at $259.20, now $277.68 (PW -23.0%). Low confidence on the level. Proof flip: two straight quarters where capex is covered by operating cash + customer prepayments + committed non-recourse debt, with no new shares issued and ARR at or above guide.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "GLBE",
+   "gate": 34.05,
+   "note": "Killed 8/12 at $40.55, now $42.36 (PW +11.6%). Or two more quarters of organic (ex-Passport) revenue +25% or better with non-GAAP gross margin at least 45%.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "AMBQ",
+   "gate": 45.0,
+   "note": "Killed 8/12 at $65.59. Or first non-GAAP profitable quarter with revenue +60% or better; or top-3 customer concentration disclosed below 55%. Below the scanner universe floor - manual watch only.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "HRMY",
+   "gate": 28.5,
+   "note": "Killed 8/12 at $39.77. Or Pitolisant-GR approval (PDUFA Apr 1, 2027) plus first two quarters where GR is 30%+ of new starts. Deep-dive queued first among the Aug 12 names.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "AAON",
+   "gate": 50.0,
+   "note": "Killed 8/12 at $85.23. Or two quarters of sequential backlog growth restored (book-to-bill above 1) with gross margin at least 26%.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "RSKD",
+   "gate": 5.36,
+   "note": "WATCHLIST name with a solved re-entry level (8/12), not a kill. Mark ~13.6% at $6.32. Q3 print (~Nov) is the clean ex-World-Cup quarter: +20% YoY with GM 46%+ and Q4 guide +15%+ triggers a re-underwrite. Below the scanner floor - manual watch.",
+   "verdict_date": "2026-08-12"
+  },
+  {
+   "t": "CAI",
+   "gate": 15.04,
+   "note": "Killed 8/8 at $22.74, now $21.80 (PW +6.0%). Or Q3 revenue +25% YoY or better - breaking the guided H2 slowdown - with EBITDA above the high end of guidance.",
+   "verdict_date": "2026-08-08"
+  },
+  {
+   "t": "STRL",
+   "gate": 245.0,
+   "note": "Killed 8/8 at ~$547, now $576.48. Or two more quarters of organic growth at 40%+ with backlog still building. Headline +90% growth is only +49% once acquisitions are stripped out.",
+   "verdict_date": "2026-08-08"
+  },
+  {
+   "t": "ACMR",
+   "gate": 35.32,
+   "note": "Killed 8/8 at $83.80, now $80.42 (PW -8.8%). Or two more quarters of revenue +30% YoY with gross margin at least 46%; or disclosed ex-China revenue at a named double-digit share with named customers.",
+   "verdict_date": "2026-08-08"
+  },
+  {
+   "t": "VSTM",
+   "gate": 4.2,
+   "note": "Killed 8/8 at $6.74. Or the VS-7375 October data readout with competitive disclosed response/durability; or a single quarter of $40M+ co-pack revenue.",
+   "verdict_date": "2026-08-08"
+  },
+  {
+   "t": "OABI",
+   "gate": 1.95,
+   "note": "Killed 8/8 at $3.08. Or ramantamig BLA/approval with disclosed royalty economics; or two quarters of ex-milestone recurring revenue +25% YoY. The raised guide implies H2 revenue of $4.2-8.2M against $27.8M booked in H1.",
+   "verdict_date": "2026-08-08"
+  },
+  {
+   "t": "MP",
+   "gate": 20.36,
+   "note": "Killed 8/5, re-affirmed 8/7 at $52.46, now $58.74 (PW -15.7%). Or 2 of 4 named proof flips - 0 of 4 flipped at Q2. $32 is a re-underwrite trigger, NOT a gate, and is not price-monitored (see triggers).",
+   "verdict_date": "2026-08-07"
+  },
+  {
+   "t": "MTRN",
+   "gate": 150.0,
+   "note": "Killed 8/5 at $297.08. Or two quarters of VA sales +15% or better with backlog expanding and no one-time items.",
+   "verdict_date": "2026-08-05"
+  },
+  {
+   "t": "PGEN",
+   "gate": 4.3,
+   "note": "Killed 8/5 at $6.89. Or two quarters of collections-confirmed ramp with DSO under 75 days.",
+   "verdict_date": "2026-08-05"
+  },
+  {
+   "t": "ISRG",
+   "gate": 305,
+   "note": "Or if US surgery volumes start growing faster again."
+  },
+  {
+   "t": "COIN",
+   "gate": 120,
+   "note": ""
+  },
+  {
+   "t": "HOOD",
+   "gate": 70,
+   "note": ""
+  },
+  {
+   "t": "DLO",
+   "gate": 12,
+   "note": "Upcoming print noted - re-look below $12."
+  },
+  {
+   "t": "NVDA",
+   "gate": 140,
+   "note": "Reports Aug 26."
+  },
+  {
+   "t": "ASML",
+   "gate": 1100,
+   "note": "Caution: the company stopped reporting its order numbers."
+  },
+  {
+   "t": "GOOGL",
+   "gate": 235,
+   "note": "Or when AI spending stops eating the cash flow, with Cloud staying very profitable."
+  },
+  {
+   "t": "KNSL",
+   "gate": 230,
+   "note": "Or if premium growth speeds back up past 10% for two quarters."
+  },
+  {
+   "t": "GEV",
+   "gate": 625,
+   "note": "Or the specific proof conditions on file."
+  },
+  {
+   "t": "VICR",
+   "gate": 130,
+   "note": "Deploy zone $110-125, or three proof flips."
+  },
+  {
+   "t": "LEU",
+   "gate": 100,
+   "note": "Or a sole-source NNSA contract or an equity-partner close. Marked ~0% at $173.78."
+  },
+  {
+   "t": "BLLN",
+   "gate": 60,
+   "note": ""
+  },
+  {
+   "t": "AEHR",
+   "gate": 27,
+   "note": "Proof escalation to $45-55 on two quarters of bookings at $50M+, or a second AI customer reaching volume."
+  },
+  {
+   "t": "TSEM",
+   "gate": 160,
+   "note": "With backlog intact. A 7/18 rerank marked sub-$105 - reconcile at a future Board."
+  },
+  {
+   "t": "NTSK",
+   "gate": 10,
+   "note": "Or re-acceleration proof plus a price under $11."
+  },
+  {
+   "t": "PENG",
+   "gate": 40,
+   "note": "Or AI-infrastructure segment above 35% of revenue with disclosed backlog."
+  },
+  {
+   "t": "KRMN",
+   "gate": 32,
+   "note": ""
+  },
+  {
+   "t": "OUST",
+   "gate": 22,
+   "note": "STALE - claimed Q2 revenue +56% and a capital raise mean a new-fact read is owed at the next Board."
+  },
+  {
+   "t": "NTRA",
+   "gate": 175,
+   "note": "Resolved 7/18 to 4-7%. At $322 this is nowhere close."
+  },
+  {
+   "t": "2454.TW",
+   "gate": 2000,
+   "note": "MediaTek. Or Q4'26 ASIC revenue above $2B with named second-customer economics."
+  }
+ ],
+ "triggers": [
+  {
+   "t": "MP",
+   "event": "$32 - RE-UNDERWRITE TRIGGER, NOT A GATE. Returns about +4% against the 20% bar. NOT price-monitored - this level needs a manual check."
+  },
+  {
+   "t": "USAR",
+   "event": "OVERDUE MANUAL LOOK: the Aug 10 print has not been read. Also: the Serra Verde close (end-Aug) roughly doubles the share count. Killed pre-proof at $19.27, now $20.00; no price gate, 2 of 3 proof flips required."
+  },
+  {
+   "t": "XFOR",
+   "event": "No price gate. 4WARD Phase 3 chronic-neutropenia topline with disclosed effect size. First look: enrollment and FDA sample-size update due by end-Q3'26."
+  },
+  {
+   "t": "NU",
+   "event": "RESOLVED 8/14 - trigger tested and failed leg 2, name moved to gates. Re-entry now: two straight quarters of risk-adjusted NIM at 12%+ WITH reserve growth no faster than loan-book growth; or a Mexico net-income inflection. First look: Q3, ~Nov."
+  },
+  {
+   "t": "LEGN",
+   "event": "RESOLVED 8/14 - post-print re-underwrite done, gate re-armed at $17.22. Proof flip: two more quarters of Carvykti growth at 45%+ with the anito-cel competitive launch absorbed; or a permanent CEO appointment with strategy held."
+  },
+  {
+   "t": "TEAM",
+   "event": "FQ1'27 (Oct-Nov): cloud growth 25%+ plus evidence the 13% full-year guide is sandbagged. The +44% RPO against a 13% guide is the open question."
+  },
+  {
+   "t": "NVO",
+   "event": "Q3 (~Nov 4): US GLP-1 growth positive excluding rebate adjustments. Window-1 probation scored 1.5 of 2 and is NOT armed."
+  },
+  {
+   "t": "CHYM",
+   "event": "Two more quarters of margin expansion with members +20% or better; or a price under $20. Marked ~10%, low-medium confidence. Primary filings only - FMP has a sign-flipped net income record on this name."
+  },
+  {
+   "t": "HRMY",
+   "event": "Dated: TEMPO PWS topline 2H'26 - AET closing arguments Oct 22 - Pitolisant-GR PDUFA Apr 1, 2027."
+  },
+  {
+   "t": "AVAH",
+   "event": "Q3 print ~early Nov: the organic ex-Family-First re-acceleration watch. Sell-side upgrades are detection, not proof - no re-read owed on upgrades alone."
+  },
+  {
+   "t": "NOW",
+   "event": "Comparator, not a candidate. Marked ~14.5% post-Q2. Filings verification owed as part of the hurdle review."
+  },
+  {
+   "t": "AXON",
+   "event": "Comparator, not a candidate. Marked ~12-15%; candidate level ~$430 solved 8/8. Filings verification owed."
+  },
+  {
+   "t": "IOT",
+   "event": "Comparator, not a candidate. Marked ~13.5%. Filings verification owed."
+  },
+  {
+   "t": "HDSI",
+   "event": "August report reveals how much of the business is humanoid robots - the first real robotics proof."
+  },
+  {
+   "t": "AMBA",
+   "event": "Watching for growth to speed back up past 25%."
+  },
+  {
+   "t": "SNPS",
+   "event": "Max-pessimism watch. Ansys integration muddies the per-share comparisons."
+  },
+  {
+   "t": "HIMS",
+   "event": "Needs all three: 2026 forecast of $2.8B+, subscriber growth, and 10%+ profit margin."
+  },
+  {
+   "t": "ISRG",
+   "event": "US surgery volumes speeding up again."
+  },
+  {
+   "t": "LEU",
+   "event": "A sole-source government contract or a big partner deal."
+  },
+  {
+   "t": "BTC",
+   "event": "Price leg SATISFIED 8/8. Flow leg needs the Sunday Aug 16 weekly close plus one more positive ETF flow week. Then Board sign-off on trigger text and sizing - which needs a real cash %."
+  },
+  {
+   "t": "IESC",
+   "event": "Deferred - needs a real book. Checklist on file from Aug 1."
+  },
+  {
+   "t": "IREN",
+   "event": "Sep 16 year-end report is its proof date. Marked ~16%, the highest live mark on the board, and unverified."
+  },
+  {
+   "t": "KALSHI",
+   "event": "Passed on the private deal; revisit only if it files to go public (2027 or later)."
+  }
+ ]
 }
