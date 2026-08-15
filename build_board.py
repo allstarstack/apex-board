@@ -689,6 +689,30 @@ def signals_html():
 def esc(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
+def is_freshly_armed(verdict_date, last_full_board_date, today):
+    """True if an entry armed on `verdict_date` is 'freshly armed -- deep by design'
+    rather than a culling candidate.
+
+    Keys on the last FULL Board, not on `board_date`. `last_full_board_date` is a
+    judgment field: it advances ONLY by explicit Board decision, never automatically
+    when `board_date` is bumped by a nightly sync. An entry is fresh if it was armed
+    on or after that Board (`verdict_date >= last_full_board_date`).
+
+    If `last_full_board_date` is absent, fall back to a 45-day rolling window on
+    `verdict_date` -- never revert to equality with `board_date`, which would
+    mislabel anything armed between Boards as having 'run away'.
+
+    A missing `verdict_date` is legacy: returns False, so the caller buckets it on
+    distance exactly as before. (ISO YYYY-MM-DD dates compare correctly as strings.)
+    """
+    if not verdict_date:
+        return False
+    if last_full_board_date:
+        return verdict_date >= last_full_board_date
+    cutoff = (today - datetime.timedelta(days=45)).isoformat()
+    return verdict_date >= cutoff
+
+
 def build():
     cfg = json.load(open("gates.json"))
     try:
@@ -708,7 +732,8 @@ def build():
 
     at_html, near, far, left, failed = "", [], [], [], []
     fresh = []
-    board_date = cfg.get("board_date")            # ISO date of the most recent Board
+    board_date = cfg.get("board_date")            # ISO date of the most recent Board (may be a nightly sync)
+    last_full_board_date = cfg.get("last_full_board_date")  # last FULL Board; judgment field, not auto-advanced
     for n in cfg["names"]:
         q = quote(n["t"])
         if not q:
@@ -718,8 +743,8 @@ def build():
         if n.get("at_gate") or d <= 10: at_html += atgate_card(n2)
         elif d <= 30: near.append(n2)
         elif d <= 80: far.append(n2)
-        elif n.get("verdict_date") and n["verdict_date"] == board_date:
-            fresh.append(n2)          # armed at the latest Board — deep by design, not "ran away"
+        elif is_freshly_armed(n.get("verdict_date"), last_full_board_date, today):
+            fresh.append(n2)          # armed on/after the last full Board — deep by design, not "ran away"
         else:
             left.append(n2)
     if failed and len(failed) >= len(cfg["names"]) // 2:
@@ -752,8 +777,10 @@ def build():
     if fresh:
         lst = ", ".join(f'{x["t"]} (gate ${x["gate"]:,}, +{x["dist"]:.0f}%)'
                         for x in sorted(fresh, key=lambda x: -x["dist"]))
+        armed_since = (f'Armed at or since the last full Board ({esc(last_full_board_date)})'
+                       if last_full_board_date else 'Armed within the last 45 days')
         fresh_html = (f'<div class="sec">Freshly armed &mdash; deep by design</div><p class="body">'
-                      f'Set at the latest Board ({esc(board_date)}) at hurdle-derived levels: {lst}. '
+                      f'{armed_since} at hurdle-derived levels: {lst}. '
                       f'The gap is the verdict, not a stale gate &mdash; not a culling candidate.</p>')
 
     left_html = ""
