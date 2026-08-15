@@ -3,48 +3,56 @@
  "last_full_board_date": "2026-08-05",
  "calendar": [
   {
+   "done": false,
    "date": "2026-08-15",
    "label": "Aug 15",
    "title": "Scanner audit + band fix",
    "sub": "decision taken Aug 14: fix routing, not construction - see the Aug 14 log entry"
   },
   {
+   "done": false,
    "date": "2026-08-16",
    "label": "Sun Aug 16",
    "title": "BTC weekly close + ETF flow check",
    "sub": "the last unfinished leg of the BTC trigger"
   },
   {
+   "done": false,
    "date": "2026-08-26",
    "label": "Aug 26",
    "title": "Nvidia (NVDA) reports",
    "sub": "context for its $140 re-look level"
   },
   {
+   "done": false,
    "date": "2026-08-31",
    "label": "end-Aug",
    "title": "USA Rare Earth: Serra Verde close",
    "sub": "the share count roughly doubles - and the Aug 10 print is still unread"
   },
   {
+   "done": false,
    "date": "2026-09-16",
    "label": "Sep 16",
    "title": "IREN year-end report",
    "sub": "its proof date, and the highest live mark on the board"
   },
   {
+   "done": false,
    "date": "2026-10-22",
    "label": "Oct 22",
    "title": "Harmony Biosciences: AET closing arguments",
    "sub": "one of three dated items on the HRMY binary"
   },
   {
+   "done": false,
    "date": "2026-11-04",
    "label": "~Nov 4",
    "title": "Novo Nordisk Q3",
    "sub": "US GLP-1 growth positive ex-rebate - the unmet probation condition"
   },
   {
+   "done": false,
    "recurring": "first_monday",
    "title": "Monthly fresh screen + cycle-map read",
    "sub": "open a Board session in Claude - the map is judgment, this is its clock"
