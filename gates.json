@@ -3,7 +3,7 @@
  "last_full_board_date": "2026-08-05",
  "calendar": [
   {
-   "done": false,
+   "done": true,
    "date": "2026-08-15",
    "label": "Aug 15",
    "title": "Scanner audit + band fix",
