@@ -10,7 +10,7 @@
    "sub": "decision taken Aug 14: fix routing, not construction - see the Aug 14 log entry"
   },
   {
-   "done": false,
+   "done": true,
    "date": "2026-08-16",
    "label": "Sun Aug 16",
    "title": "BTC weekly close + ETF flow check",
