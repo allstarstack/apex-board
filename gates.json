@@ -46,6 +46,13 @@
   },
   {
    "done": false,
+   "date": "2026-11-02",
+   "label": "Nov 2",
+   "title": "Q3 print cluster - AVAH, RSKD, NU, TEAM, ACMR, AMBQ reads owed",
+   "sub": "one entry for the cluster; each name's re-entry level lives in the triggers section"
+  },
+  {
+   "done": false,
    "date": "2026-11-04",
    "label": "~Nov 4",
    "title": "Novo Nordisk Q3",
@@ -56,6 +63,12 @@
    "recurring": "first_monday",
    "title": "Monthly fresh screen + cycle-map read",
    "sub": "open a Board session in Claude - the map is judgment, this is its clock"
+  },
+  {
+   "done": false,
+   "recurring": "weekly_monday",
+   "title": "Verify weekend discovery run - subject line PARTIAL? band histogram written to artifact?",
+   "sub": "Monday check on the Sunday 21:00 UTC discovery sweep"
   }
  ],
  "btc": {
