@@ -1,5 +1,5 @@
 {
- "board_date": "2026-08-14",
+ "board_date": "2026-08-16",
  "last_full_board_date": "2026-08-05",
  "calendar": [
   {
@@ -60,6 +60,27 @@
   },
   {
    "done": false,
+   "date": "2026-11-11",
+   "label": "~Nov 11",
+   "title": "dLocal (DLO) Q3 print",
+   "sub": "first look at the take-rate flip: GP/TPV >=0.70% with GP >=+30% is the re-underwrite trigger"
+  },
+  {
+   "done": false,
+   "date": "2026-11-11",
+   "label": "~mid-Nov",
+   "title": "Liftoff (LFTO) Q3 print",
+   "sub": "still World-Cup-contaminated (July tail) - read for decel shape; the clean test is Q4"
+  },
+  {
+   "done": false,
+   "date": "2026-12-01",
+   "label": "~Dec 1",
+   "title": "LFTO IPO lockup expiry",
+   "sub": "76% sponsor overhang unlocks - supply event, watched not gated; exact date verification owed from the prospectus"
+  },
+  {
+   "done": false,
    "recurring": "first_monday",
    "title": "Monthly fresh screen + cycle-map read",
    "sub": "open a Board session in Claude - the map is judgment, this is its clock"
@@ -80,7 +101,7 @@
   {
    "t": "NU",
    "gate": 12.58,
-   "note": "NEW 8/14. Killed for fresh capital at $15.23 (+9.3% on the Q2 print). Trigger tested and FAILED leg 2: risk-adj NIM leg passed (9.5% Q1 -> 12.4% Q2) but the loan-loss reserve grew 8.1% while the loan book grew 5%. Solved gate: PW(P)=2.7908/P^(1/3)-1 = 20% at $12.58. Frozen terminals $10.00/$24.00/$34.00.",
+   "note": "NEW 8/14. Killed for fresh capital at $15.23 (+9.3% on the Q2 print). Trigger tested and FAILED leg 2: risk-adj NIM leg passed (9.5% Q1 -> 12.4% Q2) but the loan-loss reserve grew 8.1% while the loan book grew 5%. Solved gate: PW(P)=2.7908/P^(1/3)-1 = 20% at $12.58. Frozen terminals $10.00/$24.00/$34.00. RE-AFFIRMED 8/16 at $15.23 (price unchanged since the kill; zero new information; MP-8/7 re-mark precedent).",
    "verdict_date": "2026-08-14"
   },
   {
@@ -202,8 +223,9 @@
   },
   {
    "t": "DLO",
-   "gate": 12,
-   "note": "Upcoming print noted - re-look below $12."
+   "gate": 12.29,
+   "note": "RE-SOLVED 8/16, replacing the unstamped legacy $12 judgment level (retroactively 29c loose). Killed for fresh capital at $14.17 post-Q2 print (8/13): TPV +92% but GP/TPV take rate 1.07% -> 0.72% YoY; gross profit +29% and decelerating (39.8% -> 28.6%) - value capture failing while volume accelerates. PW +14.4%. Solved gate PW(P)=2.7694/P^(1/3)-1 = 20% at $12.29. Frozen terminals $7.10/$23.80/$39.40. Bull-alone clears at <=22.80 - live gate. Flip: 2 straight qtrs GP/TPV >=0.70% with GP growth >=30% YoY. First look: Q3 ~Nov 11. PROVISIONAL ARMING: the Q2'26 print was unverified in-session (FMP carries no Q2'26 record; Q1'26 independently verifies the margin-compression direction). Re-check vs filings before acting on any alert.",
+   "verdict_date": "2026-08-16"
   },
   {
    "t": "NVDA",
@@ -284,6 +306,12 @@
    "t": "2454.TW",
    "gate": 2000,
    "note": "MediaTek. Or Q4'26 ASIC revenue above $2B with named second-customer economics."
+  },
+  {
+   "t": "LFTO",
+   "gate": 17.99,
+   "note": "NEW 8/16. Killed for fresh capital at $21.61 (IPO Jun 5 at $23; -20.6% on the Aug 13 guide). Q2 rev $219.5M +35% with 60% aEBITDA margin - real - but Q3 guided flat sequential DESPITE the July World Cup tail (guided decel 36% -> ~19-22%), a disclosed ICFR material weakness (Tier 1 leg), 76% sponsor overhang with lockup ~Dec 1, and quarter 1 of the 4-quarter S-1 baseline. PW +12.9%. Solved gate PW(P)=3.1441/P^(1/3)-1 = 20% at $17.99. Frozen terminals $11.75/$32.50/$60.25. Bull-alone clears at <=34.87 - live gate. Flips: (1) Q4'26+Q1'27 (clean ex-Cup) Core Advertising >=+25% YoY with margin >=58%; (2) material weakness remediated. Either -> full re-underwrite. PROVISIONAL ARMING: Q2 YoY, aEBITDA, Q3 guide and material weakness were unverified in-session (web search returned empty). Re-check vs filings before acting on any alert.",
+   "verdict_date": "2026-08-16"
   }
  ],
  "triggers": [
@@ -378,6 +406,10 @@
   {
    "t": "KALSHI",
    "event": "Passed on the private deal; revisit only if it files to go public (2027 or later)."
+  },
+  {
+   "t": "REZI",
+   "event": "Killed 8/16 at $20.50, ROUTING CLASS (PURR precedent) - no armed gate. Post-ADI-spin RemainCo is a +2% grower guiding H2 input-cost/OEM-security pressure; no APEX entry window exists at any price without a proof event. For the record only: PW +8.9% at $20.50; the 20% level would be $15.33 (PW(P)=2.9809/P^(1/3)-1) - deliberately not armed. Re-entry is proof-keyed: 2 straight quarters of organic product-cycle reacceleration >=+10% -> fresh underwrite."
   }
  ]
 }
