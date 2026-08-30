@@ -1,5 +1,5 @@
 {
- "board_date": "2026-08-28",
+ "board_date": "2026-08-30",
  "last_full_board_date": "2026-08-05",
  "calendar": [
   {
@@ -125,6 +125,34 @@
    "recurring": "weekly_monday",
    "title": "Verify weekend discovery run - subject line PARTIAL? band histogram written to artifact?",
    "sub": "Monday check on the Sunday 21:00 UTC discovery sweep"
+  },
+  {
+   "done": false,
+   "date": "2026-09-23",
+   "label": "Sep 23",
+   "title": "Synopsys Design IP consolidated complaint",
+   "sub": "governance flag, not a kill - watch whether the Design IP segment margin disclosure changes"
+  },
+  {
+   "done": false,
+   "date": "2026-10-15",
+   "label": "Oct 15",
+   "title": "Semtech data center investor teach-in",
+   "sub": "San Jose - the 1.6T ramp, CopperEdge pipeline and 3.2T content per port; the datum that would move the SMTC terminals"
+  },
+  {
+   "done": false,
+   "date": "2026-11-05",
+   "label": "early Nov",
+   "title": "IREN Q1 FY27 reports",
+   "sub": "first quarter with Horizon 1 in the numbers - does the $4bn contracted ARR start converting"
+  },
+  {
+   "done": false,
+   "date": "2026-12-03",
+   "label": "early Dec",
+   "title": "SMTC, RBRK, Everpure and Synopsys all report",
+   "sub": "the four remaining gated names from the 8/30 deep dive land in the same week"
   }
  ],
  "btc": {
@@ -367,6 +395,36 @@
    "gate": 15.29,
    "note": "NEW 8/28 - first look, physical-AI proof case. FQ3'26 (Aug 5): revenue $721M +22% (decel from +29% FQ2), GAAP net income $55M (vs -$21M) - profit inflection real, adj EBITDA $95M (2x), backlog $22.5B (flat QoQ; 15% recognized in 12 months), 77 systems in deployment / 56 operational, FQ4 guide $760-780M (+28% YoY) / adj EBITDA $100-105M, cash $1.7B. Walmart >50% of revenue WITH contracted lock-in (backlog) - passes the driver-level concentration text, flagged not killed. Up-C wrapper (Class V) - the YOU/CLEAR class; ~642M FMP-implied total shares, verification owed. KILLED FOR FRESH CAPITAL at $39.875 ($25.6B): PW -12.8%. Frozen terminals (3-yr, FY29, ~660M sh): bear $11.40 ($4.0B rev, 10% EBITDA, 15x) / base $26.80 ($4.9B, 15%, 22x) / bull $49.80 ($5.6B, 20%, 28x) -> -34.1% / -12.4% / +7.7%. PW(P)=2.9787/P^(1/3)-1 -> 20% at $15.29. BULL-FAILS CLASS (PLTR/MP): bull-alone clears 20% only at <=$28.82 - the level is arithmetic, not a buy signal; deep because expensive. Proof flip: 2 consecutive quarters revenue >=+30% with adj EBITDA margin >=15%, or the 400-store Walmart back-of-store contract signed and in backlog. Driving assumption: system-level margin at scale (hardware integrator vs software mix). Perm loss ~30%. Next read FQ4 ~mid-Nov. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
    "verdict_date": "2026-08-28"
+  },
+  {
+   "t": "SMTC",
+   "gate": 89.9,
+   "note": "NEW 8/30. KILL for fresh capital at $131.17 after the Aug 26 FQ2'27 print. The cleanest verified J-curve of the five names read this session: YoY +12.7 -> +9.3 -> +15.9 -> +32.7%, guided +54% for FQ3; data center revenue a record $100m (+91% YoY, +39% seq) and guided +45% sequential again; adj op margin 24.4% -> ~31% guided; cellular-module divestiture closes FQ4'27 for >500bp of structural gross margin. Killed on price only. Frozen terminals (FY30, ~104m sh): $54 / $165 / $308 -> -25.6% / +7.9% / +32.9%. PW(P)=5.3757/P^(1/3)-1 = 20% at $89.90. Bull alone clears <= $178.24, so the bull case is live at today's price and the weighted set is not. Flag not kill: securities class action certified May 2026 over the Feb-2025 CopperEdge/NVIDIA disclosure. Proof flips: two quarters of data-center revenue >= guide with adj op margin >= 31%, or 3.2T design wins named with dollar content.",
+   "verdict_date": "2026-08-30"
+  },
+  {
+   "t": "P",
+   "gate": 62.69,
+   "note": "NEW 8/30 (Everpure, formerly Pure Storage). KILL for fresh capital at $93.44 after the Aug 26 FQ2'27 print. Revenue $1.186bn +37.7%, eighth straight quarter of accelerating growth; non-GAAP op profit $230m +77% (19.4% margin, +430bp); FY27 guide raised to $5.03-5.07bn and op income $940-960m. The kill is a decomposition: product revenue +54% carries an ~20% average price increase taken Feb 9 on a NAND spot market up 5-10x, and the company said price plus customer pull-in was about one third of growth in FQ1. Subscription - the part that cannot be a price cycle - grew 20%, ARR $2bn +19%. Second top-five hyperscaler design win (Aug 10) is de minimis in FY27 and ramps FY28. Operating cash flow -$136m on strategic NAND buying. Frozen terminals (FY30, ~360m sh): $47 / $112 / $197 -> -20.5% / +6.2% / +28.2%. PW(P)=4.7670/P^(1/3)-1 = 20% at $62.69. Bull alone clears <= $114.00. Proof flip: two quarters of subscription/ARR growth >= 25% with product gross margin back above 68%, which would separate share gain from the flash cycle.",
+   "verdict_date": "2026-08-30"
+  },
+  {
+   "t": "RBRK",
+   "gate": 72.02,
+   "note": "NEW 8/30. KILL for fresh capital at $93.05 after the Aug 27 FQ2'27 print. Best arithmetic of the five and still short. Subscription ARR $1.66bn +33%, revenue $427.3m +38%, FY27 guide raised across revenue, ARR, FCF and EPS. Not an inflection: revenue growth +51% -> +48% -> +46% -> +39% -> +38% and the FQ3 revenue guide of $429-431m is +0.6% sequential off FQ2. Non-GAAP gross margin -60bp, FCF margin -4pts. Per-share capture is the swing factor: 183.6m -> 204.9m diluted shares in seven quarters (~6.5%/yr); terminals use ~250m by FY30. Frozen terminals: $58 / $126 / $224 -> -14.6% / +10.6% / +34.0%. PW(P)=4.9927/P^(1/3)-1 = 20% at $72.02. Bull alone clears <= $129.63. Proof flip: two quarters of net-new subscription ARR >= $130m with FCF margin >= 25% and dilution under 5%/yr.",
+   "verdict_date": "2026-08-30"
+  },
+  {
+   "t": "IREN",
+   "gate": 20.51,
+   "note": "NEW 8/30 - MIGRATED FROM WATCHLIST TO SOLVED GATE. The Sep 16 proof date carried in state was wrong: IREN reported FY26 on Aug 27. KILL for fresh capital at $35.45. The proof arrived split. Real: AI Cloud revenue $70.5m in FQ4, 2.1x sequential, $128.8m for FY26 against $16.4m; $1bn operating ARR; Horizon 1 (50MW) delivered and accepted under the five-year $9.7bn Microsoft contract. Against it: total FQ4 revenue $137.2m, -26.7% YoY, the second consecutive quarter of YoY revenue decline (FQ3 was -0.02%); adj EBITDA $19.2m from $59.5m sequentially; FY26 net loss -$702.6m including a $450.4m FQ4 impairment. The kill is the wrapper, as pre-registered. Debt went $3.96bn -> $7.84bn in one quarter; FY27 capex guided $25-30bn against $14bn committed and a $12.6bn market cap; weighted diluted shares 380.2m in FQ4; new non-investment-grade customer GPU financing priced at 9.0% against 6.0% for the Microsoft paper - the lenders are pricing counterparty risk the equity is not. Frozen terminals (FY29, ~500m sh): $6 / $40 / $90 -> -44.7% / +4.1% / +36.4%. PW(P)=3.2846/P^(1/3)-1 = 20% at $20.51. Bull alone clears <= $52.08. Permanent capital loss 40-50%, raised from the 30-35% carried in state. Proof flips: contracted ARR converting to reported revenue at >= $700m/qtr with positive FCF, or the FY27 funding gap closed without equity.",
+   "verdict_date": "2026-08-30"
+  },
+  {
+   "t": "SNPS",
+   "gate": 332.27,
+   "note": "NEW 8/30 - REPLACES the 'max-pessimism watch, 8-10%' watchlist row. KILL for fresh capital at $442.61 after the Aug 26 FQ3'26 print. Max-pessimism is no longer the setup: the company beat the high end and raised FY26 revenue, margin, EPS and cash flow, so Window 1 is closed by the proof itself and the name is a steep-middle compounder priced accordingly. Headline +42% is acquisition growth - Ansys contributed ~$711m in the quarter; management-reported organic is EDA +8.5% and Design IP +11%, and the crude consolidated strip lands nearer +4-5% with the Processor IP Solutions divestiture explaining part of the gap (10-Q segment verification owed). Backlog $10.9bn, down sequentially on that divestiture. FY26 guide $9.69-9.74bn, non-GAAP op margin 41.5%, EPS $15.04-15.10, FCF ~$2.6bn; ~$10bn debt against $3.6bn cash. Flag not kill: securities litigation over Design IP disclosures, consolidated complaint due Sep 23 2026. Frozen terminals (FY29 EPS x P/E): $360 / $585 / $832 -> -6.7% / +9.7% / +23.4%. PW(P)=8.3115/P^(1/3)-1 = 20% at $332.27. Bull alone clears <= $481.48 - live at today's price. Proof flip: two quarters of EDA growth >= 12% with Design IP margin recovering and the litigation resolved.",
+   "verdict_date": "2026-08-30"
   }
  ],
  "triggers": [
