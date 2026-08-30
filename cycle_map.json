@@ -1,32 +1,128 @@
 {
-  "read_date": "Jul 24, 2026",
-  "read_date_iso": "2026-07-24",
-  "note": "Themes listed in order of what needs your attention today. Where a theme sits on the curve decides IF buying is even allowed; a review session decides WHAT and WHEN.",
-  "themes": [
-    {"name": "Agentic AI", "x": 0.94, "stage": "despair, turning toward recovery", "window": "OPEN - BUYS POSSIBLE",
-     "action": "Everyone has given up on these stocks - which is exactly when buying gets interesting. Rules here: small starter positions only, and only after a company shows hard proof things have stabilized. Prices are so low that good news does the heavy lifting.",
-     "lx": 604, "ly": 252, "anchor": "end",
-     "names": [
-       {"t": "PLTR", "hook": "Earnings Monday. Worth a look below $90, or if analysts cut forecasts after the report."},
-       {"t": "NOW",  "hook": "Proved its AI-agents business Jul 24 - gets fresh numbers Wednesday."},
-       {"t": "TEAM", "hook": "Year-end earnings due - was just under our return bar last check."},
-       {"t": "GOOGL","hook": "Worth a look below $235, or when AI spending stops eating its cash flow."}]},
-    {"name": "Robotics / physical AI", "x": 0.515, "stage": "hype running ahead of proof", "window": "WATCHING - NO PROOF YET",
-     "action": "Could be the biggest prize of all IF the proof shows up. But right now it is all story at hot prices - the exact combo that burned Peloton and Zoom buyers in 2020. We buy nothing until a real proof event lands; then we pay that day's price, premium and all, as long as the math still works.",
-     "lx": 318, "ly": 106, "anchor": "end",
-     "names": [
-       {"t": "HDSI", "hook": "August report reveals its humanoid-robot share - the first real test."},
-       {"t": "AMBA", "hook": "Watching for growth past 25% again."},
-       {"t": "OUST", "hook": "Ran 82% past our level on hype, no new contracts - no chasing."},
-       {"t": "KRMN", "hook": "Worth a look below $32."}]},
-    {"name": "AI infra & memory", "x": 0.735, "stage": "the boom cracked", "window": "CLOSED - WAITING AT SET PRICES",
-     "action": "The boom broke in July. We sold or avoided, and now wait at pre-set re-look prices. A price alert here means come review the name - it never means buy.",
-     "lx": 482, "ly": 46, "anchor": "start",
-     "names": [
-       {"t": "NVDA", "hook": "Worth a look below $140 - reports Aug 26."},
-       {"t": "ASML", "hook": "Worth a look below ~$1,100. Caution: it stopped reporting order numbers."},
-       {"t": "MU",   "hook": "We missed the middle of its run - no chasing now."},
-       {"t": "AEHR / VICR / PENG / TSEM", "hook": "Waiting levels: $27 / $130 / $40 / $160."}]}
-  ],
-  "unplaced": ["Nuclear / SMRs", "Grid & power", "Defense", "Stablecoins", "Quantum", "Copper", "Sovereign AI"]
+ "read_date": "Aug 28, 2026",
+ "read_date_iso": "2026-08-28",
+ "note": "Themes listed in order of what needs your attention today. Where a theme sits on the curve decides IF buying is even allowed; a review session decides WHAT and WHEN. Aug 28 read is a Curve Analysis scan - provisional until the next Board ratifies.",
+ "themes": [
+  {
+   "name": "Agentic AI",
+   "x": 0.97,
+   "stage": "recovery under way at the app layer; the J-curve is at the model layer",
+   "window": "OPEN - AT SET PRICES ONLY",
+   "action": "The despair phase passed in July-August: ServiceNow +30% and Salesforce +43% off their lows on multiple resets, Palantir back to $186. Every accessible name is now above its solved level. The real curve is at the model layer - Anthropic ~$65B run-rate (7x this year), OpenAI ~$40B - and it comes public this fall. Rules: buy only at the set prices below, and read the Anthropic S-1 the week it lands.",
+   "lx": 604,
+   "ly": 252,
+   "anchor": "end",
+   "names": [
+    {
+     "t": "NVDA",
+     "hook": "Aug 26 proof landed: +106%, guides +70% next year. Killed at $218; worth a look below $189."
+    },
+    {
+     "t": "PLTR",
+     "hook": "Still the best operating business we underwrite - worth a look below $91. Now $186."
+    },
+    {
+     "t": "NOW",
+     "hook": "AI agents crossed $1B ACV Jul 22. Ran through its level; worth a look below $124."
+    },
+    {
+     "t": "ANTHROPIC",
+     "hook": "S-1 due Sep-Oct. First real price on the agentic curve - read it before anyone chases."
+    }
+   ]
+  },
+  {
+   "name": "AI infra & memory",
+   "x": 0.72,
+   "stage": "re-accelerated on proof; memory is the bottleneck",
+   "window": "CLOSED - WAITING AT SET PRICES",
+   "action": "July's crack was in the stocks, not the business: Nvidia doubled revenue and gave its first-ever year-ahead forecast (+70%), with $279B of supply commitments mostly for memory and margins guided to bottom in Q4. Re-look levels are re-solved off that print. A price alert here means come review the name - it never means buy.",
+   "lx": 482,
+   "ly": 46,
+   "anchor": "start",
+   "names": [
+    {
+     "t": "NVDA",
+     "hook": "Level re-solved $140 -> $189 on the Aug 26 print. Reports next ~Nov 18."
+    },
+    {
+     "t": "MU",
+     "hook": "Nvidia just named memory as the constraint. We missed the middle - honest-ledger read owed, no chasing."
+    },
+    {
+     "t": "ASML",
+     "hook": "Worth a look below ~$1,100. Caution: it stopped reporting order numbers."
+    },
+    {
+     "t": "AEHR / VICR / PENG / TSEM",
+     "hook": "Waiting levels: $27 / $130 / $40 / $160."
+    }
+   ]
+  },
+  {
+   "name": "AI-enabled healthcare",
+   "x": 0.42,
+   "stage": "proof arriving, mostly priced in private markets",
+   "window": "WATCHING - ONE NAME, ONE LEVEL",
+   "action": "The winners are private and expensive: Abridge (~$100M+ ARR, $5.3B) and OpenEvidence (~$100M ARR, $12B) at 50-120x revenue. The one scaled public pure play, Tempus, just posted its first profit - then ran 60% in a month on a device clearance, not on new numbers. Its growth is slowing as an acquisition laps. Watch the level; read Q3 in November.",
+   "lx": 250,
+   "ly": 190,
+   "anchor": "end",
+   "names": [
+    {
+     "t": "TEM",
+     "hook": "First GAAP profit Jul 30; killed at $64 after a 60% run. Worth a look below $37.50 or on a >=28% organic quarter."
+    },
+    {
+     "t": "ISRG",
+     "hook": "Also the healthcare robot - see physical AI. Level $273."
+    },
+    {
+     "t": "ABRIDGE / OPENEVIDENCE",
+     "hook": "No public wrapper. Watch for an S-1; nothing to buy today."
+    },
+    {
+     "t": "HTFL / RDNT / IRTC",
+     "hook": "AI-device adjacents not underwritten this session - scan owed."
+    }
+   ]
+  },
+  {
+   "name": "Robotics / physical AI",
+   "x": 0.56,
+   "stage": "hype peaked (Unitree IPO); proof still missing",
+   "window": "WATCHING - NO PROOF YET",
+   "action": "The first public humanoid mark arrived Aug 19: Unitree opened near 250x sales and gave back a third in three days - on a leader whose growth is slowing and whose profit is falling. Tesla's robot has $0 outside revenue; Waymo's rides went flat last quarter. The real robot cash flows are surgery (Intuitive) and warehouses (Symbotic), and both are priced. We buy nothing until a proof event lands; then we pay that day's price if the math works.",
+   "lx": 318,
+   "ly": 106,
+   "anchor": "end",
+   "names": [
+    {
+     "t": "ISRG",
+     "hook": "Real robot revenue, slowing to mid-teens, -38% off its high. Worth a look below $273."
+    },
+    {
+     "t": "SYM",
+     "hook": "First real profit (Aug 5) but the math fails even in the good case above $29. Level $15."
+    },
+    {
+     "t": "TSLA",
+     "hook": "No robot or robotaxi numbers to underwrite. Flip = Optimus reported as a segment with outside revenue."
+    },
+    {
+     "t": "HDSI / AMBA / OUST / KRMN",
+     "hook": "Carried: HDSI humanoid-share read owed; AMBA >25% growth; OUST no chasing; KRMN below $32."
+    }
+   ]
+  }
+ ],
+ "unplaced": [
+  "Nuclear / SMRs",
+  "Grid & power",
+  "Defense",
+  "Stablecoins",
+  "Quantum",
+  "Copper",
+  "Sovereign AI"
+ ]
 }

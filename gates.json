@@ -1,5 +1,5 @@
 {
- "board_date": "2026-08-16",
+ "board_date": "2026-08-28",
  "last_full_board_date": "2026-08-05",
  "calendar": [
   {
@@ -17,11 +17,11 @@
    "sub": "the last unfinished leg of the BTC trigger"
   },
   {
-   "done": false,
+   "done": true,
    "date": "2026-08-26",
    "label": "Aug 26",
    "title": "Nvidia (NVDA) reports",
-   "sub": "context for its $140 re-look level"
+   "sub": "READ 8/28: +106% revenue, +70% FY28 guide, GM trough Q4 - re-look level re-solved $140 -> $189.42 (provisional)"
   },
   {
    "done": false,
@@ -39,6 +39,27 @@
   },
   {
    "done": false,
+   "date": "2026-09-16",
+   "label": "Sep 16",
+   "title": "Salesforce Investor Day (Dreamforce)",
+   "sub": "routing-class kill; listen for organic sub&support >=15% cc as the re-entry proof"
+  },
+  {
+   "done": false,
+   "date": "2026-10-20",
+   "label": "Oct 20 (est.)",
+   "title": "Intuitive (ISRG) Q3",
+   "sub": "US da Vinci procedure growth back >=15%? gate $273.21 (provisional)"
+  },
+  {
+   "done": false,
+   "date": "2026-10-21",
+   "label": "Oct 21 (est.)",
+   "title": "ServiceNow (NOW) Q3",
+   "sub": "AI ACV toward $1.5B; gate $124.04 (provisional)"
+  },
+  {
+   "done": false,
    "date": "2026-10-22",
    "label": "Oct 22",
    "title": "Harmony Biosciences: AET closing arguments",
@@ -48,7 +69,7 @@
    "done": false,
    "date": "2026-11-02",
    "label": "Nov 2",
-   "title": "Q3 print cluster - AVAH, RSKD, NU, TEAM, ACMR, AMBQ reads owed",
+   "title": "Q3 print cluster - AVAH, RSKD, NU, TEAM, ACMR, AMBQ, TEM reads owed; SYM FQ4 ~mid-Nov",
    "sub": "one entry for the cluster; each name's re-entry level lives in the triggers section"
   },
   {
@@ -74,10 +95,24 @@
   },
   {
    "done": false,
+   "date": "2026-11-18",
+   "label": "Nov 18 (est.)",
+   "title": "Nvidia (NVDA) Q3 FY27",
+   "sub": "$108B guide test; FY28 +70% supply commentary; gate $189.42 (provisional)"
+  },
+  {
+   "done": false,
    "date": "2026-12-01",
    "label": "~Dec 1",
    "title": "LFTO IPO lockup expiry",
    "sub": "76% sponsor overhang unlocks - supply event, watched not gated; exact date verification owed from the prospectus"
+  },
+  {
+   "done": false,
+   "date": null,
+   "label": "Sep-Oct",
+   "title": "Anthropic S-1 public / IPO pricing",
+   "sub": "first-look read owed the week the S-1 is public - the agentic-AI proof event with a fresh price"
   },
   {
    "done": false,
@@ -107,7 +142,7 @@
   {
    "t": "PLTR",
    "gate": 90.65,
-   "note": "NEW 8/14 - the 11-day-overdue Aug 3 read, now done. Killed at $174.04. Business proof is real and accelerating (revenue +93%, US commercial +149%, FY guide $8.15B). The kill is price: even the full-execution bull returns +15.3%/yr, under the 20% bar, before any bear is considered. Solved gate PW(P)=5.3907/P^(1/3)-1. Frozen terminals $74/$163/$267.",
+   "note": "NEW 8/14 - the 11-day-overdue Aug 3 read, now done. Killed at $174.04. Business proof is real and accelerating (revenue +93%, US commercial +149%, FY guide $8.15B). The kill is price: even the full-execution bull returns +15.3%/yr, under the 20% bar, before any bear is considered. Solved gate PW(P)=5.3907/P^(1/3)-1. Frozen terminals $74/$163/$267. RE-MARKED 8/28 at $186.29 on the frozen formula: PW -5.6%, bull-alone +12.7%. No new print since the Aug 3 read (FY26 guide $8.15B, US commercial guide >$3.42B unchanged). Verdict stands; no re-stamp (NU 8/16 precedent).",
    "verdict_date": "2026-08-14"
   },
   {
@@ -208,8 +243,9 @@
   },
   {
    "t": "ISRG",
-   "gate": 305,
-   "note": "Or if US surgery volumes start growing faster again."
+   "gate": 273.21,
+   "note": "RE-SOLVED 8/28 - legacy $305 judgment level retired by solve. Q2'26 (Jul 16): revenue $2.89B +19%, procedures +16% (da Vinci +15%, Ion +36%), 468 dV placements (+18%, 246 dV5), installed base 11,710 (+12%), non-GAAP EPS $2.80; FY26 dV procedure guide HELD at 13.5-15.5% (not raised), US dV growth moderated to 12% (ACA subsidy expiry, coverage dynamics); stock -10% on the print, now $372.60 = -38% from the $604 high. Steep-middle name decelerating, not a curve entry; Window-1 (max-pessimism on an elite business) needs a stabilization proof that has not printed. KILLED FOR FRESH CAPITAL at $372.60: PW +8.2%. Frozen terminals (3-yr, FY29 EPS x exit P/E): bear $297 (6% EPS CAGR, 22x) / base $495 (13.5%, 30x) / bull $648 (17%, 36x) -> -7.3% / +9.9% / +20.3%. PW(P)=7.7866/P^(1/3)-1 -> 20% at $273.21. Bull-alone clears at <=$375.00 - live by a hair. Proof flip (either -> re-underwrite): US dV procedure growth back >=15% for 2 quarters, or FY27 procedure guide >=16%. Driving assumption: US procedure re-acceleration. Perm loss ~10%. Next read Q3 ~Oct 20. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
+   "verdict_date": "2026-08-28"
   },
   {
    "t": "COIN",
@@ -229,8 +265,9 @@
   },
   {
    "t": "NVDA",
-   "gate": 140,
-   "note": "Reports Aug 26."
+   "gate": 189.42,
+   "note": "RE-SOLVED 8/28 - legacy $140 re-look level retired by solve after the Aug 26 proof event was read: Q2 FY27 revenue $96.2B +106% YoY (+18% QoQ), Data Center $89.0B +117%, GM 75.0%, Q3 guide $108B (+/-2%, no China), first-ever year-ahead guide FY28 +70% (Kress; supply-limited - Huang: 'demand is much greater than 70%'), $279B supply commitments (memory), GM guided to trough 71-72% in Q4 FY27, $26B returned in the quarter. KILLED FOR FRESH CAPITAL at $217.55 (-4.6% on the day; 52-wk $164-$237). Honest 25/50/25 returns PW +14.6% (+15.8% if the base takes the 70% guide) - below 20 and below 15. Frozen terminals (3-yr, FY30 EPS x exit P/E): bear $163 (FY28 +40%, FY29 -15% digestion, 48% NM, 16x) / base $327 (FY28 +60%, FY29 +15%, FY30 flat, 52% NM, 20x) / bull $577 (FY28 +70%, FY29 +30%, FY30 +12%, 54% NM, 25x) -> IRRs -9.2% / +14.6% / +38.4%. PW(P)=6.8916/P^(1/3)-1 -> 20% at $189.42. Bull-alone clears 20% at <=$333.91 - LIVE gate (LEGN class). Driving assumption: FY29 growth after the supply-limited FY28 (digestion vs continuation of the $800B->$1.3T hyperscaler capex step). Perm loss ~15%. Per-share capture INTACT (24.3B diluted, shrinking on buybacks). Next read: Q3 FY27 ~Nov 18. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
+   "verdict_date": "2026-08-28"
   },
   {
    "t": "ASML",
@@ -312,6 +349,24 @@
    "gate": 17.99,
    "note": "NEW 8/16. Killed for fresh capital at $21.61 (IPO Jun 5 at $23; -20.6% on the Aug 13 guide). Q2 rev $219.5M +35% with 60% aEBITDA margin - real - but Q3 guided flat sequential DESPITE the July World Cup tail (guided decel 36% -> ~19-22%), a disclosed ICFR material weakness (Tier 1 leg), 76% sponsor overhang with lockup ~Dec 1, and quarter 1 of the 4-quarter S-1 baseline. PW +12.9%. Solved gate PW(P)=3.1441/P^(1/3)-1 = 20% at $17.99. Frozen terminals $11.75/$32.50/$60.25. Bull-alone clears at <=34.87 - live gate. Flips: (1) Q4'26+Q1'27 (clean ex-Cup) Core Advertising >=+25% YoY with margin >=58%; (2) material weakness remediated. Either -> full re-underwrite. PROVISIONAL ARMING: Q2 YoY, aEBITDA, Q3 guide and material weakness were unverified in-session (web search returned empty). Re-check vs filings before acting on any alert.",
    "verdict_date": "2026-08-16"
+  },
+  {
+   "t": "NOW",
+   "gate": 124.04,
+   "note": "NEW 8/28 - migrated from the comparator list to a solved row. Proof event Jul 22: Q2'26 subscription revenue $3.877B +24.5% (+23% cc), AI ACV crossed $1B with net-new AI ACV +40% QoQ (target $1.5B YE26; ~6% of ACV today), cRPO $13.2B +21%, FY26 sub guide raised to $15.76-15.78B (+22.5%), non-GAAP op margin 29.5% (FY 31.5%), $4.8B cloud commitments through 2030 (gross-margin pressure disclosed). Stock +30% off the July trough (50-dma $111 -> $144.71): momentum diagnostic fires - attribution is a multiple reset off the SaaS trough plus a real AI-ACV proof; the proof did not change the 22% company growth rate. KILLED FOR FRESH CAPITAL at $144.71: PW +14.0%. Frozen terminals (3-yr, FY29 FCF/share x exit multiple; ~1.03B shares): bear $126 (14% CAGR, 30% FCF margin, 18x - agentic seat deflation) / base $225 (19%, 34%, 25x) / bull $309 (22%, 36%, 30x) -> -4.5% / +15.8% / +28.8%. PW(P)=5.9846/P^(1/3)-1 -> 20% at $124.04. Bull-alone clears at <=$178.82 - LIVE gate. Driving assumption: seat-based pricing surviving agentic deflation (AI ACV reaching the 30%-of-ACV 2030 target without cannibalizing seats). Perm loss ~15%. Share count is FMP-implied post 5:1 split - filings verification owed. Next read Q3 ~Oct 21. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
+   "verdict_date": "2026-08-28"
+  },
+  {
+   "t": "TEM",
+   "gate": 37.47,
+   "note": "NEW 8/28 - first look. The only scaled public pure play on AI-enabled healthcare. Q2'26 (Jul 30): revenue $382.5M +22% (Diagnostics $289.3M +20%, oncology volume +31%, Hereditary/Ambry $107.4M +5%, Data & Apps $93.2M +28%, Insights +36%), FIRST GAAP PROFIT $5.6M (vs -$42.8M), adj EBITDA $8.0M, FY26 guide raised to $1.595-1.605B (+25%) / adj EBITDA ~$65M, cash $820.7M, $460M 0% converts due 2032, positive FCF targeted by YE26; FDA xT CDx approval -> ADLT pricing ~+$85M/yr from 2027; xF liquid biopsy approval possible 2H27; combined ~$400M uplift claimed for 2028; MRD volume 9,000 (+38% QoQ); Personalis acquisition ($16.25/sh, ~$1.5B EV, reported stock-funded, close late Q4'26/early '27). Profit-inflection shape is real (PLTR-'23 detector shape) but growth is DECELERATING (~+36% Q1 -> +22% Q2 as Ambry laps) and the wrapper is AT RISK (converts + stock-funded M&A + SBC). Stock ran +60% in 30 days post-print ($43 -> $70 on the Aug 20 ECG-PH clearance and PT raises, -9.4% today to $64.04): momentum diagnostic fires - attribution MULTIPLE, not proof (guide unchanged since Jul 30). KILLED FOR FRESH CAPITAL at $64.04: PW +0.4%. Frozen terminals (3-yr, FY29, ~215M diluted post-Personalis): bear $30.70 (3x sales on $2.4B) / base $60.50 ($3.2B rev, 15% adj EBITDA margin, 28x, net debt ~$0.4B) / bull $131 ($3.7B, 22%, 35x) -> -21.7% / -1.9% / +26.9%. PW(P)=4.0153/P^(1/3)-1 -> 20% at $37.47 (below the $40.77 52-wk low; the Jul 30 post-print price $43 marked ~+14.6%). Bull-alone clears at <=$75.81 - LIVE gate. Proof flips (either -> full re-underwrite): (1) 2 consecutive quarters revenue >=+28% organic (ex-Personalis, ex-ADLT step) with adj EBITDA margin >=8%; (2) Personalis closes with disclosed share count and FY27 guide implying >=+30%. Driving assumption: the 2027-28 pricing/approval uplift converting to margin while hereditary decelerates. Perm loss ~30%. Share count FMP-implied (175M) - filings verification owed (standing FMP share-count defect class). Next read Q3 ~early Nov. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
+   "verdict_date": "2026-08-28"
+  },
+  {
+   "t": "SYM",
+   "gate": 15.29,
+   "note": "NEW 8/28 - first look, physical-AI proof case. FQ3'26 (Aug 5): revenue $721M +22% (decel from +29% FQ2), GAAP net income $55M (vs -$21M) - profit inflection real, adj EBITDA $95M (2x), backlog $22.5B (flat QoQ; 15% recognized in 12 months), 77 systems in deployment / 56 operational, FQ4 guide $760-780M (+28% YoY) / adj EBITDA $100-105M, cash $1.7B. Walmart >50% of revenue WITH contracted lock-in (backlog) - passes the driver-level concentration text, flagged not killed. Up-C wrapper (Class V) - the YOU/CLEAR class; ~642M FMP-implied total shares, verification owed. KILLED FOR FRESH CAPITAL at $39.875 ($25.6B): PW -12.8%. Frozen terminals (3-yr, FY29, ~660M sh): bear $11.40 ($4.0B rev, 10% EBITDA, 15x) / base $26.80 ($4.9B, 15%, 22x) / bull $49.80 ($5.6B, 20%, 28x) -> -34.1% / -12.4% / +7.7%. PW(P)=2.9787/P^(1/3)-1 -> 20% at $15.29. BULL-FAILS CLASS (PLTR/MP): bull-alone clears 20% only at <=$28.82 - the level is arithmetic, not a buy signal; deep because expensive. Proof flip: 2 consecutive quarters revenue >=+30% with adj EBITDA margin >=15%, or the 400-store Walmart back-of-store contract signed and in backlog. Driving assumption: system-level margin at scale (hardware integrator vs software mix). Perm loss ~30%. Next read FQ4 ~mid-Nov. PROVISIONAL (8/28 Curve Analysis scan, book-blind; owed ratification at the next Board).",
+   "verdict_date": "2026-08-28"
   }
  ],
  "triggers": [
@@ -354,10 +409,6 @@
   {
    "t": "AVAH",
    "event": "Q3 print ~early Nov: the organic ex-Family-First re-acceleration watch. Sell-side upgrades are detection, not proof - no re-read owed on upgrades alone."
-  },
-  {
-   "t": "NOW",
-   "event": "Comparator, not a candidate. Marked ~14.5% post-Q2. Filings verification owed as part of the hurdle review."
   },
   {
    "t": "AXON",
@@ -410,6 +461,22 @@
   {
    "t": "REZI",
    "event": "Killed 8/16 at $20.50, ROUTING CLASS (PURR precedent) - no armed gate. Post-ADI-spin RemainCo is a +2% grower guiding H2 input-cost/OEM-security pressure; no APEX entry window exists at any price without a proof event. For the record only: PW +8.9% at $20.50; the 20% level would be $15.33 (PW(P)=2.9809/P^(1/3)-1) - deliberately not armed. Re-entry is proof-keyed: 2 straight quarters of organic product-cycle reacceleration >=+10% -> fresh underwrite."
+  },
+  {
+   "t": "CRM",
+   "event": "ROUTING KILL 8/28 at $256.00 ($210B) - no entry window exists. Q2 FY27 (Aug 26, SEC 8-K verified): revenue $11.345B +11% incl. $456M Informatica (organic ~+6-7%), sub&support +12% (Agentforce Apps segment +8% cc; Data 360/Headless/Other +20% cc incl. Informatica), cRPO $33.5B +14%, FY27 guide $46.1-46.4B (+11-12%, ~3pts Informatica, +$200M from pending Contentful/Fin), FCF growth guide +4-5%. Agentforce ARR >$1.5B +240% is ~3% of revenue and was REDEFINED this quarter (Slackbot + Headless 360 added) - KPI-definition change, flagged. Wrapper: $25B ASR funded by ~$24.8B of new debt (noncurrent debt $10.4B -> $39.3B; interest expense $67M -> $473M/qtr); diluted shares 962M -> 821M. Per-share growth is leverage, not curve. $2.6B strategic-investment gain inflates Q2 GAAP/non-GAAP EPS. Stock +43% off the 50-dma (SaaS rebound) - multiple, not proof. PW +5.5% for the record (bear $180 / base $308 / bull $447); the 20% level ($174) is deliberately NOT armed. Re-entry proof-keyed only: 2 consecutive quarters organic sub&support >=15% cc with Agentforce Apps segment >=12% cc. Investor Day Sep 16 (Dreamforce). PROVISIONAL - owed ratification."
+  },
+  {
+   "t": "TSLA",
+   "event": "ROUTING KILL 8/28 at $348.75 ($1.38T) - the priced thesis has no admissible financial proof. Q2'26 (Jul 22): revenue $28.2B +26%, deliveries 480,126 +25% (the auto curve is real), but operating income $398M -57% (1.4% margin), opex +47%, capex $5.8B, FCF -$1.1B; regulatory credits collapsing. Optimus: first-gen Fremont lines being installed, 'start production soon', initial builds used internally for training data - external revenue $0, no supply chain (Musk: 'hardest product to scale we've ever made'). Robotaxi: ~2.4M cumulative paid miles, unsupervised in Austin/Miami/Orlando/Tampa; Cybercab production started. FSD subs 1.48M +56%. At ~200x forward earnings the equity is ~85% robot/robotaxi option value - Window-4 fails on financial proof, and the 3-yr bull cannot be built from disclosed numbers (TAM-slide proof inadmissible). No price gate. Proof flips: (1) Optimus disclosed as a reporting segment with external revenue and unit deliveries; (2) quarterly robotaxi revenue / paid-miles disclosure with fleet unit economics. PROVISIONAL - owed ratification."
+  },
+  {
+   "t": "ANTHROPIC / OPENAI (pre-IPO)",
+   "event": "THE agentic-AI proof event, coming public. Anthropic run-rate ~$65B at end-July (from ~$9B at YE25; Q2 revenue >$11.5B vs $787M a year ago; positive adjusted operating income; confidential S-1 filed, IPO expected Sept-Oct per Bloomberg). OpenAI run-rate ~$40B (from ~$25B in spring), confidential S-1 filed Jun 8, $852B post-money. Both report run-rates on different bases (Anthropic gross via cloud resellers) - the S-1 is the disclosure baseline for the first 4 quarters. First-look read owed the week the S-1 is public: strip reseller gross-up, pin diluted share count, price the 3-yr from the IPO price. No verdict before the S-1."
+  },
+  {
+   "t": "UNITREE (STAR 688xxx)",
+   "event": "KILLED 8/28 - access gate (STAR Market, no US access, capital controls, Chinese-language disclosure) plus the numbers: 2025 revenue ~RMB1.7B (+335%, ~$235M), adj net profit ~RMB590M, humanoids 52% of revenue, 5,500+ humanoids shipped (#1 globally) - but H1'26 revenue guided +36-45% with adj profit -6% to -22% (Q1'26 adj profit -53%), >70% of revenue is research/education, ~9% industrial; FCC Covered List (late July). IPO Aug 19 priced ~RMB61B (~$9B), opened ~RMB445B (~$66B, ~250x sales), lost ~RMB170B in 3 sessions. Benchmark only: the first public mark for humanoid valuations is post-discovery pricing on a decelerating leader."
   }
  ]
 }
