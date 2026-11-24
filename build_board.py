@@ -54,6 +54,30 @@ def hist_close(sym, ref_date):
             best = (d, p)
     return best[1] if best else None
 
+def splits_between(start, end):
+    """{symbol: [(date, numerator, denominator)]} for every split dated after start and
+    on/before end, from FMP's split calendar queried in 30-day windows. Returns None if
+    any window fails -- split status is then unknown and nothing is flagged; never raises."""
+    try:
+        d0 = datetime.date.fromisoformat(start); d1 = datetime.date.fromisoformat(end)
+    except Exception:
+        return None
+    out, lo = {}, d0 + datetime.timedelta(days=1)
+    while lo <= d1:
+        hi = min(lo + datetime.timedelta(days=29), d1)
+        try:
+            rows = fetch("splits-calendar", **{"from": lo.isoformat(), "to": hi.isoformat()})
+        except RuntimeError:
+            return None
+        if not isinstance(rows, list):
+            return None
+        for r in rows:
+            sym, d = r.get("symbol"), r.get("date")
+            if sym and d and start < d <= end:
+                out.setdefault(sym, []).append((d, r.get("numerator"), r.get("denominator")))
+        lo = hi + datetime.timedelta(days=1)
+    return out
+
 TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
@@ -195,6 +219,7 @@ font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.6;color:var(-
 #signals .pc em.drift.unk{color:var(--amber)}
 #signals .sigadj{font-size:9px;color:var(--mute);padding:2px 0 6px 60px;border-bottom:1px solid var(--line);letter-spacing:.03em}
 #signals .sigadj.neg{color:var(--rust)} #signals .sigadj.pos{color:var(--sage)} #signals .sigadj.unk{color:var(--amber)}
+#signals .sig.off{opacity:.45} #signals .sigadj.off{font-style:italic}
 #signals .rules{display:grid;gap:9px}
 @media(min-width:700px){#signals .rules{grid-template-columns:1fr 1fr}}
 #signals .rule{background:var(--panel);border-left:2px solid var(--grey);padding:12px 14px;margin:0}
@@ -412,7 +437,7 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     <br><br>
     The APEX board rebuilds itself nightly and needs none of this.
   </div>
-  <div class="sig-line">whale rock 1.5&times; &middot; nvda strategic 2.0&times; &middot; signals expire</div>
+  <div class="sig-line">whale rock 1.5&times; &middot; nvda strategic: context, not scored &middot; max two legs per source &middot; high conviction needs two managers &middot; signals expire at two quarter-ends</div>
 </footer>
 </div>
 </div>
@@ -429,40 +454,73 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
   var W=DATA.manager_weights, HELD=DATA.held, S=DATA.signals,
       AUDIT=DATA.audit, CHANGED=DATA.changed, RULES=DATA.rules, MGRS=DATA.managers;
 
-  // ── scoring (verbatim from stack.html) ──────────────
+  // ── which legs count (Nov 2026 rules) ──────────────
+  // 1 expiry: a manager/strategic leg two or more quarter-ends behind the build date
+  //   contributes zero and renders UNREFRESHED. The clock runs from `confirmed` (the
+  //   latest filing that still shows the position) when present, else ref_date;
+  //   price drift always uses ref_date, the period of the move itself.
+  // 2 strategic capital is context: zero score, ignored by the contested test.
+  // 3 cap: within a theme each source counts at most its two strongest positive and
+  //   two strongest negative legs. Legs scored 0 count for nothing.
+  const AS_OF=DATA.build_date||DATA.as_of||'';
+  const qBehind=rd=>{let n=0;if(!rd||!AS_OF)return 0;
+    for(let y=+rd.slice(0,4);y<=+AS_OF.slice(0,4);y++)
+      ['03-31','06-30','09-30','12-31'].forEach(md=>{const q=y+'-'+md;if(q>rd&&q<=AS_OF)n++;});
+    return n;};
+  S.forEach(s=>{
+    s.ctx=s.src==='strategic';
+    s.unref=(s.src==='manager'||s.src==='strategic')&&qBehind(s.confirmed||s.ref_date)>=2;
+    s.capped=false;
+  });
+  const legs={};
+  S.forEach(s=>{if(s.ctx||s.unref||!s.v)return;
+    const g=s.th+'|'+s.by+'|'+(s.v>0?'+':'-');(legs[g]=legs[g]||[]).push(s);});
+  Object.values(legs).forEach(a=>a.slice().sort((x,y)=>Math.abs(y.v)-Math.abs(x.v)).slice(2).forEach(s=>s.capped=true));
+  const counts=s=>!s.ctx&&!s.unref&&!s.capped&&s.v!==0;
+
+  // ── scoring (stack.html, counting only the legs above) ──────────────
   const themes={};
   S.forEach(s=>{
     const k=s.th;
-    themes[k]=themes[k]||{n:k,sig:[],tk:new Set(),src:new Set(),who:new Set(),raw:0,old:0,fresh:999,nu:false,nv:false,adj:0,driftUnknown:false};
+    themes[k]=themes[k]||{n:k,sig:[],tk:new Set(),src:new Set(),who:new Set(),raw:0,old:0,fresh:999,nu:false,nv:false,adj:0,driftUnknown:false,disloc:false,unref:0,split:false};
     const t=themes[k];
-    t.sig.push(s); t.tk.add(s.t); t.src.add(s.src);
+    t.sig.push(s); (s.basket||[s.t]).forEach(x=>t.tk.add(x));
+    t.old=Math.max(t.old,s.w); t.fresh=Math.min(t.fresh,s.w);
+    if(s.by==='NVDA Corp')t.nv=true;                  // badge only -- no points
+    if(s.unref)t.unref++;
+    if(s.split)t.split=true;
+    if(!counts(s))return;
+    t.src.add(s.src);
     s.by.split('+').forEach(x=>{if(s.v>0)t.who.add(x.trim())});
     t.raw+=s.v*(W[s.by]||1);
-    t.old=Math.max(t.old,s.w); t.fresh=Math.min(t.fresh,s.w);
     if(s.nu)t.nu=true;
-    if(s.by==='NVDA Corp'&&s.v>0)t.nv=true;
-    if(typeof s.adj==='number')t.adj+=s.adj;          // flat +/-3, outside the manager weight
+    if(typeof s.adj==='number')t.adj+=s.adj;          // STALE -3 only, outside the manager weight
+    if(s.disloc)t.disloc=true;                        // badge only -- no points
     if('drift' in s&&s.drift==null)t.driftUnknown=true;
   });
 
   const list=Object.values(themes).map(t=>{
-    const wr=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v>0);
-    const wrTrim=t.sig.some(s=>s.by.indexOf('Whale Rock')===0&&s.v<0);
-    t.score=Math.round(t.raw+t.src.size*2+(wr?3:0)+(t.nv?4:0)+t.adj);
+    const C=t.sig.filter(counts);
+    const wr=C.some(s=>s.by.indexOf('Whale Rock')===0&&s.v>0);
+    const wrTrim=C.some(s=>s.by.indexOf('Whale Rock')===0&&s.v<0);
+    t.score=Math.round(t.raw+t.src.size*2+(wr?3:0)+t.adj);
     t.wr=wr; t.wrTrim=wrTrim;
     t.own=[...t.tk].filter(x=>HELD.includes(x));
 
-    const pos=t.sig.filter(s=>s.v>0).reduce((a,s)=>a+s.v,0);
-    const neg=Math.abs(t.sig.filter(s=>s.v<0).reduce((a,s)=>a+s.v,0));
+    const mgrs=new Set(C.filter(s=>s.src==='manager'&&s.v>0).map(s=>s.by)).size;
+    const pos=C.filter(s=>s.v>0).reduce((a,s)=>a+s.v,0);
+    const neg=Math.abs(C.filter(s=>s.v<0).reduce((a,s)=>a+s.v,0));
     t.contested=pos>=12&&neg>=6;
 
-    const insider=t.sig.some(s=>s.src==='insider'&&s.v<=-6);
-    const broke=t.sig.some(s=>s.src==='price'&&s.v<=-6);
+    const insider=C.some(s=>s.src==='insider'&&s.v<=-6);
+    const broke=C.some(s=>s.src==='price'&&s.v<=-6);
     const left=t.sig.some(s=>/exited|cut \d|top sell/i.test(s.a))&&t.score<5;
 
     if(t.contested){t.stage='CONTESTED';t.col='--violet';t.zone='watch';t.when='Resolve before acting';
       t.act=t.own.length?'Hold — resolve the disagreement':'APEX must pick a side';
       t.why='Bull and bear signals are both strong. The score hides a real disagreement — underwrite the specific tension rather than treating this as a mild positive.';t.u=50;}
+    else if(t.score<0&&t.score>-5&&C.length===1){t.stage='WATCH · ONE SIGNAL';t.col='--blue';t.zone='watch';t.when='Not enough signal';
+      t.act='Watch';t.why='A single, mildly negative signal. Not enough to call a decay.';t.u=12;}
     else if(left){t.stage='EXPIRED';t.col='--grey';t.zone='exit';t.when='Already gone';
       t.act=t.own.length?'Review':'Drop from the watchlist';
       t.why='The manager whose conviction created this signal has left. Carrying it forward is stale-data risk.';t.u=30;}
@@ -472,6 +530,9 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     else if(t.score<0){t.stage='DECAYING';t.col='--rust';t.zone='exit';t.when='3 to 6 months';
       t.act=t.own.length?'Trim 30% over 3–6 months':'Avoid';
       t.why='Net negative. Smart money is rotating out.';t.u=40;}
+    else if(t.score>=25&&t.nu&&mgrs<2){t.stage='EMERGING · ONE SOURCE';t.col='--gold';t.zone='buy';t.when='8 to 26 weeks';
+      t.act='New candidate — run APEX, single source';
+      t.why='Strong conviction, but from one manager only. Unconfirmed — size accordingly.';t.u=55;}
     else if(t.score>=25&&t.nu){t.stage='EMERGING · HIGH CONVICTION';t.col='--gold';t.zone='buy';
       t.when='APEX to verify the entry is still live';
       t.act=t.own.length?'Add only if the entry still works':'High conviction — APEX verifies the entry first';
@@ -556,7 +617,9 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
     if(t.wrTrim)b+=`<span class="b" style="color:var(--amber)">WR TRIMMING</span>`;
     if(t.own.length)b+=`<span class="b" style="color:var(--gold)">YOU HOLD ${t.own.join(', ')}</span>`;
     if(t.adj<0)b+=`<span class="b" style="color:var(--rust)">STALE ${t.adj}</span>`;
-    else if(t.adj>0)b+=`<span class="b" style="color:var(--sage)">DISLOCATED +${t.adj}</span>`;
+    if(t.disloc)b+=`<span class="b" style="color:var(--sage)">DISLOCATED</span>`;
+    if(t.unref)b+=`<span class="b" style="color:var(--grey)">${t.unref} UNREFRESHED</span>`;
+    if(t.split)b+=`<span class="b" style="color:var(--amber)">CHECK: possible split</span>`;
     if(t.driftUnknown)b+=`<span class="b" style="color:var(--amber)">DRIFT UNKNOWN</span>`;
     return b?`<div class="badges">${b}</div>`:'';
   };
@@ -571,12 +634,18 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
   <details><summary>${t.stage} · ${t.sig.length} signals · ${t.src.size} sources · latest ${t.fresh===0?'this week':t.fresh+'w ago'} ▾</summary>
   <div class="trail">${t.sig.map(s=>{
     let aud='';
-    if('drift' in s){
+    const off=s.ctx||s.unref||s.capped;
+    const why=s.ctx?'context, not scored':s.unref?'UNREFRESHED — two or more quarter-ends old, not scored'
+      :s.capped?'beyond the two-per-source cap — not scored':(!s.v?'scored 0':'');
+    if(off){aud=`<div class="sigadj off">${why}</div>`;}
+    else if('drift' in s){
       if(s.drift==null){aud='<div class="sigadj unk">drift unknown — score left unadjusted</div>';}
       else{const a=s.adj||0,r=s.v+a,as=a>0?'+'+a:(a<0?''+a:'±0'),ds=(s.drift>0?'+':'')+Math.round(s.drift);
-        aud=`<div class="sigadj ${a<0?'neg':a>0?'pos':'flat'}">v ${s.v>0?'+':''}${s.v} · drift ${ds}% → adj ${as} → ${r>0?'+':''}${r}</div>`;}
+        aud=`<div class="sigadj ${a<0?'neg':a>0?'pos':'flat'}">v ${s.v>0?'+':''}${s.v} · drift ${ds}% → adj ${as} → ${r>0?'+':''}${r}${s.disloc?' · dislocated, no points':''}</div>`;}
     }
-    return `<div class="sig"><span class="t">${s.t}</span><span><span class="src">${s.src.toUpperCase()}</span> <span class="d">${esc(s.by)}: ${esc(s.a)}</span></span><span class="n ${s.v>0?'pos':'neg'}">${s.v>0?'+':''}${s.v}</span></div>`+aud;
+    else if(why){aud=`<div class="sigadj off">${why}</div>`;}
+    if(s.split&&!off)aud+=`<div class="sigadj unk">CHECK: possible split — ${esc(s.split)}</div>`;
+    return `<div class="sig${off?' off':''}"><span class="t">${s.basket?s.basket.join(' · '):s.t}</span><span><span class="src">${s.src.toUpperCase()}</span> <span class="d">${esc(s.by)}: ${esc(s.a)}</span></span><span class="n ${s.v>0?'pos':s.v<0?'neg':''}">${s.v>0?'+':''}${s.v}</span></div>`+aud;
   }).join('')}</div>
   </details></div>`;
 
@@ -615,8 +684,9 @@ def signals_html():
         return ""
     seen, tickers = set(), []
     for s in sig.get("signals", []):
-        if s["t"] not in seen:
-            seen.add(s["t"]); tickers.append(s["t"])
+        for t in (s.get("basket") or [s["t"]]):        # a basket signal quotes every member
+            if t not in seen:
+                seen.add(t); tickers.append(t)
     prices, sig_failed = {}, []
     for t in tickers:
         q = quote(t)
@@ -625,45 +695,77 @@ def signals_html():
         p = q["price"]; yh = q.get("yearHigh")
         prices[t] = {"price": p, "pct": ((p - yh) / yh * 100) if yh else None}
 
-    # ── price-staleness (+/-3): adjust each signal carrying a ref_date by its drift
-    # vs the live price. Manager & strategic (13F) signals only -- insider/price/
-    # earnings/screen/senate omit ref_date and pass through unchanged. A hand-filled
-    # ref_price is honoured first and skips the lookup (period-end prices never move);
-    # a failed lookup leaves the signal unadjusted and visibly marked DRIFT UNKNOWN.
+    # ── price-staleness: each signal carrying a ref_date gets its drift vs the live
+    # price. Manager & strategic (13F) signals only -- insider/price/earnings/screen/
+    # senate omit ref_date and pass through unchanged. Drift > +30% -> STALE -3 (flat,
+    # outside the manager weight). Drift < -15% -> DISLOCATED flag, no points: the
+    # filing cannot say whether a drop is a better entry or why the manager has since
+    # sold. Reference closes come from FMP's split-adjusted EOD series, the same basis
+    # as the live quote, so a split cannot distort drift; a hand-filled ref_price is
+    # honoured first. If a split actually occurred between ref_date and today (FMP split
+    # calendar), the signal is flagged CHECK: possible split -- and a hand-pinned
+    # ref_price is then left unadjusted, since its basis cannot be known. A basket
+    # signal's drift is the mean of its members' drifts. A failed lookup leaves the
+    # signal unadjusted and visibly marked DRIFT UNKNOWN.
     def q_label(rd):
         try:
             return "Q%d" % ((int(rd[5:7]) - 1) // 3 + 1)
         except Exception:
             return "ref"
+    today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+    sig["build_date"] = today                       # expiry clock for the client engine
     ref_failed = []
     try:                                            # never let staleness crash the board
         ref_cache = {}
+        rds = sorted(s["ref_date"] for s in sig.get("signals", []) if s.get("ref_date"))
+        splits = splits_between(rds[0], today) if rds else {}
+        if splits is None:
+            print("signals.json: split calendar unavailable -- no split flags this build")
+            splits = {}
         for s in sig.get("signals", []):
             rd = s.get("ref_date")
             if not rd:
                 continue
-            cur = prices.get(s["t"], {}).get("price")
-            rp = s.get("ref_price")
-            if rp is None:
-                key = (s["t"], rd)
-                if key not in ref_cache:
-                    ref_cache[key] = hist_close(s["t"], rd)
-                rp = ref_cache[key]
-            if not rp or cur is None:
-                s["drift"] = None                   # ref_date set but drift unresolved
+            members = s.get("basket") or [s["t"]]
+            pinned = s.get("ref_price") is not None and not s.get("basket")
+            hits = [f"{m} {n}-for-{d} on {dt}" if n and d and n >= d else f"{m} split on {dt}"
+                    for m in members for (dt, n, d) in splits.get(m, []) if dt > rd]
+            if hits:
+                s["split"] = "; ".join(hits)
+            drifts, rp0 = [], None
+            for m in members:
+                cur = prices.get(m, {}).get("price")
+                rp = s.get("ref_price") if pinned else None
+                if rp is None:
+                    key = (m, rd)
+                    if key not in ref_cache:
+                        ref_cache[key] = hist_close(m, rd)
+                    rp = ref_cache[key]
                 if not rp:
-                    ref_failed.append(f'{s["t"]}@{rd}')
-                if s["t"] in prices:
-                    prices[s["t"]].setdefault("drift", None)
-                    prices[s["t"]].setdefault("ref", q_label(rd))
+                    ref_failed.append(f"{m}@{rd}")
+                if not rp or cur is None:
+                    drifts = None
+                    break
+                rp0 = rp if rp0 is None else rp0
+                drifts.append((cur - rp) / rp * 100.0)
+            if drifts is None or (pinned and hits):
+                s["drift"] = None                   # unresolved, or pinned price of unknown basis
+                for m in members:
+                    if m in prices:
+                        prices[m].setdefault("drift", None)
+                        prices[m].setdefault("ref", q_label(rd))
                 continue
-            drift = (cur - rp) / rp * 100.0
-            s["ref_close"] = round(rp, 2)
+            drift = sum(drifts) / len(drifts)
+            if not s.get("basket"):
+                s["ref_close"] = round(rp0, 2)
             s["drift"] = round(drift, 1)
-            s["adj"] = -3 if drift > 30 else (3 if drift < -15 else 0)
-            if s["t"] in prices:
-                prices[s["t"]]["drift"] = s["drift"]
-                prices[s["t"]]["ref"] = q_label(rd)
+            s["adj"] = -3 if drift > 30 else 0
+            if drift < -15:
+                s["disloc"] = True
+            for m, d in zip(members, drifts):
+                if m in prices:
+                    prices[m]["drift"] = round(d, 1)
+                    prices[m]["ref"] = q_label(rd)
         ref_failed = sorted(set(ref_failed))
     except Exception as e:
         print(f"signals.json: staleness pass failed ({e}) -- publishing unadjusted scores")
