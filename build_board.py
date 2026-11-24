@@ -699,8 +699,10 @@ def signals_html():
 
     # ── price-staleness: each signal carrying a ref_date gets its drift vs the live
     # price. Manager & strategic (13F) signals only -- insider/price/earnings/screen/
-    # senate omit ref_date and pass through unchanged. Drift > +30% -> STALE -3 (flat,
-    # outside the manager weight). Drift < -15% -> DISLOCATED flag, no points: the
+    # senate omit ref_date and pass through unchanged. STALE and DISLOCATED answer
+    # "did I miss the entry", so they apply to positive legs (v > 0) only; trims and
+    # exits show their drift but are never adjusted or flagged. Drift > +30% -> STALE -3
+    # (flat, outside the manager weight). Drift < -15% -> DISLOCATED flag, no points: the
     # filing cannot say whether a drop is a better entry or why the manager has since
     # sold. Reference closes come from FMP's split-adjusted EOD series, the same basis
     # as the live quote, so a split cannot distort drift; a hand-filled ref_price is
@@ -761,8 +763,9 @@ def signals_html():
             if not s.get("basket"):
                 s["ref_close"] = round(rp0, 2)
             s["drift"] = round(drift, 1)
-            s["adj"] = -3 if drift > 30 else 0
-            if drift < -15:
+            buy = (s.get("v") or 0) > 0             # staleness is an entry question: buys only
+            s["adj"] = -3 if buy and drift > 30 else 0
+            if buy and drift < -15:
                 s["disloc"] = True
             for m, d in zip(members, drifts):
                 if m in prices:

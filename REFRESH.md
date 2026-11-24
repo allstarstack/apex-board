@@ -105,11 +105,13 @@ Open the board, switch to the **Signals** tab and check for:
 
 ## What the badges mean
 
+STALE and DISLOCATED only apply to buy signals; trims and exits show their price drift but are never adjusted.
+
 | Badge | Meaning | Points |
 |---|---|---|
 | NEW | Fresh move this quarter | — |
-| STALE −3 | The price has run up more than 30% since the filing, so the entry is probably gone | −3 |
-| DISLOCATED | The price has dropped more than 15% since the filing. That could be a better entry, or the reason the fund has since sold. The filing can't tell | none |
+| STALE −3 | On a buy: the price has run up more than 30% since the filing, so the entry is probably gone | −3 |
+| DISLOCATED | On a buy: the price has dropped more than 15% since the filing. That could be a better entry, or the reason the fund has since sold. The filing can't tell | none |
 | CONTESTED | Strong buying and strong selling in the same theme | — |
 | NVDA | NVIDIA holds something in this theme. NVIDIA invests for supply-chain reasons, so it is shown as context, not scored | none |
 | UNREFRESHED | Signals two or more quarter-ends old; not scored | none |
