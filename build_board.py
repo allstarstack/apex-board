@@ -382,9 +382,11 @@ CYCLEMAP_SECTION = """<div class="sec" id="cyclemap">Cycle map</div>
 })();
 </script>"""
 
-# Signals tab: ported from stack.html. The panel is static; the scoring engine and
-# renderers are the verbatim stack.html JS, reading inputs from signals.json (embedded
-# as JSON) instead of inline consts, plus live price chips from a second JSON blob.
+# Signals tab: originally ported from stack.html (retired Nov 2026). The panel is static;
+# the scoring engine and renderers began as stack.html's JS, read their inputs from
+# signals.json (embedded as JSON) plus live price chips from a second JSON blob, and
+# since Nov 2026 also apply the leg cap, expiry, strategic-as-context and conviction
+# rules documented inline below.
 SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
 <div class="wrap">
 <header>
@@ -405,7 +407,7 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
 <section>
   <div class="eyebrow" id="audit-eyebrow"></div>
   <h2>What the engine got right and wrong</h2>
-  <div class="lede">Two refresh windows were missed, which left the May calls untouched long enough to score honestly. Every miss below produced a rule change, and those rules are now live in the scoring.</div>
+  <div class="lede">The Q2 refresh was skipped, which left the August calls untouched long enough to score honestly. Every miss below produced a rule change, and those rules are now live in the scoring.</div>
   <div class="cards" id="audit"></div>
 </section>
 <section>
@@ -431,9 +433,9 @@ SIGNALS_SECTION = r"""<div id="signals" class="tabpanel" hidden>
 </section>
 <footer>
   <div class="how">
-    <b style="color:var(--text)">Refreshing this page</b> &mdash; quarterly, about five business days after each 13F deadline:
-    <b style="color:var(--text)">Feb 24 &middot; May 22 &middot; Aug 21 &middot; Nov 23</b>.
-    Open the Stack project in Claude, say <b style="color:var(--text)">refresh theme map</b>, then edit <code>signals.json</code> in the apex-board repo and push. GitHub Pages redeploys on commit; the nightly job keeps the prices current.
+    <b style="color:var(--text)">Refreshing this page</b> &mdash; quarterly, about a week after each 13F deadline:
+    <b style="color:var(--text)">Feb 26 &middot; May 22 &middot; Aug 21 &middot; Nov 23</b>.
+    Run <code>fetch_13f.py</code>, review the diff, edit <code>signals.json</code>, push. The next nightly build picks it up; run <b style="color:var(--text)">Update board</b> in GitHub Actions to see it sooner. Step by step: <code>REFRESH.md</code> in the apex-board repo. The nightly job keeps the prices current.
     <br><br>
     The APEX board rebuilds itself nightly and needs none of this.
   </div>
