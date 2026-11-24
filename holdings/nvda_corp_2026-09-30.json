@@ -1,0 +1,113 @@
+{
+ "manager": "NVIDIA Corp",
+ "sec_name": "NVIDIA CORP",
+ "cik": 1045810,
+ "period": "2026-09-30",
+ "form": "13F-HR",
+ "accession": "0001045810-26-000084",
+ "filed": "2026-11-16",
+ "line_items": 8,
+ "total_value": 48330717074,
+ "value_units": "USD",
+ "weight_basis": "% of total reported 13F value; option rows count at the value reported (underlying notional)",
+ "amendments": [],
+ "check": null,
+ "positions": [
+  {
+   "issuer": "SPACE EXPLORATION TECHN CORP",
+   "cusip": "84615Q103",
+   "ticker": "SPCX",
+   "class": "CLASS A COM STK",
+   "put_call": null,
+   "shares": 130472925,
+   "share_type": "SH",
+   "value": 19683145466,
+   "weight": 40.726,
+   "lines": 1
+  },
+  {
+   "issuer": "INTEL CORP",
+   "cusip": "458140100",
+   "ticker": "INTC",
+   "class": "COM",
+   "put_call": null,
+   "shares": 161082488,
+   "share_type": "SH",
+   "value": 19366947532,
+   "weight": 40.0717,
+   "lines": 1
+  },
+  {
+   "issuer": "COREWEAVE INC",
+   "cusip": "21873S108",
+   "ticker": "CRWV",
+   "class": "COM CL A",
+   "put_call": null,
+   "shares": 47213353,
+   "share_type": "SH",
+   "value": 4113227313,
+   "weight": 8.5106,
+   "lines": 1
+  },
+  {
+   "issuer": "COHERENT CORP",
+   "cusip": "19247G107",
+   "ticker": "COHR",
+   "class": "COM",
+   "put_call": null,
+   "shares": 7788161,
+   "share_type": "SH",
+   "value": 2241510617,
+   "weight": 4.6379,
+   "lines": 1
+  },
+  {
+   "issuer": "SYNOPSYS INC",
+   "cusip": "871607107",
+   "ticker": "SNPS",
+   "class": "COM",
+   "put_call": null,
+   "shares": 4354077,
+   "share_type": "SH",
+   "value": 1893762250,
+   "weight": 3.9183,
+   "lines": 1
+  },
+  {
+   "issuer": "NOKIA CORP",
+   "cusip": "654902204",
+   "ticker": "NOK",
+   "class": "SPONSORED ADR",
+   "put_call": null,
+   "shares": 72859751,
+   "share_type": "SH",
+   "value": 738797875,
+   "weight": 1.5286,
+   "lines": 1
+  },
+  {
+   "issuer": "NEBIUS GROUP N.V.",
+   "cusip": "N97284108",
+   "ticker": "NBIS",
+   "class": "SHS CLASS A",
+   "put_call": null,
+   "shares": 1190476,
+   "share_type": "SH",
+   "value": 280809479,
+   "weight": 0.581,
+   "lines": 1
+  },
+  {
+   "issuer": "GENERATE BIOMEDICINES INC",
+   "cusip": "370920100",
+   "ticker": "GENB",
+   "class": "COM SHS",
+   "put_call": null,
+   "shares": 833325,
+   "share_type": "SH",
+   "value": 12516542,
+   "weight": 0.0259,
+   "lines": 1
+  }
+ ]
+}
